@@ -5,7 +5,7 @@
 # compile CXX with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 C_DEFINES = -D__MACOSX_CORE__
 
-C_INCLUDES = -I/Users/alexp/Me/flap/inc -I/Users/alexp/Me/flap/inc/glad -I/Users/alexp/Me/flap/inc/imgui -I/Users/alexp/Me/flap/inc/imgui/backends -I/Users/alexp/Me/flap/inc/imgui-knobs -I/Users/alexp/Me/flap/inc/miniaudio -I/Users/alexp/Me/flap/inc/rtmidi -I/Users/alexp/Me/flap/build/glfw/include -I/Users/alexp/Me/flap/inc/glfw/include
+C_INCLUDES = -I/Users/alexp/Me/flap/inc -I/Users/alexp/Me/flap/inc/glad -I/Users/alexp/Me/flap/inc/imgui -I/Users/alexp/Me/flap/inc/imgui/backends -I/Users/alexp/Me/flap/inc/imgui-knobs -I/Users/alexp/Me/flap/inc/miniaudio -I/Users/alexp/Me/flap/inc/rtmidi -I/Users/alexp/Me/flap/build/glfw/include -I/Users/alexp/Me/flap/inc/glfw/include -I/Users/alexp/Me/flap/inc/dibiff/inc -I/Users/alexp/Me/flap/inc/dibiff/inc/Eigen
 
 C_FLAGSarm64 =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 
@@ -13,7 +13,7 @@ C_FLAGS =  -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Plat
 
 CXX_DEFINES = -D__MACOSX_CORE__
 
-CXX_INCLUDES = -I/Users/alexp/Me/flap/inc -I/Users/alexp/Me/flap/inc/glad -I/Users/alexp/Me/flap/inc/imgui -I/Users/alexp/Me/flap/inc/imgui/backends -I/Users/alexp/Me/flap/inc/imgui-knobs -I/Users/alexp/Me/flap/inc/miniaudio -I/Users/alexp/Me/flap/inc/rtmidi -I/Users/alexp/Me/flap/build/glfw/include -I/Users/alexp/Me/flap/inc/glfw/include
+CXX_INCLUDES = -I/Users/alexp/Me/flap/inc -I/Users/alexp/Me/flap/inc/glad -I/Users/alexp/Me/flap/inc/imgui -I/Users/alexp/Me/flap/inc/imgui/backends -I/Users/alexp/Me/flap/inc/imgui-knobs -I/Users/alexp/Me/flap/inc/miniaudio -I/Users/alexp/Me/flap/inc/rtmidi -I/Users/alexp/Me/flap/build/glfw/include -I/Users/alexp/Me/flap/inc/glfw/include -I/Users/alexp/Me/flap/inc/dibiff/inc -I/Users/alexp/Me/flap/inc/dibiff/inc/Eigen
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 

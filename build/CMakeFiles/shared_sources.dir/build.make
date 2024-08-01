@@ -209,6 +209,622 @@ CMakeFiles/shared_sources.dir/inc/imgui-knobs/imgui-knobs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/imgui-knobs/imgui-knobs.cpp.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/imgui-knobs/imgui-knobs.cpp -o CMakeFiles/shared_sources.dir/inc/imgui-knobs/imgui-knobs.cpp.s
 
+CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Compressor.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Compressor.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Compressor.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Compressor.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Envelope.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Envelope.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Envelope.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Envelope.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Expander.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Expander.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Expander.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Expander.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Limiter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Limiter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Limiter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/dynamic/Limiter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/effect/Chorus.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/effect/Chorus.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/effect/Chorus.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/effect/Chorus.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/effect/Flanger.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/effect/Flanger.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/effect/Flanger.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/effect/Flanger.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/effect/Phaser.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/effect/Phaser.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/effect/Phaser.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/effect/Phaser.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/effect/Reverb.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/effect/Reverb.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/effect/Reverb.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/effect/Reverb.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/effect/Tremolo.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/effect/Tremolo.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/effect/Tremolo.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/effect/Tremolo.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/effect/Vibrato.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/effect/Vibrato.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/effect/Vibrato.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/effect/Vibrato.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/AdaptiveFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/AdaptiveFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/AdaptiveFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/AdaptiveFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/AllPassFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/AllPassFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/AllPassFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/AllPassFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/BandPassFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/BandPassFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/BandPassFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/BandPassFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/DigitalBiquadFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/DigitalBiquadFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/DigitalBiquadFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/DigitalBiquadFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/HighPassFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/HighPassFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/HighPassFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/HighPassFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/HighShelfFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/HighShelfFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/HighShelfFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/HighShelfFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/LowPassFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/LowPassFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/LowPassFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/LowPassFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/LowShelfFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/LowShelfFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/LowShelfFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/LowShelfFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/NotchFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/NotchFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/NotchFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/NotchFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/filter/PeakingEQFilter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/filter/PeakingEQFilter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/filter/PeakingEQFilter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/filter/PeakingEQFilter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/gate/Ducker.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/gate/Ducker.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/gate/Ducker.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/gate/Ducker.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/gate/ExpanderGate.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/gate/ExpanderGate.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/gate/ExpanderGate.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/gate/ExpanderGate.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/gate/Lookahead.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/gate/Lookahead.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/gate/Lookahead.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/gate/Lookahead.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/gate/NoiseGate.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/gate/NoiseGate.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/gate/NoiseGate.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/gate/NoiseGate.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/generator/SampleGenerator.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/generator/SampleGenerator.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/generator/SampleGenerator.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/generator/SampleGenerator.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/generator/SineGenerator.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/generator/SineGenerator.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/generator/SineGenerator.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/generator/SineGenerator.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/generator/SquareGenerator.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/generator/SquareGenerator.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/generator/SquareGenerator.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/generator/SquareGenerator.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/generator/TriangleGenerator.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/generator/TriangleGenerator.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/generator/TriangleGenerator.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/generator/TriangleGenerator.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/graph/graph.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/graph/graph.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/graph/graph.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/graph/graph.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/level/AutomaticGainControl.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/level/AutomaticGainControl.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/level/AutomaticGainControl.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/level/AutomaticGainControl.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/level/Gain.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/level/Gain.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/level/Gain.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/level/Gain.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/level/Mixer.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_44) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/level/Mixer.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/level/Mixer.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/level/Mixer.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/midi/MidiInput.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_45) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/midi/MidiInput.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/midi/MidiInput.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/midi/MidiInput.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/midi/VoiceSelector.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_46) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/midi/VoiceSelector.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/midi/VoiceSelector.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/midi/VoiceSelector.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/sink/GraphSink.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_47) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/sink/GraphSink.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/sink/GraphSink.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/sink/GraphSink.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/sink/WavWriter.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_48) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/sink/WavWriter.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/sink/WavWriter.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/sink/WavWriter.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/source/SineSource.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_49) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/source/SineSource.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/source/SineSource.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/source/SineSource.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/source/SquareSource.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_50) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/source/SquareSource.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/source/SquareSource.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/source/SquareSource.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/source/TriangleSource.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_51) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/source/TriangleSource.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/source/TriangleSource.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/source/TriangleSource.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/source/WhiteNoiseSource.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_52) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/source/WhiteNoiseSource.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/source/WhiteNoiseSource.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/source/WhiteNoiseSource.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/synth/BabysFirstSynth.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_53) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/synth/BabysFirstSynth.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/synth/BabysFirstSynth.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/synth/BabysFirstSynth.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.s
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o: CMakeFiles/shared_sources.dir/flags.make
+CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o: /Users/alexp/Me/flap/inc/dibiff/src/time/Delay.cpp
+CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o: CMakeFiles/shared_sources.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_54) "Building CXX object CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o -MF CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o.d -o CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o -c /Users/alexp/Me/flap/inc/dibiff/src/time/Delay.cpp
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/alexp/Me/flap/inc/dibiff/src/time/Delay.cpp > CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.i
+
+CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/alexp/Me/flap/inc/dibiff/src/time/Delay.cpp -o CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.s
+
 shared_sources: CMakeFiles/shared_sources.dir/inc/rtmidi/RtMidi.cpp.o
 shared_sources: CMakeFiles/shared_sources.dir/inc/glad/glad.c.o
 shared_sources: CMakeFiles/shared_sources.dir/inc/imgui/imgui.cpp.o
@@ -219,6 +835,50 @@ shared_sources: CMakeFiles/shared_sources.dir/inc/imgui/imgui_demo.cpp.o
 shared_sources: CMakeFiles/shared_sources.dir/inc/imgui/backends/imgui_impl_glfw.cpp.o
 shared_sources: CMakeFiles/shared_sources.dir/inc/imgui/backends/imgui_impl_opengl3.cpp.o
 shared_sources: CMakeFiles/shared_sources.dir/inc/imgui-knobs/imgui-knobs.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/adaptive/AcousticEchoCanceller.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Compressor.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Envelope.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Expander.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/dynamic/Limiter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Chorus.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Flanger.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Phaser.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Reverb.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Tremolo.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/effect/Vibrato.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AdaptiveFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/AllPassFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/BandPassFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/DigitalBiquadFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighPassFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/HighShelfFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowPassFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/LowShelfFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/NotchFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/filter/PeakingEQFilter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Ducker.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/ExpanderGate.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/Lookahead.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/gate/NoiseGate.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SampleGenerator.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SineGenerator.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/SquareGenerator.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/TriangleGenerator.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/generator/WhiteNoiseGenerator.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/graph/graph.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/level/AutomaticGainControl.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Gain.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/level/Mixer.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/MidiInput.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/midi/VoiceSelector.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/GraphSink.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/sink/WavWriter.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SineSource.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/source/SquareSource.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/source/TriangleSource.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/source/WhiteNoiseSource.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/synth/BabysFirstSynth.cpp.o
+shared_sources: CMakeFiles/shared_sources.dir/inc/dibiff/src/time/Delay.cpp.o
 shared_sources: CMakeFiles/shared_sources.dir/build.make
 .PHONY : shared_sources
 

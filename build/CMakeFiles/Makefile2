@@ -135,12 +135,12 @@ glfw/src/clean: glfw/src/CMakeFiles/update_mappings.dir/clean
 CMakeFiles/shared_sources.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/shared_sources.dir/build.make CMakeFiles/shared_sources.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/shared_sources.dir/build.make CMakeFiles/shared_sources.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=25,26,27,28,29,30,31,32,33,34 "Built target shared_sources"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78 "Built target shared_sources"
 .PHONY : CMakeFiles/shared_sources.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/shared_sources.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alexp/Me/flap/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alexp/Me/flap/build/CMakeFiles 54
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/shared_sources.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alexp/Me/flap/build/CMakeFiles 0
 .PHONY : CMakeFiles/shared_sources.dir/rule
@@ -167,7 +167,7 @@ CMakeFiles/flapTest.dir/all: glfw/src/CMakeFiles/glfw.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/flapTest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alexp/Me/flap/build/CMakeFiles 34
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alexp/Me/flap/build/CMakeFiles 78
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/flapTest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/alexp/Me/flap/build/CMakeFiles 0
 .PHONY : CMakeFiles/flapTest.dir/rule
@@ -240,7 +240,7 @@ glfw/src/CMakeFiles/glfw.dir/clean:
 glfw/src/CMakeFiles/update_mappings.dir/all:
 	$(MAKE) $(MAKESILENT) -f glfw/src/CMakeFiles/update_mappings.dir/build.make glfw/src/CMakeFiles/update_mappings.dir/depend
 	$(MAKE) $(MAKESILENT) -f glfw/src/CMakeFiles/update_mappings.dir/build.make glfw/src/CMakeFiles/update_mappings.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=35 "Built target update_mappings"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/alexp/Me/flap/build/CMakeFiles --progress-num=79 "Built target update_mappings"
 .PHONY : glfw/src/CMakeFiles/update_mappings.dir/all
 
 # Build rule for subdir invocation for target.

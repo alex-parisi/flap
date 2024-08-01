@@ -4,7 +4,7 @@
 # compile CXX with /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/alexp/Me/flap/inc -I/Users/alexp/Me/flap/inc/glad -I/Users/alexp/Me/flap/inc/imgui -I/Users/alexp/Me/flap/inc/imgui/backends -I/Users/alexp/Me/flap/inc/imgui-knobs -I/Users/alexp/Me/flap/inc/miniaudio -I/Users/alexp/Me/flap/inc/rtmidi -I/Users/alexp/Me/flap/build/glfw/include -I/Users/alexp/Me/flap/inc/glfw/include -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks
+CXX_INCLUDES = -I/Users/alexp/Me/flap/inc -I/Users/alexp/Me/flap/inc/glad -I/Users/alexp/Me/flap/inc/imgui -I/Users/alexp/Me/flap/inc/imgui/backends -I/Users/alexp/Me/flap/inc/imgui-knobs -I/Users/alexp/Me/flap/inc/miniaudio -I/Users/alexp/Me/flap/inc/rtmidi -I/Users/alexp/Me/flap/build/glfw/include -I/Users/alexp/Me/flap/inc/glfw/include -I/Users/alexp/Me/flap/inc/dibiff/inc -I/Users/alexp/Me/flap/inc/dibiff/inc/Eigen -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk/System/Library/Frameworks
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX14.5.sdk
 

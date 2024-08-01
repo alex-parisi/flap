@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # Set OpenGL Policy
 set(OpenGL_GL_PREFERENCE LEGACY)
 
-# Include directories imported libraries
+# Include directories for imported libraries
 include_directories(${PROJECT_SOURCE_DIR}/inc)
 include_directories(${PROJECT_SOURCE_DIR}/inc/glad)
 include_directories(${PROJECT_SOURCE_DIR}/inc/imgui)
@@ -23,10 +23,14 @@ add_subdirectory(${PROJECT_SOURCE_DIR}/inc/glfw ${PROJECT_BINARY_DIR}/glfw)
 # This line includes the GLFW headers from the correct path
 include_directories(${PROJECT_BINARY_DIR}/glfw/include ${PROJECT_SOURCE_DIR}/inc/glfw/include)
 
+# Include directories from the dibiff submodule
+include_directories(${PROJECT_SOURCE_DIR}/inc/dibiff/inc)
+include_directories(${PROJECT_SOURCE_DIR}/inc/dibiff/inc/Eigen)
+
 # Include all source files from the 'src' directory and specific files
-file(GLOB_RECURSE SOURCES "src/*.cpp")
-list(APPEND SOURCES ${PROJECT_SOURCE_DIR}/inc/rtmidi/RtMidi.cpp)
-list(APPEND SOURCES
+file(GLOB_RECURSE FLAP_SOURCES "src/*.cpp")
+list(APPEND FLAP_SOURCES
+    ${PROJECT_SOURCE_DIR}/inc/rtmidi/RtMidi.cpp
     ${PROJECT_SOURCE_DIR}/inc/glad/glad.c
     ${PROJECT_SOURCE_DIR}/inc/imgui/imgui.cpp
     ${PROJECT_SOURCE_DIR}/inc/imgui/imgui_draw.cpp
@@ -37,6 +41,12 @@ list(APPEND SOURCES
     ${PROJECT_SOURCE_DIR}/inc/imgui/backends/imgui_impl_opengl3.cpp
     ${PROJECT_SOURCE_DIR}/inc/imgui-knobs/imgui-knobs.cpp
 )
+
+# Include all source files from the dibiff submodule
+file(GLOB_RECURSE DIBIFF_SOURCES "${PROJECT_SOURCE_DIR}/inc/dibiff/src/*.cpp")
+
+# Combine FLAP and dibiff sources
+set(SOURCES ${FLAP_SOURCES} ${DIBIFF_SOURCES})
 
 # Create an object library for shared sources
 add_library(shared_sources OBJECT ${SOURCES})

@@ -13,3 +13,6 @@
 [submodule "inc/miniaudio"]
 	path = inc/miniaudio
 	url = git@github.com:mackron/miniaudio.git
+[submodule "inc/dibiff"]
+	path = inc/dibiff
+	url = git@github.com:alex-parisi/dibiff.git

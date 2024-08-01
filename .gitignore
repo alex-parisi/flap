@@ -1,3 +1,9 @@
+# Build folder
+build/
+
+# Mac DS_Store
+*.DS_Store
+
 # Prerequisites
 *.d
 
