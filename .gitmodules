@@ -1,0 +1,15 @@
+[submodule "inc/glfw"]
+	path = inc/glfw
+	url = git@github.com:glfw/glfw.git
+[submodule "inc/imgui"]
+	path = inc/imgui
+	url = git@github.com:ocornut/imgui.git
+[submodule "inc/imgui-knobs"]
+	path = inc/imgui-knobs
+	url = git@github.com:altschuler/imgui-knobs.git
+[submodule "inc/rtmidi"]
+	path = inc/rtmidi
+	url = git@github.com:thestk/rtmidi.git
+[submodule "inc/miniaudio"]
+	path = inc/miniaudio
+	url = git@github.com:mackron/miniaudio.git
