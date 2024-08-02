@@ -52,7 +52,7 @@ set(SOURCES ${FLAP_SOURCES} ${DIBIFF_SOURCES})
 add_library(shared_sources OBJECT ${SOURCES})
 
 # Add the executables and link the shared object library
-add_executable(flapTest ${PROJECT_SOURCE_DIR}/test/test.cpp)
+add_executable(flapTest ${PROJECT_SOURCE_DIR}/test/main.cpp)
 
 # Link shared sources and other libraries
 target_link_libraries(flapTest PRIVATE $<TARGET_OBJECTS:shared_sources> glfw ${CMAKE_DL_LIBS})
