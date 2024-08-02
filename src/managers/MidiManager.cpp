@@ -5,14 +5,15 @@
 #include <iostream>
 
 bool MidiManager::initialize() {
-    midiIn = std::make_shared<RtMidiIn>();
+    _midiIn = std::make_shared<RtMidiIn>();
+    _midiGraphInput = dibiff::midi::MidiInput::create(_blockSize);
     // Check for available ports.
-    unsigned int nPorts = midiIn->getPortCount();
+    unsigned int nPorts = _midiIn->getPortCount();
     std::cout << "\n[" << nPorts << "] MIDI input source(s) available.\n";
     for (unsigned int i = 0; i < nPorts; i++) {
         std::string portName;
         try {
-            portName = midiIn->getPortName(i);
+            portName = _midiIn->getPortName(i);
         } catch (RtMidiError &error) {
             error.printMessage();
         }
@@ -20,20 +21,19 @@ bool MidiManager::initialize() {
     }
     // Open the specified port.
     try {
-        midiIn->openPort(_port);
+        _midiIn->openPort(_port);
     } catch (RtMidiError &error) {
         std::cerr << error.getMessage() << "\n";
     }
     // Don't ignore sysex, timing, or active sensing messages.
-    midiIn->ignoreTypes(false, false, false);
+    _midiIn->ignoreTypes(false, false, false);
     // Set the callback function for MIDI input.
-    midiIn->setCallback(&MidiManager::_midiCallback, this);
-
+    _midiIn->setCallback(&MidiManager::_midiCallback, this);
     return true;
 }
 
 void MidiManager::cleanup() {
-    midiIn->closePort();
+    _midiIn->closePort();
 }
 
 void MidiManager::_threadFunction() {
@@ -42,11 +42,11 @@ void MidiManager::_threadFunction() {
         {
             /// Update the list of available MIDI devices
             _portNames.clear();
-            unsigned int nPorts = midiIn->getPortCount();
+            unsigned int nPorts = _midiIn->getPortCount();
             for (unsigned int i = 0; i < nPorts; i++) {
                 std::string portName;
                 try {
-                    portName = midiIn->getPortName(i);
+                    portName = _midiIn->getPortName(i);
                 } catch (RtMidiError &error) {
                     error.printMessage();
                 }
@@ -63,14 +63,14 @@ bool MidiManager::setPort(int port) {
     /// Mutex Locked
     {
         std::lock_guard<std::mutex> lock(_mutex);
-        if (port < midiIn->getPortCount()) {
-            midiIn->closePort();
+        if (port < _midiIn->getPortCount()) {
+            _midiIn->closePort();
             try {
-                midiIn->openPort(port);
+                _midiIn->openPort(port);
                 // Don't ignore sysex, timing, or active sensing messages.
-                midiIn->ignoreTypes(false, false, false);
+                _midiIn->ignoreTypes(false, false, false);
                 // Set the callback function for MIDI input.
-                midiIn->setCallback(&MidiManager::_midiCallback, this);
+                _midiIn->setCallback(&MidiManager::_midiCallback, this);
                 _port = port;
                 return true;
             } catch (RtMidiError &error) {
@@ -83,12 +83,13 @@ bool MidiManager::setPort(int port) {
 }
 
 void MidiManager::_midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData) {
-    auto *midiInput = static_cast<MidiManager *>(userData);
+    auto manager = static_cast<MidiManager *>(userData);
     /// Mutex Locked
     {
-        std::lock_guard<std::mutex> lock(static_cast<MidiManager *>(userData)->_mutex);
+        std::lock_guard<std::mutex> lock(manager->_mutex);
         if (message->size() > 0) {
             /// Push MIDI message to the audio graph
+            manager->_midiGraphInput->addMidiMessage(*message);
         }
     }
     /// Mutex Unlocked

@@ -7,7 +7,7 @@
 
 class Manager {
     public:
-        Manager() : _running(false) {}
+        Manager(int blockSize = 512) : _blockSize(blockSize), _running(false) {}
         virtual bool initialize() = 0;
         virtual void cleanup() = 0;
         void run() {
@@ -19,7 +19,9 @@ class Manager {
             if (_thread.joinable()) _thread.join();
         }
         bool isRunning() { return _running; }
+        void setBlockSize(int blockSize) { _blockSize = blockSize; }
     protected:
+        int _blockSize;
         std::atomic<bool> _running;
         std::thread _thread;
         mutable std::mutex _mutex;

@@ -7,6 +7,7 @@
 #include <iostream>
 
 bool AudioManager::initialize() {
+    _graphSink = dibiff::sink::GraphSink::create(_sampleRate, _blockSize);
     ma_result result;
     // Initialize playback context
     result = ma_context_init(NULL, 0, NULL, &_playbackContext);
@@ -20,6 +21,9 @@ bool AudioManager::initialize() {
         std::cerr << "Failed to initialize capture context." << std::endl;
         return false;
     }
+
+    selectPlaybackDevice(0);
+
     return true;
 }
 
@@ -30,75 +34,75 @@ void AudioManager::cleanup() {
     ma_context_uninit(&_captureContext);
 }
 
-// bool AudioManager::selectPlaybackDevice(int index) {
-//     ma_device_info* pPlaybackDevices;
-//     ma_uint32 playbackDeviceCount;
-//     ma_result result;
-//     result = ma_context_get_devices(&_playbackContext, &pPlaybackDevices, &playbackDeviceCount, NULL, NULL);
-//     if (result != MA_SUCCESS) {
-//         std::cerr << "Failed to enumerate playback devices." << std::endl;
-//         return false;
-//     }
-//     if (index < 0 || index >= playbackDeviceCount) {
-//         std::cerr << "Invalid playback device index." << std::endl;
-//         return false;
-//     }
-//     /// Determine the supported formats and channels for the device
+bool AudioManager::selectPlaybackDevice(int index) {
+    ma_device_info* pPlaybackDevices;
+    ma_uint32 playbackDeviceCount;
+    ma_result result;
+    result = ma_context_get_devices(&_playbackContext, &pPlaybackDevices, &playbackDeviceCount, NULL, NULL);
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to enumerate playback devices." << std::endl;
+        return false;
+    }
+    if (index < 0 || index >= playbackDeviceCount) {
+        std::cerr << "Invalid playback device index." << std::endl;
+        return false;
+    }
+    /// TODO: Determine the supported formats and channels for the device
+    _playbackConfig = ma_device_config_init(ma_device_type_playback);
+    _playbackConfig.playback.format = ma_format_f32;
+    _playbackConfig.playback.channels = 2;
+    _playbackConfig.sampleRate = _sampleRate;
+    _playbackConfig.dataCallback = _playbackDataCallback;
+    _playbackConfig.pUserData = this;
+    _playbackConfig.playback.pDeviceID = &pPlaybackDevices[index].id;
+    result = ma_device_init(&_playbackContext, &_playbackConfig, &_playbackDevice);
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to initialize playback device." << std::endl;
+        return false;
+    }
+    result = ma_device_start(&_playbackDevice);
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to start playback device." << std::endl;
+        ma_device_uninit(&_playbackDevice);
+        return false;
+    }
+    return true;
+}
 
-//     _playbackConfig = ma_device_config_init(ma_device_type_playback);
-//     _playbackConfig.playback.format = ma_format_f32;
-//     _playbackConfig.playback.channels = 2;
-//     _playbackConfig.sampleRate = _sampleRate;
-//     _playbackConfig.dataCallback = _playbackDataCallback;
-//     _playbackConfig.pUserData = this;
-//     _playbackConfig.playback.pDeviceID = &pPlaybackDevices[index].id;
-//     result = ma_device_init(&_playbackContext, &_playbackConfig, &_playbackDevice);
-//     if (result != MA_SUCCESS) {
-//         std::cerr << "Failed to initialize playback device." << std::endl;
-//         return false;
-//     }
-//     result = ma_device_start(&_playbackDevice);
-//     if (result != MA_SUCCESS) {
-//         std::cerr << "Failed to start playback device." << std::endl;
-//         ma_device_uninit(&_playbackDevice);
-//         return false;
-//     }
-//     return true;
-// }
-
-// bool AudioManager::selectCaptureDevice(int index) {
-//     ma_device_info* pCaptureDevices;
-//     ma_uint32 captureDeviceCount;
-//     ma_result result;
-//     result = ma_context_get_devices(&_captureContext, NULL, NULL, &pCaptureDevices, &captureDeviceCount);
-//     if (result != MA_SUCCESS) {
-//         std::cerr << "Failed to enumerate capture devices." << std::endl;
-//         return false;
-//     }
-//     if (index < 0 || index >= captureDeviceCount) {
-//         std::cerr << "Invalid capture device index." << std::endl;
-//         return false;
-//     }
-//     _captureConfig = ma_device_config_init(ma_device_type_capture);
-//     _captureConfig.capture.format = ma_format_f32;
-//     _captureConfig.capture.channels = 2;
-//     _captureConfig.sampleRate = _sampleRate;
-//     _captureConfig.dataCallback = _captureDataCallback;
-//     _captureConfig.pUserData = this;
-//     _captureConfig.capture.pDeviceID = &pCaptureDevices[index].id;
-//     result = ma_device_init(&_captureContext, &_captureConfig, &_captureDevice);
-//     if (result != MA_SUCCESS) {
-//         std::cerr << "Failed to initialize capture device." << std::endl;
-//         return false;
-//     }
-//     result = ma_device_start(&_captureDevice);
-//     if (result != MA_SUCCESS) {
-//         std::cerr << "Failed to start capture device." << std::endl;
-//         ma_device_uninit(&_captureDevice);
-//         return false;
-//     }
-//     return true;
-// }
+bool AudioManager::selectCaptureDevice(int index) {
+    ma_device_info* pCaptureDevices;
+    ma_uint32 captureDeviceCount;
+    ma_result result;
+    result = ma_context_get_devices(&_captureContext, NULL, NULL, &pCaptureDevices, &captureDeviceCount);
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to enumerate capture devices." << std::endl;
+        return false;
+    }
+    if (index < 0 || index >= captureDeviceCount) {
+        std::cerr << "Invalid capture device index." << std::endl;
+        return false;
+    }
+    /// TODO: Determine the supported formats and channels for the device
+    _captureConfig = ma_device_config_init(ma_device_type_capture);
+    _captureConfig.capture.format = ma_format_f32;
+    _captureConfig.capture.channels = 2;
+    _captureConfig.sampleRate = _sampleRate;
+    _captureConfig.dataCallback = _captureDataCallback;
+    _captureConfig.pUserData = this;
+    _captureConfig.capture.pDeviceID = &pCaptureDevices[index].id;
+    result = ma_device_init(&_captureContext, &_captureConfig, &_captureDevice);
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to initialize capture device." << std::endl;
+        return false;
+    }
+    result = ma_device_start(&_captureDevice);
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to start capture device." << std::endl;
+        ma_device_uninit(&_captureDevice);
+        return false;
+    }
+    return true;
+}
 
 void AudioManager::_threadFunction() {
     while (isRunning()) {
@@ -136,8 +140,17 @@ void AudioManager::_threadFunction() {
     }
 }
 
-// void AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
-// }
+void AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+    AudioManager* audioManager = static_cast<AudioManager*>(pDevice->pUserData);
+    if (audioManager->_graphSink == nullptr || audioManager->_graphSink->ringBuffer == nullptr) return;
+    float* outputBuffer = static_cast<float*>(pOutput);
+    size_t samplesAvailable = audioManager->_graphSink->ringBuffer->available();
+    if (samplesAvailable == 0) return;
+    audioManager->_graphSink->ringBuffer->read(outputBuffer, samplesAvailable);
+    // Signal that the callback has finished processing
+    std::lock_guard<std::mutex> lock(audioManager->_graphSink->cv_mtx);
+    audioManager->_graphSink->cv.notify_one();
+}
 
-// void AudioManager::_captureDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
-// }
+void AudioManager::_captureDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+}

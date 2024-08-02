@@ -50,7 +50,13 @@ bool MainApplication::initialize() {
         std::cerr << "Failed to initialize MidiManager\n";
         return false;
     }
-    
+    /// Add the MIDI input to the graph
+    _graphManager.addObject(_midiManager.getMidiGraphInput());
+    /// Add the GraphSink to the graph
+    _graphManager.addObject(_audioManager.getGraphSink());
+    /// Set the graph signal and mutex
+    _graphManager.setGraphSignal(&_audioManager.getGraphSink()->cv);
+    _graphManager.setGraphMutex(&_audioManager.getGraphSink()->cv_mtx);
 
     return true;
 }

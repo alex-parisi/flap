@@ -3,6 +3,8 @@
 #pragma once
 
 #include <iostream>
+#include <condition_variable>
+#include <mutex>
 
 #include "glad.h"
 #include <GLFW/glfw3.h>
