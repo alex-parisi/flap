@@ -1,9 +1,11 @@
 /// main.cpp
 
 #include "../src/MainApplication.h"
+#include "../src/MainApplicationSettings.h"
 
 int main() {
-    MainApplication app;
+    auto settings = std::make_shared<flap::MainApplicationSettings>();
+    flap::MainApplication app(settings);
     if (!app.initialize()) {
         return -1;
     }

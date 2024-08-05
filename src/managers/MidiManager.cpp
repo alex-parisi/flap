@@ -1,56 +1,77 @@
 /// MidiManager.cpp
 
 #include "MidiManager.h"
+#include "../objects/io/MidiIn.h"
 
 #include <iostream>
 
-bool MidiManager::initialize() {
-    _midiIn = std::make_shared<RtMidiIn>();
-    _midiGraphInput = dibiff::midi::MidiInput::create(_blockSize);
-    // Check for available ports.
-    unsigned int nPorts = _midiIn->getPortCount();
-    std::cout << "\n[" << nPorts << "] MIDI input source(s) available.\n";
-    for (unsigned int i = 0; i < nPorts; i++) {
-        std::string portName;
-        try {
-            portName = _midiIn->getPortName(i);
-        } catch (RtMidiError &error) {
-            error.printMessage();
-        }
-        std::cout << "\tInput Port #" << i << ": " << portName << "\n";
-    }
-    // Open the specified port.
-    try {
-        _midiIn->openPort(_port);
-    } catch (RtMidiError &error) {
-        std::cerr << error.getMessage() << "\n";
-    }
-    // Don't ignore sysex, timing, or active sensing messages.
-    _midiIn->ignoreTypes(false, false, false);
-    // Set the callback function for MIDI input.
-    _midiIn->setCallback(&MidiManager::_midiCallback, this);
+bool flap::MidiManager::initialize() {
+    _mainMidiIn = std::make_shared<RtMidiIn>();
+    _mainMidiOut = std::make_shared<RtMidiOut>();
     return true;
 }
 
-void MidiManager::cleanup() {
-    _midiIn->closePort();
+void flap::MidiManager::cleanup() {
+    _mainMidiIn->closePort();
+    _mainMidiOut->closePort();
 }
 
-void MidiManager::_threadFunction() {
+std::optional<std::shared_ptr<flap::MidiIn>> flap::MidiManager::openInputPort(int port) {
+    /// Mutex Locked
+    {
+        std::lock_guard<std::mutex> lock(_mutex);
+        /// Make a new RtMidiIn object
+        auto newMidiIn = std::make_shared<RtMidiIn>();
+        if (port < newMidiIn->getPortCount()) {
+            newMidiIn->closePort();
+            try {
+                newMidiIn->openPort(port);
+                auto newMidiInObject = std::make_shared<flap::MidiIn>(port, _settings->blockSize);
+                newMidiInObject->initialize();
+                /// Don't ignore sysex, timing, or active sensing messages.
+                newMidiIn->ignoreTypes(false, false, false);
+                /// Set the callback function for MIDI input.
+                auto callbackData = std::make_shared<MidiCallbackData>(MidiCallbackData{this, port});
+                newMidiIn->setCallback(&MidiManager::_midiCallback, callbackData.get());
+                _midiIns[port] = newMidiIn;
+                _midiInObjects[port] = newMidiInObject;
+                callbackDataMap[port] = callbackData;
+                return newMidiInObject;
+            } catch (RtMidiError &error) {
+                std::cerr << error.getMessage() << "\n";
+                return std::nullopt;
+            }        
+        }   
+    }
+    return std::nullopt;
+}
+
+void flap::MidiManager::_threadFunction() {
     while (isRunning()) {
         /// Mutex Locked
         {
             /// Update the list of available MIDI devices
-            _portNames.clear();
-            unsigned int nPorts = _midiIn->getPortCount();
+            _inputPortNames.clear();
+            unsigned int nPorts = _mainMidiIn->getPortCount();
             for (unsigned int i = 0; i < nPorts; i++) {
                 std::string portName;
                 try {
-                    portName = _midiIn->getPortName(i);
+                    portName = _mainMidiIn->getPortName(i);
                 } catch (RtMidiError &error) {
                     error.printMessage();
                 }
-                _portNames.push_back("[" + std::to_string(i) + "] " + portName);
+                _inputPortNames.push_back("[" + std::to_string(i) + "] " + portName);
+            }
+            _outputPortNames.clear();
+            nPorts = _mainMidiOut->getPortCount();
+            for (unsigned int i = 0; i < nPorts; i++) {
+                std::string portName;
+                try {
+                    portName = _mainMidiOut->getPortName(i);
+                } catch (RtMidiError &error) {
+                    error.printMessage();
+                }
+                _outputPortNames.push_back("[" + std::to_string(i) + "] " + portName);
             }
         }
         /// Mutex Unlocked
@@ -59,37 +80,19 @@ void MidiManager::_threadFunction() {
     }
 }
 
-bool MidiManager::setPort(int port) {
-    /// Mutex Locked
-    {
-        std::lock_guard<std::mutex> lock(_mutex);
-        if (port < _midiIn->getPortCount()) {
-            _midiIn->closePort();
-            try {
-                _midiIn->openPort(port);
-                // Don't ignore sysex, timing, or active sensing messages.
-                _midiIn->ignoreTypes(false, false, false);
-                // Set the callback function for MIDI input.
-                _midiIn->setCallback(&MidiManager::_midiCallback, this);
-                _port = port;
-                return true;
-            } catch (RtMidiError &error) {
-                std::cerr << error.getMessage() << "\n";
-                return false;
-            }        
-        }
-    }
-    return false;
-}
-
-void MidiManager::_midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData) {
-    auto manager = static_cast<MidiManager *>(userData);
+void flap::MidiManager::_midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData) {
+    auto callbackData = static_cast<MidiCallbackData*>(userData);
+    auto manager = callbackData->manager;
+    int port = callbackData->port;
     /// Mutex Locked
     {
         std::lock_guard<std::mutex> lock(manager->_mutex);
         if (message->size() > 0) {
             /// Push MIDI message to the audio graph
-            manager->_midiGraphInput->addMidiMessage(*message);
+            /// TODO: Search for the correct audio object, don't assume it's the first one
+            auto a = manager->_midiInObjects[port]->getAudioObjects()[0];
+            auto b = std::dynamic_pointer_cast<dibiff::midi::MidiInput>(a);
+            b->addMidiMessage(*message);
         }
     }
     /// Mutex Unlocked

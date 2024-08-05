@@ -6,8 +6,9 @@
 
 #include <iostream>
 
-bool AudioManager::initialize() {
-    _graphSink = dibiff::sink::GraphSink::create(_sampleRate, _blockSize);
+bool flap::AudioManager::initialize() {
+    /// TODO: Don't do this now
+    _graphSink = dibiff::sink::GraphSink::create(1, _settings->sampleRate, _settings->blockSize);
     ma_result result;
     // Initialize playback context
     result = ma_context_init(NULL, 0, NULL, &_playbackContext);
@@ -27,14 +28,14 @@ bool AudioManager::initialize() {
     return true;
 }
 
-void AudioManager::cleanup() {
-    // ma_device_uninit(&_playbackDevice);
-    // ma_device_uninit(&_captureDevice);
+void flap::AudioManager::cleanup() {
+    ma_device_uninit(&_playbackDevice);
+    ma_device_uninit(&_captureDevice);
     ma_context_uninit(&_playbackContext);
     ma_context_uninit(&_captureContext);
 }
 
-bool AudioManager::selectPlaybackDevice(int index) {
+bool flap::AudioManager::selectPlaybackDevice(int index) {
     ma_device_info* pPlaybackDevices;
     ma_uint32 playbackDeviceCount;
     ma_result result;
@@ -50,8 +51,8 @@ bool AudioManager::selectPlaybackDevice(int index) {
     /// TODO: Determine the supported formats and channels for the device
     _playbackConfig = ma_device_config_init(ma_device_type_playback);
     _playbackConfig.playback.format = ma_format_f32;
-    _playbackConfig.playback.channels = 2;
-    _playbackConfig.sampleRate = _sampleRate;
+    _playbackConfig.playback.channels = 1;
+    _playbackConfig.sampleRate = _settings->sampleRate;
     _playbackConfig.dataCallback = _playbackDataCallback;
     _playbackConfig.pUserData = this;
     _playbackConfig.playback.pDeviceID = &pPlaybackDevices[index].id;
@@ -69,7 +70,7 @@ bool AudioManager::selectPlaybackDevice(int index) {
     return true;
 }
 
-bool AudioManager::selectCaptureDevice(int index) {
+bool flap::AudioManager::selectCaptureDevice(int index) {
     ma_device_info* pCaptureDevices;
     ma_uint32 captureDeviceCount;
     ma_result result;
@@ -85,8 +86,8 @@ bool AudioManager::selectCaptureDevice(int index) {
     /// TODO: Determine the supported formats and channels for the device
     _captureConfig = ma_device_config_init(ma_device_type_capture);
     _captureConfig.capture.format = ma_format_f32;
-    _captureConfig.capture.channels = 2;
-    _captureConfig.sampleRate = _sampleRate;
+    _captureConfig.capture.channels = 1;
+    _captureConfig.sampleRate = _settings->sampleRate;
     _captureConfig.dataCallback = _captureDataCallback;
     _captureConfig.pUserData = this;
     _captureConfig.capture.pDeviceID = &pCaptureDevices[index].id;
@@ -104,7 +105,17 @@ bool AudioManager::selectCaptureDevice(int index) {
     return true;
 }
 
-void AudioManager::_threadFunction() {
+std::vector<ma_device_info> flap::AudioManager::getPlaybackDevices() {
+    std::lock_guard<std::mutex> lock(_mutex);
+    return _playbackDevices;
+}
+
+std::vector<ma_device_info> flap::AudioManager::getCaptureDevices() {
+    std::lock_guard<std::mutex> lock(_mutex);
+    return _captureDevices;
+}
+
+void flap::AudioManager::_threadFunction() {
     while (isRunning()) {
         /// Mutex Locked
         {
@@ -140,7 +151,7 @@ void AudioManager::_threadFunction() {
     }
 }
 
-void AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+void flap::AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
     AudioManager* audioManager = static_cast<AudioManager*>(pDevice->pUserData);
     if (audioManager->_graphSink == nullptr || audioManager->_graphSink->ringBuffer == nullptr) return;
     float* outputBuffer = static_cast<float*>(pOutput);
@@ -152,5 +163,5 @@ void AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, cons
     audioManager->_graphSink->cv.notify_one();
 }
 
-void AudioManager::_captureDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+void flap::AudioManager::_captureDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
 }

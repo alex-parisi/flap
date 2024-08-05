@@ -2,15 +2,42 @@
 
 #include "GraphManager.h"
 
-bool GraphManager::initialize() {
+bool flap::GraphManager::initialize() {
     _graph = std::make_shared<dibiff::graph::AudioGraph>();
     return true;
 }
 
-void GraphManager::cleanup() {
+void flap::GraphManager::cleanup() {
 }
 
-void GraphManager::_threadFunction() {
+void flap::GraphManager::addObject(std::shared_ptr<dibiff::graph::AudioObject> object) { 
+    /// Mutex Locked
+    {
+        // std::lock_guard<std::mutex> lock(_mutex);
+        _graph->add(object); 
+    }
+}
+
+void flap::GraphManager::addObject(std::vector<std::shared_ptr<dibiff::graph::AudioObject>> objects) { 
+    /// Mutex Locked
+    {
+        // std::lock_guard<std::mutex> lock(_mutex);
+        for (auto object : objects) { 
+            _graph->add(object); 
+        } 
+    }
+}
+
+void flap::GraphManager::addObject(std::shared_ptr<dibiff::graph::AudioCompositeObject> object) { 
+    /// Mutex Locked
+    {
+        // std::lock_guard<std::mutex> lock(_mutex);
+        _graph->add(object);
+    }
+}
+
+
+void flap::GraphManager::_threadFunction() {
     while (isRunning()) {
         /// Mutex Locked
         {
