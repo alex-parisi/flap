@@ -17,11 +17,6 @@ void flap::Envelope::initialize() {
 
 void flap::Envelope::render() {
     ImGui::Begin("Envelope");
-    // Debug prints to check initial values
-    ImGui::Text("Attack: %f", _attackTime);
-    ImGui::Text("Decay: %f", _decayTime);
-    ImGui::Text("Sustain: %f", _sustainLevel);
-    ImGui::Text("Release: %f", _releaseTime);
     if (ImGui::RadioButton("MIDI Input", _midiInputSelected)) {
         if (!_midiInputSelected) {
             if (!ConnectionService::getInstance().isDragging()) {
