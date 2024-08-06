@@ -14,6 +14,8 @@ namespace flap {
             void initialize() override;
             void render() override;
         private:
-            std::shared_ptr<MainApplicationSettings> _settings;    
+            std::shared_ptr<MainApplicationSettings> _settings;
+            bool _inputSelected = false;
+            bool _outputSelected = false;
     };
 }

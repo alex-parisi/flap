@@ -12,5 +12,7 @@ namespace flap {
         void render() override;
     private:
         float _gain;
+        bool _inputSelected = false;
+        bool _outputSelected = false;
     };
 }

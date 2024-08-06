@@ -15,5 +15,6 @@ namespace flap {
     private:
         int _port;
         int _blockSize;
+        bool _outputSelected = false;
     };
 }

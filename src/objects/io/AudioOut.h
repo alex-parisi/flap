@@ -18,5 +18,8 @@ namespace flap {
         int _channels;
         int _sampleRate;
         int _blockSize;
+        bool _inputSelected = false;
+        bool _inputLSelected = false;
+        bool _inputRSelected = false;
     };
 }

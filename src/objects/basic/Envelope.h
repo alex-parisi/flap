@@ -16,5 +16,8 @@ namespace flap {
         float _sustainLevel;
         float _releaseTime;
         float& _sampleRate;
+        bool _inputSelected = false;
+        bool _midiInputSelected = false;
+        bool _outputSelected = false;
     };
 }
