@@ -2,6 +2,7 @@
 
 #include "MainApplication.h"
 #include "objects/basic/Gain.h"
+#include "objects/generator/SineGenerator.h"
 #include <iostream>
 
 bool flap::MainApplication::initialize() {
@@ -51,11 +52,6 @@ bool flap::MainApplication::initialize() {
         std::cerr << "Failed to initialize MidiManager\n";
         return false;
     }
-    /// Add the GraphSink to the graph
-    _graphManager.addObject(_audioManager.getGraphSink());
-    /// Set the graph signal and mutex - this lets the two talk to each other
-    _graphManager.setGraphSignal(&_audioManager.getGraphSink()->cv);
-    _graphManager.setGraphMutex(&_audioManager.getGraphSink()->cv_mtx);
 
     return true;
 }
@@ -198,6 +194,12 @@ void flap::MainApplication::_renderToolbar() {
                     _objects.push_back(gain);
                     _graphManager.addObject(gain->getAudioObjects());
                 }
+                if (ImGui::MenuItem("Sine Generator")) {
+                    auto sine = std::make_shared<SineGenerator>(_settings);
+                    sine->initialize();
+                    _objects.push_back(sine);
+                    _graphManager.addObject(sine->getAudioObjects());
+                }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Add Audio I/O")) {
@@ -211,6 +213,32 @@ void flap::MainApplication::_renderToolbar() {
                 if (ImGui::BeginMenu("Output")) {
                     for (auto& p : _audioManager.getPlaybackDevices()) {
                         if (ImGui::MenuItem(p.name)) {
+                            /// Convert the format to a ma_format
+                            ma_format format;
+                            if (_settings->format == "f32") {
+                                format = ma_format_f32;
+                            } else if (_settings->format == "s16") {
+                                format = ma_format_s16;
+                            } else if (_settings->format == "s24") {
+                                format = ma_format_s24;
+                            } else if (_settings->format == "s32") {
+                                format = ma_format_s32;
+                            } else {
+                                format = ma_format_f32;
+                            }
+                            /// Pull out the device info and add it to the graph
+                            auto audioOut = _audioManager.openPlaybackDevice(p, format, 2, _settings->sampleRate);
+                            /// If the device was opened successfully, add it to the graph
+                            if (audioOut.has_value()) {
+                                _objects.push_back(audioOut.value());
+                                _graphManager.addObject(audioOut.value()->getAudioObjects());
+                                /// Set the graph signal and mutex - this lets the two talk to each other
+                                /// We first have to pull it out
+                                auto a = audioOut.value()->getAudioObjects()[0];
+                                auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(a);
+                                _graphManager.addGraphSignal(&sink->cv);
+                                _graphManager.addGraphMutex(&sink->cv_mtx);
+                            }
                         }
                     }
                     ImGui::EndMenu();

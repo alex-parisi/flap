@@ -44,9 +44,13 @@ void flap::GraphManager::_threadFunction() {
             std::lock_guard<std::mutex> lock(_mutex);
             _graph->tick();
             /// Wait for the signal from the audio manager
-            {
-                std::unique_lock<std::mutex> ulock(*_graphMutex);
-                _graphSignal->wait(ulock);
+            for (int i = 0; i < _graphSignals.size(); i++) {
+                std::unique_lock<std::mutex> ulock(*_graphMutexs[i]);
+                _graphSignals[i]->wait(ulock);
+            }
+            /// Reset the signals
+            for (auto& signal : _graphSignals) {
+                signal->notify_all();
             }
         }
         /// Mutex Unlocked

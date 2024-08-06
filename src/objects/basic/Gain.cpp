@@ -19,5 +19,4 @@ void flap::Gain::render() {
     ImGui::SameLine();
     ImGui::RadioButton("Output", false);
     ImGui::End();
-    // ImGui::ShowDemoWindow();
 }

@@ -14,6 +14,10 @@ bool flap::MidiManager::initialize() {
 void flap::MidiManager::cleanup() {
     _mainMidiIn->closePort();
     _mainMidiOut->closePort();
+    _mainMidiIn.reset();
+    _mainMidiOut.reset();
+    _midiIns.clear();
+    _midiInObjects.clear();
 }
 
 std::optional<std::shared_ptr<flap::MidiIn>> flap::MidiManager::openInputPort(int port) {

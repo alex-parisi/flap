@@ -17,12 +17,12 @@ namespace flap {
             void addObject(std::shared_ptr<dibiff::graph::AudioObject> object);
             void addObject(std::vector<std::shared_ptr<dibiff::graph::AudioObject>> objects);
             void addObject(std::shared_ptr<dibiff::graph::AudioCompositeObject> object);
-            void setGraphSignal(std::condition_variable * signal) { _graphSignal = signal; }
-            void setGraphMutex(std::mutex * mutex) { _graphMutex = mutex; }
+            void addGraphSignal(std::condition_variable * signal) { _graphSignals.push_back(signal); }
+            void addGraphMutex(std::mutex * mutex) { _graphMutexs.push_back(mutex); }
         private:
             /// TODO: Use smart pointers here
-            std::condition_variable * _graphSignal;
-            std::mutex * _graphMutex;
+            std::vector<std::condition_variable *> _graphSignals;
+            std::vector<std::mutex *> _graphMutexs;
             void _threadFunction() override;
             std::shared_ptr<dibiff::graph::AudioGraph> _graph;
     };
