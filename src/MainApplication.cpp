@@ -3,6 +3,7 @@
 #include "MainApplication.h"
 #include "objects/basic/Gain.h"
 #include "objects/generator/SineGenerator.h"
+#include "objects/basic/Envelope.h"
 #include "ConnectionService.h"
 #include <iostream>
 
@@ -204,6 +205,12 @@ void flap::MainApplication::_renderToolbar() {
                     _objects.push_back(sine);
                     _graphManager.addObject(sine->getAudioObjects());
                 }
+                if (ImGui::MenuItem("Envelope")) {
+                    auto envelope = std::make_shared<Envelope>(_settings->sampleRate);
+                    envelope->initialize();
+                    _objects.push_back(envelope);
+                    _graphManager.addObject(envelope->getAudioObjects());
+                }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Add Audio I/O")) {
@@ -231,7 +238,7 @@ void flap::MainApplication::_renderToolbar() {
                                 format = ma_format_f32;
                             }
                             /// Pull out the device info and add it to the graph
-                            auto audioOut = _audioManager.openPlaybackDevice(p, format, 1, _settings->sampleRate, _settings->blockSize);
+                            auto audioOut = _audioManager.openPlaybackDevice(p, format, 2, _settings->sampleRate, _settings->blockSize);
                             /// If the device was opened successfully, add it to the graph
                             if (audioOut.has_value()) {
                                 _objects.push_back(audioOut.value());
