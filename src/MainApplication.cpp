@@ -3,6 +3,7 @@
 #include "MainApplication.h"
 #include "objects/basic/Gain.h"
 #include "objects/generator/SineGenerator.h"
+#include "ConnectionService.h"
 #include <iostream>
 
 bool flap::MainApplication::initialize() {
@@ -52,7 +53,7 @@ bool flap::MainApplication::initialize() {
         std::cerr << "Failed to initialize MidiManager\n";
         return false;
     }
-
+    ConnectionService::getInstance().setMutex(_graphManager.getMutex());
     return true;
 }
 
@@ -123,6 +124,9 @@ void flap::MainApplication::_renderImGui(int screenWidth, int screenHeight) {
     for (auto& object : _objects) {
         object->render();
     }
+
+    /// Render connections
+    ConnectionService::getInstance().renderConnections();
 
     /// End the main window
     ImGui::End();
@@ -227,7 +231,7 @@ void flap::MainApplication::_renderToolbar() {
                                 format = ma_format_f32;
                             }
                             /// Pull out the device info and add it to the graph
-                            auto audioOut = _audioManager.openPlaybackDevice(p, format, 2, _settings->sampleRate);
+                            auto audioOut = _audioManager.openPlaybackDevice(p, format, 1, _settings->sampleRate, _settings->blockSize);
                             /// If the device was opened successfully, add it to the graph
                             if (audioOut.has_value()) {
                                 _objects.push_back(audioOut.value());

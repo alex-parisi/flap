@@ -25,14 +25,15 @@ namespace flap {
             }
             bool isRunning() { return _running; }
             void setSettings(std::shared_ptr<MainApplicationSettings> settings) { 
-                std::lock_guard<std::mutex> lock(_mutex);
+                std::lock_guard<std::mutex> lock(*_mutex);
                 _settings = settings;
             }
+            std::shared_ptr<std::mutex> getMutex() { return _mutex; }
         protected:
             std::shared_ptr<flap::MainApplicationSettings> _settings;
             std::atomic<bool> _running;
             std::thread _thread;
-            mutable std::mutex _mutex;
+            std::shared_ptr<std::mutex> _mutex;
             virtual void _threadFunction() = 0;
     };
 }

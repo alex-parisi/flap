@@ -3,6 +3,7 @@
 #include "GraphManager.h"
 
 bool flap::GraphManager::initialize() {
+    _mutex = std::make_shared<std::mutex>();
     _graph = std::make_shared<dibiff::graph::AudioGraph>();
     return true;
 }
@@ -41,7 +42,7 @@ void flap::GraphManager::_threadFunction() {
     while (isRunning()) {
         /// Mutex Locked
         {
-            std::lock_guard<std::mutex> lock(_mutex);
+            std::lock_guard<std::mutex> lock(*_mutex);
             _graph->tick();
             /// Wait for the signal from the audio manager
             for (int i = 0; i < _graphSignals.size(); i++) {

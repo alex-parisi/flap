@@ -6,6 +6,7 @@
 #include <iostream>
 
 bool flap::MidiManager::initialize() {
+    _mutex = std::make_shared<std::mutex>();
     _mainMidiIn = std::make_shared<RtMidiIn>();
     _mainMidiOut = std::make_shared<RtMidiOut>();
     return true;
@@ -23,7 +24,7 @@ void flap::MidiManager::cleanup() {
 std::optional<std::shared_ptr<flap::MidiIn>> flap::MidiManager::openInputPort(int port) {
     /// Mutex Locked
     {
-        std::lock_guard<std::mutex> lock(_mutex);
+        std::lock_guard<std::mutex> lock(*_mutex);
         /// Make a new RtMidiIn object
         auto newMidiIn = std::make_shared<RtMidiIn>();
         if (port < newMidiIn->getPortCount()) {
@@ -90,7 +91,7 @@ void flap::MidiManager::_midiCallback(double deltatime, std::vector<unsigned cha
     int port = callbackData->port;
     /// Mutex Locked
     {
-        std::lock_guard<std::mutex> lock(manager->_mutex);
+        std::lock_guard<std::mutex> lock(*manager->_mutex);
         if (message->size() > 0) {
             /// Push MIDI message to the audio graph
             /// TODO: Search for the correct audio object, don't assume it's the first one

@@ -23,22 +23,22 @@ namespace flap {
             bool initialize() override;
             void cleanup() override;
             std::vector<std::string> getInputPortNames() { 
-                std::lock_guard<std::mutex> lock(_mutex);
+                std::lock_guard<std::mutex> lock(*_mutex);
                 return _inputPortNames; 
             }
             std::vector<std::string> getOutputPortNames() { 
-                std::lock_guard<std::mutex> lock(_mutex);
+                std::lock_guard<std::mutex> lock(*_mutex);
                 return _outputPortNames; 
             }
             std::optional<std::shared_ptr<MidiIn>> openInputPort(int port);
             /// TODO: Implement this
             bool openOutputPort(int port) { return false;};
             std::string getInPortName(int port) {
-                std::lock_guard<std::mutex> lock(_mutex);
+                std::lock_guard<std::mutex> lock(*_mutex);
                 return _mainMidiIn->getPortName(port);
             }
             std::string getOutPortName(int port) {
-                std::lock_guard<std::mutex> lock(_mutex);
+                std::lock_guard<std::mutex> lock(*_mutex);
                 return _mainMidiOut->getPortName(port);
             }
         private:

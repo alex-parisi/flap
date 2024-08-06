@@ -25,7 +25,7 @@ namespace flap {
             void cleanup() override;
             std::vector<ma_device_info> getPlaybackDevices();
             std::vector<ma_device_info> getCaptureDevices();
-            std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels, int sampleRate);
+            std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels, int sampleRate, int blockSize);
         private:
             ma_context _playbackContext;
             ma_context _captureContext;
