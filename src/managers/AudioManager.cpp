@@ -23,9 +23,11 @@ bool flap::AudioManager::initialize() {
 }
 
 void flap::AudioManager::cleanup() {
-    ma_context_uninit(&_playbackContext);
-    ma_context_uninit(&_captureContext);
+    ma_device_stop(&_playbackDevice);
     ma_device_uninit(&_playbackDevice);
+    ma_context_uninit(&_playbackContext);
+    
+    ma_context_uninit(&_captureContext);
 }
 
 std::vector<ma_device_info> flap::AudioManager::getPlaybackDevices() {

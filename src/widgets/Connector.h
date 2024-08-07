@@ -2,6 +2,7 @@
 
 #include "dibiff/dibiff"
 #include "imgui.h"
+#include "imgui_internal.h"
 
 #include <memory>
 #include <string>
@@ -10,11 +11,20 @@
 #pragma once
 
 namespace flap {
-    class Connector {
+    class Connector : public std::enable_shared_from_this<Connector> {
         public:
             Connector() {};
             Connector(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point, std::shared_ptr<dibiff::graph::AudioObject> object, bool allowMultiple = false) : _point(point), _object(object), _allowMultiple(allowMultiple) {};
             void render(std::optional<std::string> label = std::nullopt);
+            std::weak_ptr<dibiff::graph::AudioConnectionPoint> getPoint() {
+                return _point;
+            }
+            std::shared_ptr<dibiff::graph::AudioObject> getObject() {
+                return _object;
+            }
+            void setSelected(bool selected) {
+                _isSelected = selected;
+            }
         private:
             std::weak_ptr<dibiff::graph::AudioConnectionPoint> _point;
             std::shared_ptr<dibiff::graph::AudioObject> _object;
@@ -31,5 +41,6 @@ namespace flap {
                 // Calculate the center position of the radio button
                 return ImVec2(rectMin.x + radioButtonSize / 2, rectMin.y + radioButtonSize / 2);
             }
+            std::vector<Connector*> _connectedTo;
     };
 }
