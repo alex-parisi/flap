@@ -5,8 +5,27 @@
 #include <vector>
 #include <tuple>
 #include <memory>
+#include <unordered_map>
+#include <mutex>
 #include "imgui.h"
 #include "dibiff/dibiff"
+
+// Custom hash function for std::weak_ptr
+struct WeakPtrHash {
+    template <typename T>
+    std::size_t operator()(const std::weak_ptr<T>& wp) const {
+        auto sp = wp.lock();
+        return std::hash<std::shared_ptr<T>>()(sp);
+    }
+};
+
+// Custom equality function for std::weak_ptr
+struct WeakPtrEqual {
+    template <typename T>
+    bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const {
+        return !lhs.owner_before(rhs) && !rhs.owner_before(lhs);
+    }
+};
 
 class ConnectionService {
     public:
@@ -36,7 +55,9 @@ class ConnectionService {
                 drawList->AddLine(p[i - 1], p[i], IM_COL32(255, 255, 255, 255), 2.0f);
             }
             for (auto pair : _connections) {
-                drawList->AddLine(std::get<0>(pair), std::get<1>(pair), IM_COL32(255, 255, 255, 255), 2.0f);
+                ImVec2 pt1 = _connectionLocations[std::get<0>(pair)];
+                ImVec2 pt2 = _connectionLocations[std::get<1>(pair)];
+                drawList->AddLine(pt1, pt2, IM_COL32(255, 255, 255, 255), 1.0f);
             }
         }
         void setDragging(bool dragging) {
@@ -78,18 +99,24 @@ class ConnectionService {
                 try {
                     std::lock_guard<std::mutex> lock(*getMutex());
                     dibiff::graph::AudioGraph::connect(getActivePoint(), point);
-                    ConnectionService::getInstance().removePoint();
                     std::cout << "Connected\n";
                     *_radioBool = true;
+                    _connectionLocations[point] = centerpos;
+                    _connectionLocations[getActivePoint()] = _points.back();
+                    _connections.push_back(std::make_tuple(getActivePoint(), point));
+                    removePoint();
                 } catch (std::exception& e) {
                     /// If we can't connect, remove the last point
                     std::cout << "Can't connect\n";
-                    ConnectionService::getInstance().removePoint();
+                    removePoint();
                 }
             } else {
                 std::cout << "Can't connect to itself\n";
-                ConnectionService::getInstance().removePoint();
+                removePoint();
             }
+        }
+        std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual>& getConnectionLocations() {
+            return _connectionLocations;
         }
     private:
         /// Singleton pattern
@@ -97,10 +124,11 @@ class ConnectionService {
         ~ConnectionService() {}
         /// List of points to draw lines between
         std::vector<ImVec2> _points;
-        std::vector<std::tuple<ImVec2, ImVec2>> _connections;
         bool _dragging = false;
         std::weak_ptr<dibiff::graph::AudioConnectionPoint> _activePoint;
         std::shared_ptr<dibiff::graph::AudioObject> _activeObject;
         std::shared_ptr<std::mutex> _mutex;
         bool* _radioBool;
+        std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual> _connectionLocations;
+        std::vector<std::tuple<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, std::weak_ptr<dibiff::graph::AudioConnectionPoint>>> _connections;
 };

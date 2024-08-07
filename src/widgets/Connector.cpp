@@ -26,4 +26,8 @@ void flap::Connector::render(std::optional<std::string> label) {
             }
         }
     }
+    /// Update the point location
+    if (_isSelected) {
+        ConnectionService::getInstance().getConnectionLocations()[_point] = _getRadioButtonCenter();
+    }
 }
