@@ -38,7 +38,7 @@ namespace flap {
             /// TODO: Use a smart pointer here
             GLFWwindow* _window;
 
-            double _lastRenderTime;
+            double _lastRenderTime = 0.0;
             const double _renderFPS = 60.0;
             const double _renderInterval = 1.0 / _renderFPS;
             std::vector<std::shared_ptr<Object>> _objects;

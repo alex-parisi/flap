@@ -60,8 +60,8 @@ bool flap::MainApplication::initialize() {
 
 void flap::MainApplication::run() {
     // Manager Threads
-    _audioManager.run();
     _graphManager.run();
+    _audioManager.run();
     _midiManager.run();
     // Main render loop / UI Thread
     while (!glfwWindowShouldClose(_window)) {
@@ -75,6 +75,9 @@ void flap::MainApplication::run() {
 }
 
 void flap::MainApplication::cleanup() {
+    _audioManager.cleanup();
+    _graphManager.cleanup();
+    _midiManager.cleanup();
     if (_window) {
         ImGui_ImplOpenGL3_Shutdown();
         ImGui_ImplGlfw_Shutdown();
@@ -82,9 +85,6 @@ void flap::MainApplication::cleanup() {
         glfwDestroyWindow(_window);
         glfwTerminate();
     }
-    _audioManager.cleanup();
-    _graphManager.cleanup();
-    _midiManager.cleanup();
 }
 
 void flap::MainApplication::_render() {

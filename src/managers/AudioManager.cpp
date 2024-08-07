@@ -23,8 +23,11 @@ bool flap::AudioManager::initialize() {
 }
 
 void flap::AudioManager::cleanup() {
-    ma_device_stop(&_playbackDevice);
-    ma_device_uninit(&_playbackDevice);
+    ma_device_state state = ma_device_get_state(&_playbackDevice);
+    if (state == ma_device_state_started) {
+        ma_device_stop(&_playbackDevice);
+        ma_device_uninit(&_playbackDevice);
+    }
     ma_context_uninit(&_playbackContext);
     
     ma_context_uninit(&_captureContext);
