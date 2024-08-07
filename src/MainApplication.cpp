@@ -183,6 +183,9 @@ void flap::MainApplication::_renderToolbar() {
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Edit")) {
+            if (ImGui::MenuItem("Show Connections", "^ + C", ConnectionService::getInstance().getShowConnections())) {
+                ConnectionService::getInstance().setShowConnections(!ConnectionService::getInstance().getShowConnections());
+            }
             if (ImGui::MenuItem("Undo")) {
                 /// TODO: Handle undo action
             }
@@ -285,5 +288,10 @@ void flap::MainApplication::_renderToolbar() {
             ImGui::EndMenu();
         }
         ImGui::EndMenuBar();
+        /// Check for hotkeys
+        /// TODO: Fix this.
+        if (ImGui::IsKeyDown(ImGuiKey_C) && (ImGui::IsKeyDown(ImGuiKey_LeftSuper) || ImGui::IsKeyPressed(ImGuiKey_RightSuper))) {
+            ConnectionService::getInstance().setShowConnections(!ConnectionService::getInstance().getShowConnections());
+        }
     }
 }

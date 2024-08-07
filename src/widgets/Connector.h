@@ -25,6 +25,9 @@ namespace flap {
             void setSelected(bool selected) {
                 _isSelected = selected;
             }
+            void addConnectedTo(Connector* connectedTo) {
+                _connectedTo.push_back(connectedTo);
+            }
         private:
             std::weak_ptr<dibiff::graph::AudioConnectionPoint> _point;
             std::shared_ptr<dibiff::graph::AudioObject> _object;

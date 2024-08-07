@@ -55,10 +55,12 @@ class ConnectionService {
             for (size_t i = 1; i < p.size(); i += 2) {
                 drawList->AddLine(p[i - 1], p[i], IM_COL32(255, 255, 255, 255), 2.0f);
             }
-            for (auto pair : _connections) {
-                ImVec2 pt1 = _connectionLocations[std::get<0>(pair)];
-                ImVec2 pt2 = _connectionLocations[std::get<1>(pair)];
-                drawList->AddLine(pt1, pt2, IM_COL32(255, 255, 255, 255), 1.0f);
+            if (_showConnections) {
+                for (auto pair : _connections) {
+                    ImVec2 pt1 = _connectionLocations[std::get<0>(pair)];
+                    ImVec2 pt2 = _connectionLocations[std::get<1>(pair)];
+                    drawList->AddLine(pt1, pt2, IM_COL32(255, 255, 255, 255), 1.0f);
+                }
             }
         }
         void setDragging(bool dragging) {
@@ -91,6 +93,7 @@ class ConnectionService {
                     _connectionLocations[secondConnector->getPoint()] = centerpos;
                     _connectionLocations[_currentConnector->getPoint()] = _points.back();
                     _connections.push_back(std::make_tuple(_currentConnector->getPoint(), secondConnector->getPoint()));
+                    _currentConnector->addConnectedTo(secondConnector);
                     removePoint();
                 } catch (std::exception& e) {
                     /// If we can't connect, remove the last point
@@ -123,6 +126,12 @@ class ConnectionService {
                 _connections.erase(it);
             }
         }
+        void setShowConnections(bool showConnections) {
+            _showConnections = showConnections;
+        }
+        bool getShowConnections() {
+            return _showConnections;
+        }
     private:
         /// Singleton pattern
         ConnectionService() {}
@@ -134,4 +143,5 @@ class ConnectionService {
         flap::Connector* _currentConnector;
         std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual> _connectionLocations;
         std::vector<std::tuple<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, std::weak_ptr<dibiff::graph::AudioConnectionPoint>>> _connections;
+        bool _showConnections = true;
 };
