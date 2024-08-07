@@ -4,6 +4,7 @@
 
 #include "../Object.h"
 #include "../../MainApplicationSettings.h"
+#include "../../widgets/Connector.h"
 
 #include <memory>
 
@@ -15,7 +16,7 @@ namespace flap {
             void render() override;
         private:
             std::shared_ptr<MainApplicationSettings> _settings;
-            bool _inputSelected = false;
-            bool _outputSelected = false;
+            Connector _input;
+            Connector _output;
     };
 }

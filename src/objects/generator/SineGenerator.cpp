@@ -12,30 +12,14 @@
 void flap::SineGenerator::initialize() {
     auto sineObject = dibiff::generator::SineGenerator::create(_settings->blockSize, _settings->sampleRate);
     _audioObjects.push_back(sineObject);
+    _input = Connector(sineObject->getInput(), sineObject);
+    _output = Connector(sineObject->getOutput(), sineObject, true);
 }
 
 void flap::SineGenerator::render() {
     ImGui::Begin("Sine Generator");
-    if (ImGui::RadioButton("Input", _inputSelected)) {
-        if (!_inputSelected) {
-            if (!ConnectionService::getInstance().isDragging()) {
-                ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(), _audioObjects[0], _inputSelected);
-            } else {
-                ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(), _audioObjects[0]);
-                _inputSelected = true;
-            }
-        } else {
-            /// TODO: Disconnect
-        }
-    }
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Output", _outputSelected)) {
-        if (!ConnectionService::getInstance().isDragging()) {
-            ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0], _outputSelected);
-        } else {
-            ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0]);
-            _outputSelected = true;
-        }
-    }
+    ImGui::SeparatorText("Connections");
+    _input.render("MIDI In");
+    _output.render("Out");
     ImGui::End();
 }

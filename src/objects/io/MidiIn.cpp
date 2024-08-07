@@ -12,17 +12,12 @@
 void flap::MidiIn::initialize() {
     auto midiObject = dibiff::midi::MidiInput::create(_blockSize);
     _audioObjects.push_back(midiObject);
+    _output = Connector(midiObject->getOutput(), midiObject, true);
 }
 
 void flap::MidiIn::render() {
     ImGui::Begin("MidiInput");
-    if (ImGui::RadioButton("Output", _outputSelected)) {
-        if (!ConnectionService::getInstance().isDragging()) {
-            ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0], _outputSelected);
-        } else {
-            ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0]);
-            _outputSelected = true;
-        }
-    }
+    ImGui::SeparatorText("Connections");
+    _output.render("MIDI Out");
     ImGui::End();
 }

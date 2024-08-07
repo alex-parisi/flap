@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../Object.h"
+#include "../../widgets/Connector.h"
 
 namespace flap {
     class Envelope : public Object {
@@ -16,8 +17,8 @@ namespace flap {
         float _sustainLevel;
         float _releaseTime;
         float& _sampleRate;
-        bool _inputSelected = false;
-        bool _midiInputSelected = false;
-        bool _outputSelected = false;
+        Connector _input;
+        Connector _midiInput;
+        Connector _output;
     };
 }

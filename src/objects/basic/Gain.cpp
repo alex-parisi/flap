@@ -13,31 +13,16 @@
 void flap::Gain::initialize() {
     auto gainObject = dibiff::level::Gain::create(_gain);
     _audioObjects.push_back(gainObject);
+    _input = Connector(gainObject->getInput(), gainObject);
+    _output = Connector(gainObject->getOutput(), gainObject, true);
 }
 
 void flap::Gain::render() {
     ImGui::Begin("Gain");
-    if (ImGui::RadioButton("Input", _inputSelected)) {
-        if (!_inputSelected) {
-            if (!ConnectionService::getInstance().isDragging()) {
-                ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(), _audioObjects[0], _inputSelected);
-            } else {
-                ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(), _audioObjects[0]);
-                _inputSelected = true;
-            }
-        } else {
-            /// TODO: Disconnect
-        }
-    }
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Output", _outputSelected)) {
-        if (!ConnectionService::getInstance().isDragging()) {
-            ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0], _outputSelected);
-        } else {
-            ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0]);
-            _outputSelected = true;
-        }
-    }
+    ImGui::SeparatorText("Connections");
+    _input.render("In");
+    _output.render("Out");
+    ImGui::SeparatorText("Gain Parameters");
     ImGuiKnobs::Knob("Gain", &_gain, -80.0f, 30.0f, 0.1f, "%.1fdB", ImGuiKnobVariant_Wiper);
     ImGui::End();
 }

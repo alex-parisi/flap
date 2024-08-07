@@ -13,44 +13,18 @@
 void flap::Envelope::initialize() {
     auto envelope = dibiff::dynamic::Envelope::create(_attackTime, _decayTime, _sustainLevel, _releaseTime, _sampleRate);
     _audioObjects.push_back(envelope);
+    _input = Connector(envelope->getInput(0), envelope);
+    _midiInput = Connector(envelope->getInput(1), envelope);
+    _output = Connector(envelope->getOutput(), envelope, true);
 }
 
 void flap::Envelope::render() {
     ImGui::Begin("Envelope");
-    if (ImGui::RadioButton("MIDI Input", _midiInputSelected)) {
-        if (!_midiInputSelected) {
-            if (!ConnectionService::getInstance().isDragging()) {
-                ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(1), _audioObjects[0], _midiInputSelected);
-            } else {
-                ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(1), _audioObjects[0]);
-                _midiInputSelected = true;
-            }
-        } else {
-            /// TODO: Disconnect 
-        }
-    }
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Input", _inputSelected)) {
-        if (!_inputSelected) {
-            if (!ConnectionService::getInstance().isDragging()) {
-                ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(0), _audioObjects[0], _inputSelected);
-            } else {
-                ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(0), _audioObjects[0]);
-                _inputSelected = true;
-            }
-        } else {
-            /// TODO: Disconnect
-        }
-    }
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Output", _outputSelected)) {
-        if (!ConnectionService::getInstance().isDragging()) {
-            ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0], _outputSelected);
-        } else {
-            ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getOutput(), _audioObjects[0]);
-            _outputSelected = true;
-        }
-    }
+    ImGui::SeparatorText("Connections");
+    _midiInput.render("MIDI In");
+    _input.render("In");
+    _output.render("Out");
+    ImGui::SeparatorText("Envelope Parameters");
     ImGuiKnobs::Knob("Attack", &_attackTime, 0.0f, 2.0f, 0.005f, "%1.3fs", ImGuiKnobVariant_Wiper);
     ImGui::SameLine();
     ImGuiKnobs::Knob("Decay", &_decayTime, 0.0f, 2.0f, 0.005f, "%1.3fs", ImGuiKnobVariant_Wiper);
@@ -58,6 +32,5 @@ void flap::Envelope::render() {
     ImGuiKnobs::Knob("Sustain", &_sustainLevel, 0.0f, 1.0f, 0.005f, "%1.3f", ImGuiKnobVariant_Wiper);
     ImGui::SameLine();
     ImGuiKnobs::Knob("Release", &_releaseTime, 0.0f, 5.0f, 0.01f, "%1.2fs", ImGuiKnobVariant_Wiper);
-
     ImGui::End();
 }

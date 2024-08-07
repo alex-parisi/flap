@@ -12,49 +12,19 @@
 void flap::AudioOut::initialize() {
     auto graphSink = dibiff::sink::GraphSink::create(_channels, _sampleRate, _blockSize);
     _audioObjects.push_back(graphSink);
+    _input = Connector(graphSink->getInput(), graphSink);
+    _inputL = Connector(graphSink->getInput(0), graphSink);
+    _inputR = Connector(graphSink->getInput(1), graphSink);
 }
 
 void flap::AudioOut::render() {
     ImGui::Begin("AudioOut");
+    ImGui::SeparatorText("Connections");
     if (_channels == 1) {
-        if (ImGui::RadioButton("Input", _inputSelected)) {
-            if (!_inputSelected) {
-                if (!ConnectionService::getInstance().isDragging()) {
-                    ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(), _audioObjects[0], _inputSelected);
-                } else {
-                    ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(), _audioObjects[0]);
-                    _inputSelected = true;
-                }
-            } else {
-                /// TODO: Disconnect
-            }
-        }
+        _input.render("In");
     } else {
-        if (ImGui::RadioButton("Input L", _inputLSelected)) {
-            if (!_inputLSelected) {
-                if (!ConnectionService::getInstance().isDragging()) {
-                    ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(0), _audioObjects[0], _inputLSelected);
-                } else {
-                    ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(0), _audioObjects[0]);
-                    _inputLSelected = true;
-                }
-            } else {
-                /// TODO: Disconnect
-            }
-        }
-        ImGui::SameLine();
-        if (ImGui::RadioButton("Input R", _inputRSelected)) {
-            if (!_inputRSelected) {
-                if (!ConnectionService::getInstance().isDragging()) {
-                    ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(1), _audioObjects[0], _inputRSelected);
-                } else {
-                    ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), _audioObjects[0]->getInput(1), _audioObjects[0]);
-                    _inputRSelected = true;
-                }
-            } else {
-                /// TODO: Disconnect
-            }
-        }
+        _inputL.render("In L");
+        _inputR.render("In R");
     }
     ImGui::End();
 }

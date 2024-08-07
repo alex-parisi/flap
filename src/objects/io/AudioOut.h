@@ -4,6 +4,7 @@
 
 #include "../Object.h"
 #include "miniaudio.h"
+#include "../../widgets/Connector.h"
 
 #include <memory>
 
@@ -18,8 +19,8 @@ namespace flap {
         int _channels;
         int _sampleRate;
         int _blockSize;
-        bool _inputSelected = false;
-        bool _inputLSelected = false;
-        bool _inputRSelected = false;
+        Connector _input;
+        Connector _inputL;
+        Connector _inputR;
     };
 }
