@@ -8,7 +8,7 @@
 namespace flap {
     class Chorus : public Object {
     public:
-        inline Chorus() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _wetMix(0.5f) {}
+        inline Chorus(std::optional<std::string> name = std::nullopt) : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _wetMix(0.5f), _name(name) {}
         void initialize() override;
         void render() override;
     private:
@@ -17,5 +17,6 @@ namespace flap {
         float _wetMix;
         Connector _input;
         Connector _output;
+        std::optional<std::string> _name;
     };
 }

@@ -17,7 +17,13 @@ void flap::MidiIn::initialize() {
 }
 
 void flap::MidiIn::render() {
-    ImGui::Begin("MidiInput", _isOpen);
+        std::string title;
+    if (_name.has_value()) {
+        title = *_name;
+    } else {
+        title = "MidiIn";
+    }
+    ImGui::Begin(title.c_str(), _isOpen);
     ImGui::SeparatorText("Connections");
     _output.render("MIDI-Out");
     ImGui::End();

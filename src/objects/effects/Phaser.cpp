@@ -20,12 +20,18 @@ void flap::Phaser::initialize() {
 }
 
 void flap::Phaser::render() {
-    ImGui::Begin("Flanger", _isOpen);
+        std::string title;
+    if (_name.has_value()) {
+        title = *_name;
+    } else {
+        title = "Phaser";
+    }
+    ImGui::Begin(title.c_str(), _isOpen);
     ImGui::SeparatorText("Connections");
     _input.render("In");
     ImGui::SameLine();
     _output.render("Out");
-    ImGui::SeparatorText("Flanger Parameters");
+    ImGui::SeparatorText("Phaser Parameters");
     ImGuiKnobs::Knob("Mod. Depth", &_modulationDepth, 0.0f, 5.0f, 0.05f, "%.3fms", ImGuiKnobVariant_Wiper);
     ImGui::SameLine();
     ImGuiKnobs::Knob("Mod. Rate", &_modulationRate, 0.0f, 10.0f, 0.1f, "%.1fHz", ImGuiKnobVariant_Wiper);

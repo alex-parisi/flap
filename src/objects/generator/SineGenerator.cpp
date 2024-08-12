@@ -18,7 +18,13 @@ void flap::SineGenerator::initialize() {
 }
 
 void flap::SineGenerator::render() {
-    ImGui::Begin("Sine Generator", _isOpen);
+        std::string title;
+    if (_name.has_value()) {
+        title = *_name;
+    } else {
+        title = "SineGenerator";
+    }
+    ImGui::Begin(title.c_str(), _isOpen);
     ImGui::SeparatorText("Connections");
     _input.render("MIDI-In");
     ImGui::SameLine();

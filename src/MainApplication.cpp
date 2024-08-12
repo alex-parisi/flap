@@ -7,6 +7,7 @@
 #include "ConnectionService.h"
 #include "managers/ObjectManager.h"
 #include "MainApplicationSettings.h"
+#include "objects/io/Probe.h"
 
 #include <iostream>
 #include <cstring>
@@ -151,9 +152,17 @@ void flap::MainApplication::_renderToolbar() {
         _renderGraphMenu();
         ImGui::EndMenuBar();
         /// Check for hotkeys
-        /// TODO: Fix this.
-        if (ImGui::IsKeyDown(ImGuiKey_C) && (ImGui::IsKeyDown(ImGuiKey_LeftSuper) || ImGui::IsKeyPressed(ImGuiKey_RightSuper))) {
+        if (ImGui::IsKeyPressed(ImGuiKey_C, false) && (ImGui::IsKeyDown(ImGuiKey_LeftSuper) || ImGui::IsKeyDown(ImGuiKey_RightSuper))) {
             ConnectionService::getInstance().setShowConnections(!ConnectionService::getInstance().getShowConnections());
+        }
+        if (ImGui::IsKeyPressed(ImGuiKey_P, false) && (ImGui::IsKeyDown(ImGuiKey_LeftSuper) || ImGui::IsKeyDown(ImGuiKey_RightSuper))) {
+            auto probe = std::make_shared<Probe>();
+            probe->initialize();
+            ObjectManager::getInstance().objects.push_back(probe);
+            {
+                std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+                flap::GraphManager::getInstance().addObject(probe->getAudioObjects());
+            }
         }
     }
 }
@@ -230,7 +239,7 @@ void flap::MainApplication::_renderGraphMenu() {
         if (ImGui::BeginMenu("Add Object")) {
             if (ImGui::BeginMenu("Basic")) {
                 if (ImGui::MenuItem("Gain")) {
-                    auto gain = std::make_shared<Gain>();
+                    auto gain = std::make_shared<Gain>("Gain" + std::to_string(flap::ObjectManager::getInstance().gainCounter++));
                     gain->initialize();
                     ObjectManager::getInstance().objects.push_back(gain);
                     {
@@ -242,7 +251,7 @@ void flap::MainApplication::_renderGraphMenu() {
             }
             if (ImGui::BeginMenu("Dynamic")) {
                 if (ImGui::MenuItem("Envelope")) {
-                    auto envelope = std::make_shared<Envelope>();
+                    auto envelope = std::make_shared<Envelope>("Envelope" + std::to_string(flap::ObjectManager::getInstance().envelopeCounter++));
                     envelope->initialize();
                     ObjectManager::getInstance().objects.push_back(envelope);
                     {
@@ -258,7 +267,7 @@ void flap::MainApplication::_renderGraphMenu() {
             }
             if (ImGui::BeginMenu("Generator")) {
                 if (ImGui::MenuItem("Sine Generator")) {
-                    auto sine = std::make_shared<SineGenerator>();
+                    auto sine = std::make_shared<SineGenerator>("SineGenerator" + std::to_string(flap::ObjectManager::getInstance().sineCounter++));
                     sine->initialize();
                     ObjectManager::getInstance().objects.push_back(sine);
                     {
@@ -271,6 +280,15 @@ void flap::MainApplication::_renderGraphMenu() {
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Add Audio I/O")) {
+            if (ImGui::MenuItem("Probe", "^ + P")) {
+                auto probe = std::make_shared<Probe>("Probe" + std::to_string(flap::ObjectManager::getInstance().probeCounter++));
+                probe->initialize();
+                ObjectManager::getInstance().objects.push_back(probe);
+                {
+                    std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+                    flap::GraphManager::getInstance().addObject(probe->getAudioObjects());
+                }
+            }
             if (ImGui::BeginMenu("Input")) {
                 for (auto& c : flap::AudioManager::getInstance().getCaptureDevices()) {
                     if (ImGui::MenuItem(c.name)) {

@@ -19,7 +19,13 @@ void flap::Chorus::initialize() {
 }
 
 void flap::Chorus::render() {
-    ImGui::Begin("Chorus", _isOpen);
+        std::string title;
+    if (_name.has_value()) {
+        title = *_name;
+    } else {
+        title = "Chorus";
+    }
+    ImGui::Begin(title.c_str(), _isOpen);
     ImGui::SeparatorText("Connections");
     _input.render("In");
     ImGui::SameLine();

@@ -20,8 +20,13 @@ void flap::Envelope::initialize() {
 }
 
 void flap::Envelope::render() {
-    /// TODO: Remove all connections and delete this object when closed
-    ImGui::Begin("Envelope", _isOpen);
+        std::string title;
+    if (_name.has_value()) {
+        title = *_name;
+    } else {
+        title = "Envelope";
+    }
+    ImGui::Begin(title.c_str(), _isOpen);
     ImGui::SeparatorText("Connections");
     _midiInput.render("MIDI-In");
     _input.render("In");

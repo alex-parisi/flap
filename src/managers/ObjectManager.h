@@ -21,6 +21,14 @@ namespace flap {
             }
             std::vector<std::shared_ptr<Object>> objects;
             std::shared_ptr<std::recursive_mutex> mutex;
+            /// TODO: Use a better way than counters to manage object IDs
+            int gainCounter = 0;
+            int envelopeCounter = 0;
+            int chorusCounter = 0;
+            int flangerCounter = 0;
+            int phaserCounter = 0;
+            int sineCounter = 0;
+            int probeCounter = 0;
         private:
             /// Singleton pattern
             inline ObjectManager() {}
