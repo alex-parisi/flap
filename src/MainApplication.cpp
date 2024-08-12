@@ -9,6 +9,7 @@
 #include "MainApplicationSettings.h"
 
 #include <iostream>
+#include <cstring>
 
 bool flap::MainApplication::initialize() {
     // Initialize GLFW
@@ -279,7 +280,14 @@ void flap::MainApplication::_renderGraphMenu() {
             }
             if (ImGui::BeginMenu("Output")) {
                 for (auto& p : flap::AudioManager::getInstance().getPlaybackDevices()) {
-                    if (ImGui::MenuItem(p.name)) {
+                    bool selected = false;
+                    for (auto& d : flap::AudioManager::getInstance().getOpenedPlaybackDevices()) {
+                        if (std::strcmp(p.name, d.name) == 0) {
+                            selected = true;
+                            break;
+                        }
+                    }
+                    if (ImGui::MenuItem(p.name, NULL, &selected, !selected)) {
                         /// Convert the format to a ma_format
                         ma_format format;
                         if (flap::MainApplicationSettingsManager::getInstance().settings.format == "f32") {

@@ -4,6 +4,7 @@
 
 #include "AudioManager.h"
 #include <iostream>
+#include <cstring>
 #include "../MainApplicationSettings.h"
 
 bool flap::AudioManager::initialize() {
@@ -84,6 +85,7 @@ std::optional<std::shared_ptr<flap::AudioOut>> flap::AudioManager::openPlaybackD
     }
     std::cout << "Started playback device: " << device.name << std::endl;
     _playbackDevices[device.name] = playbackDevice;
+    _openedPlaybackDevices.push_back(device);
     return audioOut;
 }
 
@@ -117,6 +119,11 @@ void flap::AudioManager::closePlaybackDevice(ma_device_info device) {
     _playbackConfigs.erase(device.name);
     _audioCallbackDatas.erase(device.name);
     _audioOuts.erase(device.name);
+
+    // Remove the device from the list of opened playback devices
+    _openedPlaybackDevices.erase(std::remove_if(_openedPlaybackDevices.begin(), _openedPlaybackDevices.end(), [device](ma_device_info d) {
+        return strcmp(d.name, device.name) == 0;
+    }), _openedPlaybackDevices.end());
 
     std::cout << "Closed playback device: " << device.name << std::endl;
 }

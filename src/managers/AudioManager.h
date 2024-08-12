@@ -64,6 +64,9 @@ namespace flap {
             std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels);
 
             void closePlaybackDevice(ma_device_info device);
+
+            inline std::vector<ma_device_info> getOpenedPlaybackDevices() { return _openedPlaybackDevices; }
+            inline std::vector<ma_device_info> getOpenedCaptureDevices() { return _openedCaptureDevices; }
         private:
             /// Singleton pattern
             inline AudioManager() {}
@@ -79,11 +82,17 @@ namespace flap {
             /**
              * @brief The playback device infos.
              */
-            std::vector<ma_device_info> _playbackDeviceInfos;
+            std::vector<ma_device_info> _playbackDeviceInfos = {};
+
+            std::vector<ma_device_info> _openedPlaybackDevices = {};
+
             /**
              * @brief The capture device infos.
              */
-            std::vector<ma_device_info> _captureDeviceInfos;
+            std::vector<ma_device_info> _captureDeviceInfos = {};
+
+            std::vector<ma_device_info> _openedCaptureDevices = {};
+
             /**
              * @brief The playback device configs.
              */
