@@ -18,11 +18,13 @@ void flap::Gain::initialize() {
 }
 
 void flap::Gain::render() {
-    ImGui::Begin("Gain");
+    ImGui::Begin("Gain", _isOpen);
     ImGui::SeparatorText("Connections");
     _input.render("In");
+    ImGui::SameLine();
     _output.render("Out");
     ImGui::SeparatorText("Gain Parameters");
     ImGuiKnobs::Knob("Gain", &_gain, -80.0f, 30.0f, 0.1f, "%.1fdB", ImGuiKnobVariant_Wiper);
     ImGui::End();
+    _isOpen.check();
 }

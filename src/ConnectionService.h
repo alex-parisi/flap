@@ -69,10 +69,10 @@ class ConnectionService {
         bool isDragging() {
             return _dragging;
         }
-        void setMutex(std::shared_ptr<std::mutex> mutex) {
+        void setMutex(std::shared_ptr<std::recursive_mutex> mutex) {
             _mutex = mutex;
         }
-        std::shared_ptr<std::mutex> getMutex() {
+        std::shared_ptr<std::recursive_mutex> getMutex() {
             return _mutex;
         }
         void startDragging(ImVec2 centerPos, flap::Connector& firstConnector) {
@@ -86,10 +86,9 @@ class ConnectionService {
             if (_currentConnector->getObject() != secondConnector->getObject()) {
                 /// Try to connect the active point to the input of the gain object
                 try {
-                    std::lock_guard<std::mutex> lock(*getMutex());
+                    std::lock_guard<std::recursive_mutex> lock(*getMutex());
                     dibiff::graph::AudioGraph::connect(_currentConnector->getPoint(), secondConnector->getPoint());
                     std::cout << "Connected\n";
-                    _currentConnector->setSelected(true);
                     _connectionLocations[secondConnector->getPoint()] = centerpos;
                     _connectionLocations[_currentConnector->getPoint()] = _points.back();
                     _connections.push_back(std::make_tuple(_currentConnector->getPoint(), secondConnector->getPoint()));
@@ -98,14 +97,10 @@ class ConnectionService {
                 } catch (std::exception& e) {
                     /// If we can't connect, remove the last point
                     std::cout << "Can't connect\n";
-                    _currentConnector->setSelected(false);
-                    secondConnector->setSelected(false);
                     removePoint();
                 }
             } else {
                 std::cout << "Can't connect to itself\n";
-                _currentConnector->setSelected(false);
-                secondConnector->setSelected(false);
                 removePoint();
             }
         }
@@ -116,15 +111,20 @@ class ConnectionService {
             return _currentConnector;
         }
         void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point1, std::weak_ptr<dibiff::graph::AudioConnectionPoint> point2) {
-            auto it = std::find_if(_connections.begin(), _connections.end(), 
+            _connections.erase(std::remove_if(_connections.begin(), _connections.end(), 
                 [&](const auto& pair) {
                     auto p1 = std::get<0>(pair).lock();
                     auto p2 = std::get<1>(pair).lock();
                     return p1 == point1.lock() && p2 == point2.lock() || p1 == point2.lock() && p2 == point1.lock();
-                });
-            if (it != _connections.end()) {
-                _connections.erase(it);
-            }
+                }), _connections.end());
+        }
+        void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point) {
+            _connections.erase(std::remove_if(_connections.begin(), _connections.end(), 
+                [&](const auto& pair) {
+                    auto p1 = std::get<0>(pair).lock();
+                    auto p2 = std::get<1>(pair).lock();
+                    return p1 == point.lock() || p2 == point.lock();
+                }), _connections.end());
         }
         void setShowConnections(bool showConnections) {
             _showConnections = showConnections;
@@ -139,7 +139,7 @@ class ConnectionService {
         /// List of points to draw lines between
         std::vector<ImVec2> _points;
         bool _dragging = false;
-        std::shared_ptr<std::mutex> _mutex;
+        std::shared_ptr<std::recursive_mutex> _mutex;
         flap::Connector* _currentConnector;
         std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual> _connectionLocations;
         std::vector<std::tuple<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, std::weak_ptr<dibiff::graph::AudioConnectionPoint>>> _connections;

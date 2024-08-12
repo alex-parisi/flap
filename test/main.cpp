@@ -4,12 +4,10 @@
 #include "../src/MainApplicationSettings.h"
 
 int main() {
-    auto settings = std::make_shared<flap::MainApplicationSettings>();
-    flap::MainApplication app(settings);
-    if (!app.initialize()) {
+    if (!flap::MainApplication::getInstance().initialize()) {
         return -1;
     }
-    app.run();    
-    app.cleanup();
+    flap::MainApplication::getInstance().run();    
+    flap::MainApplication::getInstance().cleanup();
     return 0;
 }

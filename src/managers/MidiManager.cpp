@@ -31,7 +31,7 @@ std::optional<std::shared_ptr<flap::MidiIn>> flap::MidiManager::openInputPort(in
             newMidiIn->closePort();
             try {
                 newMidiIn->openPort(port);
-                auto newMidiInObject = std::make_shared<flap::MidiIn>(port, _settings->blockSize);
+                auto newMidiInObject = std::make_shared<flap::MidiIn>(port);
                 newMidiInObject->initialize();
                 /// Don't ignore sysex, timing, or active sensing messages.
                 newMidiIn->ignoreTypes(false, false, false);

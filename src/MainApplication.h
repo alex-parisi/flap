@@ -26,23 +26,26 @@
 namespace flap {
     class MainApplication {
         public:
-            MainApplication(std::shared_ptr<MainApplicationSettings> settings) : _settings(settings), _audioManager(settings), _graphManager(settings), _midiManager(settings) {};
+            /// Singleton pattern
+            static MainApplication& getInstance() {
+                static MainApplication instance;
+                return instance;
+            }
+            MainApplication(const MainApplication&) = delete;
+            MainApplication& operator=(const MainApplication&) = delete; 
+
             bool initialize();
             void run();
             void cleanup();
         private:
-            AudioManager _audioManager;
-            GraphManager _graphManager;
-            MidiManager _midiManager;
-
+            /// Singleton pattern
+            MainApplication() {}
+            ~MainApplication() {}
             /// TODO: Use a smart pointer here
             GLFWwindow* _window;
-
             double _lastRenderTime = 0.0;
             const double _renderFPS = 60.0;
             const double _renderInterval = 1.0 / _renderFPS;
-            std::vector<std::shared_ptr<Object>> _objects;
-            std::shared_ptr<MainApplicationSettings> _settings;
             static void _glfwErrorCallback(int error, const char* description) {
                 std::cerr << "GLFW Error " << error << ": " << description << "\n";
             }

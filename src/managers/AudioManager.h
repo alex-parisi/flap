@@ -9,7 +9,7 @@
 #include <vector>
 #include <chrono>
 #include <memory>
-#include <map>
+#include <unordered_map>
 
 #include "miniaudio.h"
 #include "dibiff/dibiff"
@@ -17,6 +17,19 @@
 #include "../MainApplicationSettings.h"
 
 namespace flap {
+    // Custom hash function for ma_device_info
+    struct MaDeviceInfoHash {
+        std::size_t operator()(const ma_device_info& madi) const {
+            return std::hash<std::string>()(madi.name);
+        }
+    };
+
+    // Custom equality function for std::weak_ptr
+    struct MaDeviceInfoEqual {
+        bool operator()(const ma_device_info& lhs, const ma_device_info& rhs) const {
+            return lhs.name == rhs.name;
+        }
+    };
     /**
      * @brief AudioCallbackData is a struct that holds a pointer to the AudioManager and an id.
      */
@@ -25,12 +38,15 @@ namespace flap {
      * @brief AudioManager is a class that manages audio devices and audio data.
      */
     class AudioManager : public Manager {
-        public: 
-            /**
-             * @brief AudioManager constructor.
-             * @param settings The settings for the main application.
-             */
-            AudioManager(std::shared_ptr<MainApplicationSettings> settings) : Manager(settings) {}
+        public:
+            /// Singleton pattern
+            static AudioManager& getInstance() {
+                static AudioManager instance;
+                return instance;
+            }
+            /// Delete copy constructor and assignment operator to prevent copying
+            AudioManager(const AudioManager&) = delete;
+            AudioManager& operator=(const AudioManager&) = delete;  
             /**
              * @brief Initializes the AudioManager.
              */
@@ -58,8 +74,11 @@ namespace flap {
              * @param blockSize The block size.
              * @return A shared pointer to an AudioOut object.
              */
-            std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels, int sampleRate, int blockSize);
+            std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels);
         private:
+            /// Singleton pattern
+            AudioManager() {}
+            ~AudioManager() {}
             /**
              * @brief The playback context.
              */
@@ -79,15 +98,17 @@ namespace flap {
             /**
              * @brief The playback device configs.
              */
-            ma_device_config _playbackConfig;
+            std::unordered_map<ma_device_info, ma_device_config, MaDeviceInfoHash, MaDeviceInfoEqual> _playbackConfigs;
             /**
              * @brief The playback device.
              */
-            ma_device _playbackDevice;
+            std::unordered_map<ma_device_info, ma_device, MaDeviceInfoHash, MaDeviceInfoEqual> _playbackDevices;
             /**
              * @brief The AudioOut object associated with the playback device.
              */
-            std::shared_ptr<AudioOut> _audioOut;
+            std::unordered_map<ma_device_info, std::shared_ptr<AudioOut>, MaDeviceInfoHash, MaDeviceInfoEqual> _audioOuts;
+
+            std::unordered_map<ma_device_info, std::shared_ptr<AudioCallbackData>, MaDeviceInfoHash, MaDeviceInfoEqual> _audioCallbackDatas;
             /**
              * @brief The rate at which the AudioManager updates.
              */
@@ -112,6 +133,6 @@ namespace flap {
         /**
          * @brief The id.
          */
-        int id;
+        ma_device_info device;
     };
 }

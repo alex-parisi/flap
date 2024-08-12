@@ -22,16 +22,12 @@ namespace flap {
             std::shared_ptr<dibiff::graph::AudioObject> getObject() {
                 return _object;
             }
-            void setSelected(bool selected) {
-                _isSelected = selected;
-            }
             void addConnectedTo(Connector* connectedTo) {
                 _connectedTo.push_back(connectedTo);
             }
         private:
             std::weak_ptr<dibiff::graph::AudioConnectionPoint> _point;
             std::shared_ptr<dibiff::graph::AudioObject> _object;
-            bool _isSelected = false;
             bool _allowMultiple;
             /// @brief  Get the center position of a radio button. Note that this MUST
             ///         be called after the radio button has been rendered via:
@@ -44,6 +40,6 @@ namespace flap {
                 // Calculate the center position of the radio button
                 return ImVec2(rectMin.x + radioButtonSize / 2, rectMin.y + radioButtonSize / 2);
             }
-            std::vector<Connector*> _connectedTo;
+            std::vector<Connector*> _connectedTo = {};
     };
 }

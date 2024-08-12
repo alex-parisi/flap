@@ -1,8 +1,10 @@
 /// AudioManager.cpp
 
 #define MINIAUDIO_IMPLEMENTATION
+
 #include "AudioManager.h"
 #include <iostream>
+#include "../MainApplicationSettings.h"
 
 bool flap::AudioManager::initialize() {
     _mutex = std::make_shared<std::mutex>();
@@ -23,10 +25,12 @@ bool flap::AudioManager::initialize() {
 }
 
 void flap::AudioManager::cleanup() {
-    ma_device_state state = ma_device_get_state(&_playbackDevice);
-    if (state == ma_device_state_started) {
-        ma_device_stop(&_playbackDevice);
-        ma_device_uninit(&_playbackDevice);
+    for (auto& pd : _playbackDevices) {
+        ma_device_state state = ma_device_get_state(&pd.second);
+        if (state == ma_device_state_started) {
+            ma_device_stop(&pd.second);
+            ma_device_uninit(&pd.second);
+        }
     }
     ma_context_uninit(&_playbackContext);
     
@@ -43,34 +47,42 @@ std::vector<ma_device_info> flap::AudioManager::getCaptureDevices() {
     return _captureDeviceInfos;
 }
 
-std::optional<std::shared_ptr<flap::AudioOut>> flap::AudioManager::openPlaybackDevice(ma_device_info device, ma_format format, int channels, int sampleRate, int blockSize) {
+std::optional<std::shared_ptr<flap::AudioOut>> flap::AudioManager::openPlaybackDevice(ma_device_info device, ma_format format, int channels) {
     std::lock_guard<std::mutex> lock(*_mutex);
 
     ma_result result;
+    std::shared_ptr<AudioCallbackData> audioCallbackData = std::make_shared<AudioCallbackData>();
+    audioCallbackData->manager = this;
+    audioCallbackData->device = device;
+    _audioCallbackDatas[device] = audioCallbackData;
     /// TODO: Determine the supported formats and channels for the device
     /// TODO: Support stereo when selected 
-    _playbackConfig = ma_device_config_init(ma_device_type_playback);
-    _playbackConfig.playback.format = ma_format_f32;
-    _playbackConfig.playback.channels = channels;
-    _playbackConfig.sampleRate = sampleRate;
-    _playbackConfig.dataCallback = _playbackDataCallback;
-    _playbackConfig.pUserData = this;
-    _playbackConfig.playback.pDeviceID = &device.id;
-    _playbackConfig.periodSizeInFrames = blockSize;
-    result = ma_device_init(&_playbackContext, &_playbackConfig, &_playbackDevice);
+    ma_device_config playbackConfig = ma_device_config_init(ma_device_type_playback);
+    playbackConfig.playback.format = ma_format_f32;
+    playbackConfig.playback.channels = channels;
+    playbackConfig.sampleRate = flap::MainApplicationSettingsManager::getInstance().settings.sampleRate;
+    playbackConfig.dataCallback = _playbackDataCallback;
+    playbackConfig.pUserData = audioCallbackData.get();
+    playbackConfig.playback.pDeviceID = &device.id;
+    playbackConfig.periodSizeInFrames = flap::MainApplicationSettingsManager::getInstance().settings.blockSize;
+    _playbackConfigs[device] = playbackConfig;
+    ma_device playbackDevice;
+    result = ma_device_init(&_playbackContext, &playbackConfig, &playbackDevice);
     if (result != MA_SUCCESS) {
         std::cerr << "Failed to initialize playback device." << std::endl;
         return std::nullopt;
     }
-    _audioOut = std::make_shared<AudioOut>(0, channels, sampleRate, _settings->blockSize);
-    _audioOut->initialize();
-    result = ma_device_start(&_playbackDevice);
+    std::shared_ptr<AudioOut> audioOut = std::make_shared<AudioOut>(device, channels, device.name);
+    audioOut->initialize();
+    _audioOuts[device] = audioOut;
+    result = ma_device_start(&playbackDevice);
     if (result != MA_SUCCESS) {
         std::cerr << "Failed to start playback device." << std::endl;
-        ma_device_uninit(&_playbackDevice);
+        ma_device_uninit(&playbackDevice);
         return std::nullopt;
     }
-    return _audioOut;
+    _playbackDevices[device] = playbackDevice;
+    return audioOut;
 }
 
 void flap::AudioManager::_threadFunction() {
@@ -106,8 +118,10 @@ void flap::AudioManager::_threadFunction() {
 }
 
 void flap::AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
-    AudioManager* audioManager = static_cast<AudioManager*>(pDevice->pUserData);
-    auto a = audioManager->_audioOut->getAudioObjects()[0];
+    AudioCallbackData* audioCallbackData = static_cast<AudioCallbackData*>(pDevice->pUserData);
+    AudioManager* audioManager = audioCallbackData->manager;
+    ma_device_info device = audioCallbackData->device;
+    auto a = audioManager->_audioOuts[device]->getAudioObjects()[0];
     auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(a);
     if (sink == nullptr) {
         std::lock_guard<std::mutex> lock(sink->cv_mtx);

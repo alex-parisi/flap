@@ -11,11 +11,10 @@
 namespace flap {
     class SineGenerator : public Object {
         public:
-            SineGenerator(std::shared_ptr<MainApplicationSettings> settings) : Object(), _settings(settings) {}
+            SineGenerator() : Object() {}
             void initialize() override;
             void render() override;
         private:
-            std::shared_ptr<MainApplicationSettings> _settings;
             Connector _input;
             Connector _output;
     };

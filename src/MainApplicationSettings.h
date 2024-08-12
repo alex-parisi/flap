@@ -14,4 +14,20 @@ namespace flap {
         int blockSize = 512;
         std::string format = "f32";
     };
+    class MainApplicationSettingsManager {
+        public:
+            /// Singleton pattern
+            static MainApplicationSettingsManager& getInstance() {
+                static MainApplicationSettingsManager instance; // Guaranteed to be destroyed and instantiated on first use
+                return instance;
+            }
+            /// Delete copy constructor and assignment operator to prevent copying
+            MainApplicationSettingsManager(const MainApplicationSettingsManager&) = delete;
+            MainApplicationSettingsManager& operator=(const MainApplicationSettingsManager&) = delete;
+            MainApplicationSettings settings;
+        private:
+            /// Singleton pattern
+            MainApplicationSettingsManager() {}
+            ~MainApplicationSettingsManager() {}
+    };
 }

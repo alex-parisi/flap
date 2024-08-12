@@ -10,12 +10,11 @@
 namespace flap {
     class MidiIn : public Object {
     public:
-        MidiIn(int port, int blockSize) : Object(), _port(port), _blockSize(blockSize) {}
+        MidiIn(int port) : Object(), _port(port) {}
         void initialize() override;
         void render() override;
     private:
         int _port;
-        int _blockSize;
         Connector _output;
     };
 }

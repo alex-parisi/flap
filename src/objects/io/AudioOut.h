@@ -7,20 +7,21 @@
 #include "../../widgets/Connector.h"
 
 #include <memory>
+#include <optional>
+#include <string>
 
 namespace flap {
     class AudioOut : public Object {
     public:
-        AudioOut(int id, int channels, int sampleRate, int blockSize) : Object(), _id(id), _channels(channels), _sampleRate(sampleRate), _blockSize(blockSize) {}
+        AudioOut(ma_device_info device, int channels, std::optional<std::string> name = std::nullopt) : Object(), _device(device), _channels(channels), _name(name) {}
         void initialize() override;
         void render() override;
     private:
-        int _id;
+        ma_device_info _device;
         int _channels;
-        int _sampleRate;
-        int _blockSize;
         Connector _input;
         Connector _inputL;
         Connector _inputR;
+        std::optional<std::string> _name;
     };
 }

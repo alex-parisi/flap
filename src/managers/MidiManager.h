@@ -25,11 +25,14 @@ namespace flap {
      */
     class MidiManager : public Manager {
         public: 
-            /**
-             * @brief MidiManager constructor.
-             * @param settings The settings for the main application.
-             */
-            MidiManager(std::shared_ptr<MainApplicationSettings> settings) : Manager(settings) {}
+            /// Singleton pattern
+            static MidiManager& getInstance() {
+                static MidiManager instance;
+                return instance;
+            }
+            /// Delete copy constructor and assignment operator to prevent copying
+            MidiManager(const MidiManager&) = delete;
+            MidiManager& operator=(const MidiManager&) = delete; 
             /**
              * @brief Initializes the MidiManager.
              */
@@ -86,6 +89,9 @@ namespace flap {
                 return _mainMidiOut->getPortName(port);
             }
         private:
+            /// Singleton pattern
+            MidiManager() {}
+            ~MidiManager() {}
             /**
              * @brief A map of RtMidiIn contexts
              */

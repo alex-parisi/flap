@@ -8,13 +8,13 @@ void flap::Connector::render(std::optional<std::string> label) {
     std::string title = (label.has_value()) ? label.value() : _point.lock()->getName();
     
     // Render the radio button
+    bool _isSelected = _point.lock()->isConnected();
     if (ImGui::RadioButton(title.c_str(), _isSelected)) {
         if (!_allowMultiple) {
             if (!_isSelected) {
                 if (!ConnectionService::getInstance().isDragging()) {
                     ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), *this);
                 } else {
-                    _isSelected = true;
                     ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), this);
                     _connectedTo.push_back(ConnectionService::getInstance().getCurrentConnector());
                 }
@@ -23,7 +23,6 @@ void flap::Connector::render(std::optional<std::string> label) {
             if (!ConnectionService::getInstance().isDragging()) {
                 ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), *this);
             } else {
-                _isSelected = true;
                 ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), this);
                 _connectedTo.push_back(ConnectionService::getInstance().getCurrentConnector());
             }
@@ -39,10 +38,8 @@ void flap::Connector::render(std::optional<std::string> label) {
         for (auto& connection : _connectedTo) {
             dibiff::graph::AudioGraph::disconnect(_point, connection->getPoint());
             ConnectionService::getInstance().removeConnection(_point, connection->getPoint());
-            connection->setSelected(false);
         }
         _connectedTo.clear();
-        _isSelected = false;
     }
 
     // Update the point location
