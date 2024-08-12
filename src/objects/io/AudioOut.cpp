@@ -9,6 +9,7 @@
 
 #include "../../ConnectionService.h"
 #include "../../managers/AudioManager.h"
+#include "../../managers/GraphManager.h"
 #include "../../MainApplicationSettings.h"
 
 void flap::AudioOut::initialize() {
@@ -51,4 +52,16 @@ void flap::AudioOut::render() {
     }
     ImGui::End();
     _isOpen.check();
+}
+
+void flap::AudioOut::preDisconnect() {
+    /// Remove graph mutexs and condition variables
+    auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(_audioObjects[0]);
+    flap::GraphManager::getInstance().removeGraphMutex(&sink->cv_mtx);
+    flap::GraphManager::getInstance().removeGraphSignal(&sink->cv);
+}
+
+void flap::AudioOut::postDisconnect() {
+    /// Close the playback device
+    flap::AudioManager::getInstance().closePlaybackDevice(_device);
 }

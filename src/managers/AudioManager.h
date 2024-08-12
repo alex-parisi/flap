@@ -17,19 +17,6 @@
 #include "../MainApplicationSettings.h"
 
 namespace flap {
-    // Custom hash function for ma_device_info
-    struct MaDeviceInfoHash {
-        std::size_t operator()(const ma_device_info& madi) const {
-            return std::hash<std::string>()(madi.name);
-        }
-    };
-
-    // Custom equality function for std::weak_ptr
-    struct MaDeviceInfoEqual {
-        bool operator()(const ma_device_info& lhs, const ma_device_info& rhs) const {
-            return lhs.name == rhs.name;
-        }
-    };
     /**
      * @brief AudioCallbackData is a struct that holds a pointer to the AudioManager and an id.
      */
@@ -40,7 +27,7 @@ namespace flap {
     class AudioManager : public Manager {
         public:
             /// Singleton pattern
-            static AudioManager& getInstance() {
+            inline static AudioManager& getInstance() {
                 static AudioManager instance;
                 return instance;
             }
@@ -75,10 +62,12 @@ namespace flap {
              * @return A shared pointer to an AudioOut object.
              */
             std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels);
+
+            void closePlaybackDevice(ma_device_info device);
         private:
             /// Singleton pattern
-            AudioManager() {}
-            ~AudioManager() {}
+            inline AudioManager() {}
+            inline ~AudioManager() {}
             /**
              * @brief The playback context.
              */
@@ -98,17 +87,17 @@ namespace flap {
             /**
              * @brief The playback device configs.
              */
-            std::unordered_map<ma_device_info, ma_device_config, MaDeviceInfoHash, MaDeviceInfoEqual> _playbackConfigs;
+            std::unordered_map<std::string, std::shared_ptr<ma_device_config>> _playbackConfigs = {};
             /**
              * @brief The playback device.
              */
-            std::unordered_map<ma_device_info, ma_device, MaDeviceInfoHash, MaDeviceInfoEqual> _playbackDevices;
+            std::unordered_map<std::string, std::shared_ptr<ma_device>> _playbackDevices = {};
             /**
              * @brief The AudioOut object associated with the playback device.
              */
-            std::unordered_map<ma_device_info, std::shared_ptr<AudioOut>, MaDeviceInfoHash, MaDeviceInfoEqual> _audioOuts;
+            std::unordered_map<std::string, std::shared_ptr<AudioOut>> _audioOuts = {};
 
-            std::unordered_map<ma_device_info, std::shared_ptr<AudioCallbackData>, MaDeviceInfoHash, MaDeviceInfoEqual> _audioCallbackDatas;
+            std::unordered_map<std::string, std::shared_ptr<AudioCallbackData>> _audioCallbackDatas = {};
             /**
              * @brief The rate at which the AudioManager updates.
              */
@@ -126,10 +115,6 @@ namespace flap {
      * @brief AudioCallbackData is a struct that holds a pointer to the AudioManager and an id.
      */
     struct AudioCallbackData {
-        /**
-         * @brief The AudioManager pointer.
-         */
-        flap::AudioManager* manager;
         /**
          * @brief The id.
          */

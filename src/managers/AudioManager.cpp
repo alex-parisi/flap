@@ -26,10 +26,10 @@ bool flap::AudioManager::initialize() {
 
 void flap::AudioManager::cleanup() {
     for (auto& pd : _playbackDevices) {
-        ma_device_state state = ma_device_get_state(&pd.second);
+        ma_device_state state = ma_device_get_state(pd.second.get());
         if (state == ma_device_state_started) {
-            ma_device_stop(&pd.second);
-            ma_device_uninit(&pd.second);
+            ma_device_stop(pd.second.get());
+            ma_device_uninit(pd.second.get());
         }
     }
     ma_context_uninit(&_playbackContext);
@@ -51,38 +51,74 @@ std::optional<std::shared_ptr<flap::AudioOut>> flap::AudioManager::openPlaybackD
     std::lock_guard<std::mutex> lock(*_mutex);
 
     ma_result result;
-    std::shared_ptr<AudioCallbackData> audioCallbackData = std::make_shared<AudioCallbackData>();
-    audioCallbackData->manager = this;
+    auto audioCallbackData = std::make_shared<AudioCallbackData>();
     audioCallbackData->device = device;
-    _audioCallbackDatas[device] = audioCallbackData;
+    _audioCallbackDatas[device.name] = audioCallbackData;
     /// TODO: Determine the supported formats and channels for the device
     /// TODO: Support stereo when selected 
-    ma_device_config playbackConfig = ma_device_config_init(ma_device_type_playback);
-    playbackConfig.playback.format = ma_format_f32;
-    playbackConfig.playback.channels = channels;
-    playbackConfig.sampleRate = flap::MainApplicationSettingsManager::getInstance().settings.sampleRate;
-    playbackConfig.dataCallback = _playbackDataCallback;
-    playbackConfig.pUserData = audioCallbackData.get();
-    playbackConfig.playback.pDeviceID = &device.id;
-    playbackConfig.periodSizeInFrames = flap::MainApplicationSettingsManager::getInstance().settings.blockSize;
-    _playbackConfigs[device] = playbackConfig;
-    ma_device playbackDevice;
-    result = ma_device_init(&_playbackContext, &playbackConfig, &playbackDevice);
+    std::shared_ptr<ma_device> playbackDevice = std::make_shared<ma_device>();
+    std::shared_ptr<ma_device_config> playbackConfig = std::make_shared<ma_device_config>();
+    *playbackConfig = ma_device_config_init(ma_device_type_playback);
+    playbackConfig->playback.format = ma_format_f32;
+    playbackConfig->playback.channels = channels;
+    playbackConfig->sampleRate = flap::MainApplicationSettingsManager::getInstance().settings.sampleRate;
+    playbackConfig->dataCallback = _playbackDataCallback;
+    playbackConfig->pUserData = audioCallbackData.get();
+    playbackConfig->playback.pDeviceID = &device.id;
+    playbackConfig->periodSizeInFrames = flap::MainApplicationSettingsManager::getInstance().settings.blockSize;
+    _playbackConfigs[device.name] = playbackConfig;
+    result = ma_device_init(&_playbackContext, playbackConfig.get(), playbackDevice.get());
     if (result != MA_SUCCESS) {
         std::cerr << "Failed to initialize playback device." << std::endl;
         return std::nullopt;
     }
+    std::cout << "Opened playback device: " << device.name << std::endl;
     std::shared_ptr<AudioOut> audioOut = std::make_shared<AudioOut>(device, channels, device.name);
     audioOut->initialize();
-    _audioOuts[device] = audioOut;
-    result = ma_device_start(&playbackDevice);
+    _audioOuts[device.name] = audioOut;
+    result = ma_device_start(playbackDevice.get());
     if (result != MA_SUCCESS) {
         std::cerr << "Failed to start playback device." << std::endl;
-        ma_device_uninit(&playbackDevice);
+        ma_device_uninit(playbackDevice.get());
         return std::nullopt;
     }
-    _playbackDevices[device] = playbackDevice;
+    std::cout << "Started playback device: " << device.name << std::endl;
+    _playbackDevices[device.name] = playbackDevice;
     return audioOut;
+}
+
+void flap::AudioManager::closePlaybackDevice(ma_device_info device) {
+    std::lock_guard<std::mutex> lock(*_mutex);
+
+    auto deviceIt = _playbackDevices.find(device.name);
+    if (deviceIt == _playbackDevices.end()) {
+        std::cerr << "Playback device not found: " << device.name << std::endl;
+        return;
+    }
+
+    std::shared_ptr<ma_device> playbackDevice = deviceIt->second;
+
+    // Stop the playback device if it is running
+    ma_result result = ma_device_stop(playbackDevice.get());
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to stop playback device: " << device.name << std::endl;
+    } else {
+        std::cout << "Stopped playback device: " << device.name << std::endl;
+    }
+
+    // Uninitialize the device to free resources
+    ma_device_uninit(playbackDevice.get());
+    std::cout << "Uninitialized playback device: " << device.name << std::endl;
+
+    // Remove the device from the map
+    _playbackDevices.erase(deviceIt);
+
+    // Clean up associated data
+    _playbackConfigs.erase(device.name);
+    _audioCallbackDatas.erase(device.name);
+    _audioOuts.erase(device.name);
+
+    std::cout << "Closed playback device: " << device.name << std::endl;
 }
 
 void flap::AudioManager::_threadFunction() {
@@ -118,10 +154,11 @@ void flap::AudioManager::_threadFunction() {
 }
 
 void flap::AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
-    AudioCallbackData* audioCallbackData = static_cast<AudioCallbackData*>(pDevice->pUserData);
-    AudioManager* audioManager = audioCallbackData->manager;
-    ma_device_info device = audioCallbackData->device;
-    auto a = audioManager->_audioOuts[device]->getAudioObjects()[0];
+    AudioCallbackData* callbackData = static_cast<AudioCallbackData*>(pDevice->pUserData);
+    if (flap::AudioManager::getInstance()._audioOuts.find(callbackData->device.name) == flap::AudioManager::getInstance()._audioOuts.end()) {
+        return;
+    }
+    auto a = flap::AudioManager::getInstance()._audioOuts[callbackData->device.name]->getAudioObjects()[0];
     auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(a);
     if (sink == nullptr) {
         std::lock_guard<std::mutex> lock(sink->cv_mtx);

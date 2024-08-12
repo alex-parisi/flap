@@ -17,7 +17,7 @@ namespace flap {
     class MainApplicationSettingsManager {
         public:
             /// Singleton pattern
-            static MainApplicationSettingsManager& getInstance() {
+            inline static MainApplicationSettingsManager& getInstance() {
                 static MainApplicationSettingsManager instance; // Guaranteed to be destroyed and instantiated on first use
                 return instance;
             }
@@ -27,7 +27,7 @@ namespace flap {
             MainApplicationSettings settings;
         private:
             /// Singleton pattern
-            MainApplicationSettingsManager() {}
-            ~MainApplicationSettingsManager() {}
+            inline MainApplicationSettingsManager() {}
+            inline ~MainApplicationSettingsManager() {}
     };
 }

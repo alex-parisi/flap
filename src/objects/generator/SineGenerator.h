@@ -11,7 +11,7 @@
 namespace flap {
     class SineGenerator : public Object {
         public:
-            SineGenerator() : Object() {}
+            inline SineGenerator() : Object() {}
             void initialize() override;
             void render() override;
         private:

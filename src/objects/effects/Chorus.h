@@ -8,7 +8,7 @@
 namespace flap {
     class Chorus : public Object {
     public:
-        Chorus() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _wetMix(0.5f) {}
+        inline Chorus() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _wetMix(0.5f) {}
         void initialize() override;
         void render() override;
     private:

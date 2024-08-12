@@ -8,7 +8,7 @@
 namespace flap {
     class Phaser : public Object {
     public:
-        Phaser() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _baseCutoff(1000.0f), _wetMix(0.5f), _numStages(4.0f) {}
+        inline Phaser() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _baseCutoff(1000.0f), _wetMix(0.5f), _numStages(4.0f) {}
         void initialize() override;
         void render() override;
     private:

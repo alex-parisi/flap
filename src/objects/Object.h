@@ -16,8 +16,10 @@ namespace flap {
             virtual ~Object() = default;
             virtual void initialize() = 0;
             virtual void render() = 0;
-            std::vector<std::shared_ptr<dibiff::graph::AudioObject>> getAudioObjects() { return _audioObjects; }
+            inline std::vector<std::shared_ptr<dibiff::graph::AudioObject>> getAudioObjects() { return _audioObjects; }
             bool shouldDelete = false;
+            virtual void preDisconnect() {};
+            virtual void postDisconnect() {};
         protected:
             std::vector<std::shared_ptr<dibiff::graph::AudioObject>> _audioObjects;
             BoolProxy _isOpen;

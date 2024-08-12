@@ -8,7 +8,7 @@
 namespace flap {
     class Flanger : public Object {
     public:
-        Flanger() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _feedback(0.7f), _wetMix(0.5f) {}
+        inline Flanger() : Object(), _modulationDepth(2.0f), _modulationRate(0.4f), _feedback(0.7f), _wetMix(0.5f) {}
         void initialize() override;
         void render() override;
     private:

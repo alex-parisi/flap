@@ -10,7 +10,7 @@
 namespace flap {
     class MidiIn : public Object {
     public:
-        MidiIn(int port) : Object(), _port(port) {}
+        inline MidiIn(int port) : Object(), _port(port) {}
         void initialize() override;
         void render() override;
     private:

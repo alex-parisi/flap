@@ -15,7 +15,7 @@ namespace flap {
     class GraphManager : public Manager {
         public:
             /// Singleton pattern
-            static GraphManager& getInstance() {
+            inline static GraphManager& getInstance() {
                 static GraphManager instance;
                 return instance;
             }
@@ -60,19 +60,24 @@ namespace flap {
             /**
              * @brief Adds a graph signal for the GraphManager to wait on
              */
-            void addGraphSignal(std::condition_variable * signal) { _graphSignals.push_back(signal); }
+            inline void addGraphSignal(std::condition_variable * signal) { _graphSignals.push_back(signal); }
             /**
              * @brief Adds a graph mutex for the GraphManager to lock
              */
-            void addGraphMutex(std::mutex * mutex) { _graphMutexs.push_back(mutex); }
-            /// Override the mutex
-            std::shared_ptr<std::recursive_mutex> getMutex() { return _mutex; }
+            inline void addGraphMutex(std::mutex * mutex) { _graphMutexs.push_back(mutex); }
+            inline std::shared_ptr<std::recursive_mutex> getMutex() { return _mutex; }
+            inline void removeGraphSignal(std::condition_variable * signal) { 
+                _graphSignals.erase(std::remove_if(_graphSignals.begin(), _graphSignals.end(), [&](std::condition_variable * s) { return s == signal; }), _graphSignals.end());
+            }
+            inline void removeGraphMutex(std::mutex * mutex) { 
+                _graphMutexs.erase(std::remove_if(_graphMutexs.begin(), _graphMutexs.end(), [&](std::mutex * m) { return m == mutex; }), _graphMutexs.end());
+            }
         private:
             /// Override the mutex
             std::shared_ptr<std::recursive_mutex> _mutex;
             /// Singleton pattern
-            GraphManager() {}
-            ~GraphManager() {}
+            inline GraphManager() {}
+            inline ~GraphManager() {}
             /// TODO: Use smart pointers here
             /**
              * @brief A vector of condition variables for the GraphManager to wait on

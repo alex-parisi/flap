@@ -27,7 +27,7 @@ namespace flap {
     class MainApplication {
         public:
             /// Singleton pattern
-            static MainApplication& getInstance() {
+            inline static MainApplication& getInstance() {
                 static MainApplication instance;
                 return instance;
             }
@@ -39,18 +39,22 @@ namespace flap {
             void cleanup();
         private:
             /// Singleton pattern
-            MainApplication() {}
-            ~MainApplication() {}
+            inline MainApplication() {}
+            inline ~MainApplication() {}
             /// TODO: Use a smart pointer here
             GLFWwindow* _window;
             double _lastRenderTime = 0.0;
             const double _renderFPS = 60.0;
             const double _renderInterval = 1.0 / _renderFPS;
-            static void _glfwErrorCallback(int error, const char* description) {
+            inline static void _glfwErrorCallback(int error, const char* description) {
                 std::cerr << "GLFW Error " << error << ": " << description << "\n";
             }
             void _render();
             void _renderImGui(int screenWidth, int screenHeight);
             void _renderToolbar();
+            void _renderFileMenu(GLFWwindow& window);
+            void _renderEditMenu();
+            void _renderGraphMenu();
+            void _renderSettingsSubMenu();
     };
 }

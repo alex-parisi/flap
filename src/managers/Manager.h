@@ -18,7 +18,7 @@ namespace flap {
             /**
              * @brief Manager constructor.
              */
-            Manager() : _running(false) {}
+            inline Manager() : _running(false) {}
             /**
              * @brief Initializes the Manager.
              */
@@ -30,25 +30,25 @@ namespace flap {
             /**
              * @brief Runs the Manager.
              */
-            void run() {
+            inline void run() {
                 _running = true;
                 _thread = std::thread(&Manager::_threadFunction, this);
             }
             /**
              * @brief Stops the Manager.
              */
-            void stop() {
+            inline void stop() {
                 _running = false;
                 if (_thread.joinable()) _thread.join();
             }
             /**
              * @brief Checks if the Manager is running.
              */
-            bool isRunning() { return _running; }
+            inline bool isRunning() { return _running; }
             /**
              * @brief Gets the mutex for the Manager.
              */
-            std::shared_ptr<std::mutex> getMutex() { return _mutex; }
+            inline std::shared_ptr<std::mutex> getMutex() { return _mutex; }
         protected:
             /**
              * @brief A flag to check if the Manager is running.

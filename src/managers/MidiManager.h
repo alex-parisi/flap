@@ -26,7 +26,7 @@ namespace flap {
     class MidiManager : public Manager {
         public: 
             /// Singleton pattern
-            static MidiManager& getInstance() {
+            inline static MidiManager& getInstance() {
                 static MidiManager instance;
                 return instance;
             }
@@ -45,7 +45,7 @@ namespace flap {
              * @brief Gets the input port names.
              * @return A vector of strings.
              */
-            std::vector<std::string> getInputPortNames() { 
+            inline std::vector<std::string> getInputPortNames() { 
                 std::lock_guard<std::mutex> lock(*_mutex);
                 return _inputPortNames; 
             }
@@ -53,7 +53,7 @@ namespace flap {
              * @brief Gets the output port names.
              * @return A vector of strings.
              */
-            std::vector<std::string> getOutputPortNames() { 
+            inline std::vector<std::string> getOutputPortNames() { 
                 std::lock_guard<std::mutex> lock(*_mutex);
                 return _outputPortNames; 
             }
@@ -69,13 +69,13 @@ namespace flap {
              * @return A shared pointer to a MidiOut object.
              */
             /// TODO: Implement this
-            bool openOutputPort(int port) { return false;};
+            inline bool openOutputPort(int port) { return false;};
             /**
              * @brief Gets the input port name.
              * @param port The port to get the name of.
              * @return A string.
              */
-            std::string getInPortName(int port) {
+            inline std::string getInPortName(int port) {
                 std::lock_guard<std::mutex> lock(*_mutex);
                 return _mainMidiIn->getPortName(port);
             }
@@ -84,14 +84,14 @@ namespace flap {
              * @param port The port to get the name of.
              * @return A string.
              */
-            std::string getOutPortName(int port) {
+            inline std::string getOutPortName(int port) {
                 std::lock_guard<std::mutex> lock(*_mutex);
                 return _mainMidiOut->getPortName(port);
             }
         private:
             /// Singleton pattern
-            MidiManager() {}
-            ~MidiManager() {}
+            inline MidiManager() {}
+            inline ~MidiManager() {}
             /**
              * @brief A map of RtMidiIn contexts
              */

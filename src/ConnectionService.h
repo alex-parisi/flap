@@ -31,7 +31,7 @@ struct WeakPtrEqual {
 class ConnectionService {
     public:
         /// Singleton pattern
-        static ConnectionService& getInstance() {
+        inline static ConnectionService& getInstance() {
             static ConnectionService instance; // Guaranteed to be destroyed and instantiated on first use
             return instance;
         }
@@ -40,14 +40,14 @@ class ConnectionService {
         ConnectionService& operator=(const ConnectionService&) = delete;
 
         /// Method to add a point
-        void addPoint(const ImVec2& point) {
+        inline void addPoint(const ImVec2& point) {
             _points.push_back(point);
         }
-        void removePoint() {
+        inline void removePoint() {
             _points.pop_back();
         }
         /// Method to render the connections
-        void renderConnections() {
+        inline void renderConnections() {
             ImDrawList* drawList = ImGui::GetForegroundDrawList();
             /// Add the current mouse position to the list of points
             std::vector<ImVec2> p(_points.begin(), _points.end());
@@ -63,24 +63,24 @@ class ConnectionService {
                 }
             }
         }
-        void setDragging(bool dragging) {
+        inline void setDragging(bool dragging) {
             _dragging = dragging;
         }
-        bool isDragging() {
+        inline bool isDragging() {
             return _dragging;
         }
-        void setMutex(std::shared_ptr<std::recursive_mutex> mutex) {
+        inline void setMutex(std::shared_ptr<std::recursive_mutex> mutex) {
             _mutex = mutex;
         }
-        std::shared_ptr<std::recursive_mutex> getMutex() {
+        inline std::shared_ptr<std::recursive_mutex> getMutex() {
             return _mutex;
         }
-        void startDragging(ImVec2 centerPos, flap::Connector& firstConnector) {
+        inline void startDragging(ImVec2 centerPos, flap::Connector& firstConnector) {
             addPoint(centerPos);
             setDragging(true);
             _currentConnector = &firstConnector;
         }
-        void stopDragging(ImVec2 centerpos, flap::Connector* secondConnector) {
+        inline void stopDragging(ImVec2 centerpos, flap::Connector* secondConnector) {
             setDragging(false);
             /// Ensure we're not connecting this to itself
             if (_currentConnector->getObject() != secondConnector->getObject()) {
@@ -104,13 +104,13 @@ class ConnectionService {
                 removePoint();
             }
         }
-        std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual>& getConnectionLocations() {
+        inline std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual>& getConnectionLocations() {
             return _connectionLocations;
         }
-        flap::Connector* getCurrentConnector() {
+        inline flap::Connector* getCurrentConnector() {
             return _currentConnector;
         }
-        void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point1, std::weak_ptr<dibiff::graph::AudioConnectionPoint> point2) {
+        inline void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point1, std::weak_ptr<dibiff::graph::AudioConnectionPoint> point2) {
             _connections.erase(std::remove_if(_connections.begin(), _connections.end(), 
                 [&](const auto& pair) {
                     auto p1 = std::get<0>(pair).lock();
@@ -118,7 +118,7 @@ class ConnectionService {
                     return p1 == point1.lock() && p2 == point2.lock() || p1 == point2.lock() && p2 == point1.lock();
                 }), _connections.end());
         }
-        void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point) {
+        inline void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point) {
             _connections.erase(std::remove_if(_connections.begin(), _connections.end(), 
                 [&](const auto& pair) {
                     auto p1 = std::get<0>(pair).lock();
@@ -126,16 +126,16 @@ class ConnectionService {
                     return p1 == point.lock() || p2 == point.lock();
                 }), _connections.end());
         }
-        void setShowConnections(bool showConnections) {
+        inline void setShowConnections(bool showConnections) {
             _showConnections = showConnections;
         }
-        bool getShowConnections() {
+        inline bool getShowConnections() {
             return _showConnections;
         }
     private:
         /// Singleton pattern
-        ConnectionService() {}
-        ~ConnectionService() {}
+        inline ConnectionService() {}
+        inline ~ConnectionService() {}
         /// List of points to draw lines between
         std::vector<ImVec2> _points;
         bool _dragging = false;
