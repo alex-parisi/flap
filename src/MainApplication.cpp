@@ -8,9 +8,141 @@
 #include "managers/ObjectManager.h"
 #include "MainApplicationSettings.h"
 #include "objects/io/Probe.h"
+#include "KeyboardService.h"
+#include "ShortcutService.h"
+#include "objects/effects/Chorus.h"
+#include "objects/effects/Flanger.h"
+#include "objects/effects/Phaser.h"
 
 #include <iostream>
 #include <cstring>
+
+void flipShowConnections() {
+    ConnectionService::getInstance().setShowConnections(!ConnectionService::getInstance().getShowConnections());
+}
+
+void makeGainObject() {
+    auto gain = std::make_shared<flap::Gain>("Gain" + std::to_string(flap::ObjectManager::getInstance().gainCounter++));
+    gain->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(gain);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(gain->getAudioObjects());
+    }
+}
+
+void makeEnvelopeObject() {
+    auto envelope = std::make_shared<flap::Envelope>("Envelope" + std::to_string(flap::ObjectManager::getInstance().envelopeCounter++));
+    envelope->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(envelope);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(envelope->getAudioObjects());
+    }
+}
+
+void makeSineGeneratorObject() {
+    auto sine = std::make_shared<flap::SineGenerator>("SineGenerator" + std::to_string(flap::ObjectManager::getInstance().sineCounter++));
+    sine->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(sine);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(sine->getAudioObjects());
+    }
+}
+
+void makeProbeObject() {
+    auto probe = std::make_shared<flap::Probe>("Probe" + std::to_string(flap::ObjectManager::getInstance().probeCounter++));
+    probe->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(probe);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(probe->getAudioObjects());
+    }
+}
+
+void makeAudioOutObject(ma_device_info p) {
+    /// Convert the format to a ma_format
+    ma_format format;
+    if (flap::MainApplicationSettingsManager::getInstance().settings.format == "f32") {
+        format = ma_format_f32;
+    } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s16") {
+        format = ma_format_s16;
+    } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s24") {
+        format = ma_format_s24;
+    } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s32") {
+        format = ma_format_s32;
+    } else {
+        format = ma_format_f32;
+    }
+    /// Pull out the device info and add it to the graph
+    auto audioOut = flap::AudioManager::getInstance().openPlaybackDevice(p, format, 2);
+    /// If the device was opened successfully, add it to the graph
+    if (audioOut.has_value()) {
+        flap::ObjectManager::getInstance().objects.push_back(audioOut.value());
+        {
+            std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+            flap::GraphManager::getInstance().addObject(audioOut.value()->getAudioObjects());
+        }
+        /// Set the graph signal and mutex - this lets the two talk to each other
+        /// TODO: Does this need to be protected by the mutex?
+        auto a = audioOut.value()->getAudioObjects()[0];
+        auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(a);
+        flap::GraphManager::getInstance().addGraphSignal(&sink->cv);
+        flap::GraphManager::getInstance().addGraphMutex(&sink->cv_mtx);
+    }
+}
+
+void makeMidiInObject(std::string i) {
+    /// Pull out the port number from the string
+    int port = std::stoi(i.substr(1, i.find("]") - 1));
+    auto midiInObj = flap::MidiManager::getInstance().openInputPort(port);
+    /// If the port was opened successfully, add it to the graph
+    if (midiInObj.has_value()) {
+        /// Pull out the midiIn object and add it to the graph
+        flap::ObjectManager::getInstance().objects.push_back(midiInObj.value());
+        {
+            std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+            flap::GraphManager::getInstance().addObject(midiInObj.value()->getAudioObjects());
+        }
+    }
+}
+
+void makeChorusObject() {
+    auto chorus = std::make_shared<flap::Chorus>("Chorus" + std::to_string(flap::ObjectManager::getInstance().chorusCounter++));
+    chorus->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(chorus);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(chorus->getAudioObjects());
+    }
+}
+
+void makeFlangerObject() {
+    auto flanger = std::make_shared<flap::Flanger>("Flanger" + std::to_string(flap::ObjectManager::getInstance().flangerCounter++));
+    flanger->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(flanger);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(flanger->getAudioObjects());
+    }
+}
+
+void makePhaserObject() {
+    auto phaser = std::make_shared<flap::Phaser>("Phaser" + std::to_string(flap::ObjectManager::getInstance().phaserCounter++));
+    phaser->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(phaser);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(phaser->getAudioObjects());
+    }
+}
+
+void buildMenuEntry(std::string title, std::function<void()> action, std::optional<std::string> shortcut = std::nullopt, std::optional<bool*> selected = std::nullopt, bool enabled = true) {
+    if (ImGui::MenuItem(title.c_str(), shortcut.has_value() ? shortcut.value().c_str() : NULL, selected.has_value() ? selected.value() : NULL, enabled)) {
+        action();
+    }
+}
 
 bool flap::MainApplication::initialize() {
     // Initialize GLFW
@@ -59,7 +191,13 @@ bool flap::MainApplication::initialize() {
         std::cerr << "Failed to initialize MidiManager\n";
         return false;
     }
+
+    /// TODO: Remove this, singleton pattern makes this unnecessary
     ConnectionService::getInstance().setMutex(flap::GraphManager::getInstance().getMutex());
+
+    /// Add shortcuts
+    flap::ShortcutService::getInstance().shortcuts.push_back({{ImGuiKey_LeftSuper, ImGuiKey_C}, [](){ flipShowConnections(); }});
+    flap::ShortcutService::getInstance().shortcuts.push_back({{ImGuiKey_LeftSuper, ImGuiKey_P}, [](){ makeProbeObject(); }});
     return true;
 }
 
@@ -151,19 +289,8 @@ void flap::MainApplication::_renderToolbar() {
         _renderEditMenu();
         _renderGraphMenu();
         ImGui::EndMenuBar();
-        /// Check for hotkeys
-        if (ImGui::IsKeyPressed(ImGuiKey_C, false) && (ImGui::IsKeyDown(ImGuiKey_LeftSuper) || ImGui::IsKeyDown(ImGuiKey_RightSuper))) {
-            ConnectionService::getInstance().setShowConnections(!ConnectionService::getInstance().getShowConnections());
-        }
-        if (ImGui::IsKeyPressed(ImGuiKey_P, false) && (ImGui::IsKeyDown(ImGuiKey_LeftSuper) || ImGui::IsKeyDown(ImGuiKey_RightSuper))) {
-            auto probe = std::make_shared<Probe>();
-            probe->initialize();
-            ObjectManager::getInstance().objects.push_back(probe);
-            {
-                std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                flap::GraphManager::getInstance().addObject(probe->getAudioObjects());
-            }
-        }
+        flap::KeyboardService::getInstance().update();
+        flap::ShortcutService::getInstance().update();
     }
 }
 
@@ -222,7 +349,7 @@ void flap::MainApplication::_renderSettingsSubMenu() {
 void flap::MainApplication::_renderEditMenu() {
     if (ImGui::BeginMenu("Edit")) {
         if (ImGui::MenuItem("Show Connections", "^ + C", ConnectionService::getInstance().getShowConnections())) {
-            ConnectionService::getInstance().setShowConnections(!ConnectionService::getInstance().getShowConnections());
+            flipShowConnections();
         }
         if (ImGui::MenuItem("Undo")) {
             /// TODO: Handle undo action
@@ -238,57 +365,27 @@ void flap::MainApplication::_renderGraphMenu() {
     if (ImGui::BeginMenu("Graph")) {
         if (ImGui::BeginMenu("Add Object")) {
             if (ImGui::BeginMenu("Basic")) {
-                if (ImGui::MenuItem("Gain")) {
-                    auto gain = std::make_shared<Gain>("Gain" + std::to_string(flap::ObjectManager::getInstance().gainCounter++));
-                    gain->initialize();
-                    ObjectManager::getInstance().objects.push_back(gain);
-                    {
-                        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                        flap::GraphManager::getInstance().addObject(gain->getAudioObjects());
-                    }
-                }
+                buildMenuEntry("Gain", makeGainObject);
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Dynamic")) {
-                if (ImGui::MenuItem("Envelope")) {
-                    auto envelope = std::make_shared<Envelope>("Envelope" + std::to_string(flap::ObjectManager::getInstance().envelopeCounter++));
-                    envelope->initialize();
-                    ObjectManager::getInstance().objects.push_back(envelope);
-                    {
-                        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                        flap::GraphManager::getInstance().addObject(envelope->getAudioObjects());
-                    }
-                }
+                buildMenuEntry("Envelope", makeEnvelopeObject);
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Effect")) {
-
+                buildMenuEntry("Chorus", makeChorusObject);
+                buildMenuEntry("Flanger", makeFlangerObject);
+                buildMenuEntry("Phaser", makePhaserObject);
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Generator")) {
-                if (ImGui::MenuItem("Sine Generator")) {
-                    auto sine = std::make_shared<SineGenerator>("SineGenerator" + std::to_string(flap::ObjectManager::getInstance().sineCounter++));
-                    sine->initialize();
-                    ObjectManager::getInstance().objects.push_back(sine);
-                    {
-                        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                        flap::GraphManager::getInstance().addObject(sine->getAudioObjects());
-                    }
-                }
+                buildMenuEntry("Sine Generator", makeSineGeneratorObject);
                 ImGui::EndMenu();
             }
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Add Audio I/O")) {
-            if (ImGui::MenuItem("Probe", "^ + P")) {
-                auto probe = std::make_shared<Probe>("Probe" + std::to_string(flap::ObjectManager::getInstance().probeCounter++));
-                probe->initialize();
-                ObjectManager::getInstance().objects.push_back(probe);
-                {
-                    std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                    flap::GraphManager::getInstance().addObject(probe->getAudioObjects());
-                }
-            }
+            buildMenuEntry("Probe", makeProbeObject, "^ + P");
             if (ImGui::BeginMenu("Input")) {
                 for (auto& c : flap::AudioManager::getInstance().getCaptureDevices()) {
                     if (ImGui::MenuItem(c.name)) {
@@ -305,37 +402,7 @@ void flap::MainApplication::_renderGraphMenu() {
                             break;
                         }
                     }
-                    if (ImGui::MenuItem(p.name, NULL, &selected, !selected)) {
-                        /// Convert the format to a ma_format
-                        ma_format format;
-                        if (flap::MainApplicationSettingsManager::getInstance().settings.format == "f32") {
-                            format = ma_format_f32;
-                        } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s16") {
-                            format = ma_format_s16;
-                        } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s24") {
-                            format = ma_format_s24;
-                        } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s32") {
-                            format = ma_format_s32;
-                        } else {
-                            format = ma_format_f32;
-                        }
-                        /// Pull out the device info and add it to the graph
-                        auto audioOut = flap::AudioManager::getInstance().openPlaybackDevice(p, format, 2);
-                        /// If the device was opened successfully, add it to the graph
-                        if (audioOut.has_value()) {
-                            ObjectManager::getInstance().objects.push_back(audioOut.value());
-                            {
-                                std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                                flap::GraphManager::getInstance().addObject(audioOut.value()->getAudioObjects());
-                            }
-                            /// Set the graph signal and mutex - this lets the two talk to each other
-                            /// TODO: Does this need to be protected by the mutex?
-                            auto a = audioOut.value()->getAudioObjects()[0];
-                            auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(a);
-                            flap::GraphManager::getInstance().addGraphSignal(&sink->cv);
-                            flap::GraphManager::getInstance().addGraphMutex(&sink->cv_mtx);
-                        }
-                    }
+                    buildMenuEntry(p.name, [=](){ makeAudioOutObject(p); }, std::nullopt, &selected, !selected);
                 }
                 ImGui::EndMenu();
             }
@@ -345,19 +412,9 @@ void flap::MainApplication::_renderGraphMenu() {
             if (ImGui::BeginMenu("MIDI Input")) {
                 for (auto& i : flap::MidiManager::getInstance().getInputPortNames()) {
                     if (ImGui::MenuItem(i.c_str())) {
-                        /// Pull out the port number from the string
-                        int port = std::stoi(i.substr(1, i.find("]") - 1));
-                        auto midiInObj = flap::MidiManager::getInstance().openInputPort(port);
-                        /// If the port was opened successfully, add it to the graph
-                        if (midiInObj.has_value()) {
-                            /// Pull out the midiIn object and add it to the graph
-                            ObjectManager::getInstance().objects.push_back(midiInObj.value());
-                            {
-                                std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
-                                flap::GraphManager::getInstance().addObject(midiInObj.value()->getAudioObjects());
-                            }
-                        }
+                        makeMidiInObject(i);
                     }
+                    buildMenuEntry(i, [=](){ makeMidiInObject(i); });
                 }
                 ImGui::EndMenu();
             }
