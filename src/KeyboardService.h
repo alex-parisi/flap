@@ -39,8 +39,8 @@ namespace flap {
             }
         private:
             /// Singleton pattern
-            KeyboardService() {}
-            ~KeyboardService() {}
+            inline KeyboardService() {}
+            inline ~KeyboardService() {}
             std::map<ImGuiKey, int> keyMap;
     };
 }

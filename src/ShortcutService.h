@@ -38,7 +38,7 @@ namespace flap {
             std::vector<KeyboardShortcut> shortcuts;
         private:
             /// Singleton pattern
-            ShortcutService() {}
-            ~ShortcutService() {}
+            inline ShortcutService() {}
+            inline ~ShortcutService() {}
     };
 }
