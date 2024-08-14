@@ -14,6 +14,7 @@
 #include "RtMidi.h"
 #include "dibiff/dibiff"
 #include "../objects/io/MidiIn.h"
+#include "../objects/io/KeyboardSimulator.h"
 
 namespace flap {
     /**
@@ -63,6 +64,27 @@ namespace flap {
              * @return A shared pointer to a MidiIn object.
              */
             std::optional<std::shared_ptr<MidiIn>> openInputPort(int port);
+            /**
+             * @brief Creates a simulator.
+             * @param name The name of the simulator.
+             */
+            std::shared_ptr<flap::KeyboardSimulator> createSimulator();
+            /**
+             * @brief Removes a simulator.
+             * @param simulator The simulator to remove.
+             */
+            inline void removeSimulator(std::shared_ptr<flap::KeyboardSimulator> simulator) {
+                std::lock_guard<std::mutex> lock(*_mutex);
+                _simulators.erase(std::remove_if(_simulators.begin(), _simulators.end(), [simulator](std::shared_ptr<flap::KeyboardSimulator> sim) {
+                    return sim == simulator;
+                }), _simulators.end());
+            }
+            inline void stepSimulators() {
+                std::lock_guard<std::mutex> lock(*_mutex);
+                for (auto& sim : _simulators) {
+                    sim->update();
+                }
+            }
             /**
              * @brief Opens an output port.
              * @param port The port to open.
@@ -136,6 +158,10 @@ namespace flap {
              * @brief The MIDI callback.
              */
             static void _midiCallback(double deltatime, std::vector<unsigned char> *message, void *userData);
+            /**
+             * @brief A vector of all open simulators
+             */
+            std::vector<std::shared_ptr<flap::KeyboardSimulator>> _simulators = {};
     };
     /**
      * @brief MidiCallbackData is a struct that holds a pointer to the MidiManager and an id.

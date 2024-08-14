@@ -8,6 +8,7 @@
 #include "managers/ObjectManager.h"
 #include "MainApplicationSettings.h"
 #include "objects/io/Probe.h"
+#include "objects/io/KeyboardSimulator.h"
 #include "KeyboardService.h"
 #include "ShortcutService.h"
 #include "objects/effects/Chorus.h"
@@ -58,6 +59,17 @@ void makeProbeObject() {
     {
         std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
         flap::GraphManager::getInstance().addObject(probe->getAudioObjects());
+    }
+}
+
+void makeKeyboardSimulatorObject() {
+    /// Pull out the port number from the string
+    auto keyboardSim = flap::MidiManager::getInstance().createSimulator();
+    /// Pull out the midiIn object and add it to the graph
+    flap::ObjectManager::getInstance().objects.push_back(keyboardSim);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(keyboardSim->getAudioObjects());
     }
 }
 
@@ -198,6 +210,7 @@ bool flap::MainApplication::initialize() {
     /// Add shortcuts
     flap::ShortcutService::getInstance().shortcuts.push_back({{ImGuiKey_LeftSuper, ImGuiKey_C}, [](){ flipShowConnections(); }});
     flap::ShortcutService::getInstance().shortcuts.push_back({{ImGuiKey_LeftSuper, ImGuiKey_P}, [](){ makeProbeObject(); }});
+    flap::ShortcutService::getInstance().shortcuts.push_back({{ImGuiKey_LeftSuper, ImGuiKey_K}, [](){ makeKeyboardSimulatorObject(); }});
     return true;
 }
 
@@ -237,6 +250,8 @@ void flap::MainApplication::_render() {
         _lastRenderTime = elapsedTime;
         /// Poll for input events
         glfwPollEvents();
+        /// Update simulators
+        flap::MidiManager::getInstance().stepSimulators();
         /// Draw all ImGui elements
         int display_w, display_h;
         glfwGetFramebufferSize(_window, &display_w, &display_h);
@@ -410,6 +425,7 @@ void flap::MainApplication::_renderGraphMenu() {
         }
         if (ImGui::BeginMenu("Add MIDI I/O")) {
             if (ImGui::BeginMenu("MIDI Input")) {
+                buildMenuEntry("Keyboard Simulator", makeKeyboardSimulatorObject, "^ + K");
                 for (auto& i : flap::MidiManager::getInstance().getInputPortNames()) {
                     if (ImGui::MenuItem(i.c_str())) {
                         makeMidiInObject(i);

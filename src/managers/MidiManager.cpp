@@ -2,6 +2,7 @@
 
 #include "MidiManager.h"
 #include "../objects/io/MidiIn.h"
+#include "../managers/ObjectManager.h"
 
 #include <iostream>
 
@@ -51,10 +52,22 @@ std::optional<std::shared_ptr<flap::MidiIn>> flap::MidiManager::openInputPort(in
     return std::nullopt;
 }
 
+std::shared_ptr<flap::KeyboardSimulator> flap::MidiManager::createSimulator() {
+    /// Mutex Locked
+    {
+        std::lock_guard<std::mutex> lock(*_mutex);
+        auto keyboardSim = std::make_shared<flap::KeyboardSimulator>("KeyboardSimulator" + std::to_string(flap::ObjectManager::getInstance().keyboardSimulatorCounter++));
+        keyboardSim->initialize();
+        _simulators.push_back(keyboardSim);
+        return keyboardSim;
+    }
+}
+
 void flap::MidiManager::_threadFunction() {
     while (isRunning()) {
         /// Mutex Locked
         {
+            std::lock_guard<std::mutex> lock(*_mutex);
             /// Update the list of available MIDI devices
             _inputPortNames.clear();
             unsigned int nPorts = _mainMidiIn->getPortCount();
