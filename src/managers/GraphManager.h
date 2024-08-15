@@ -60,17 +60,25 @@ namespace flap {
             /**
              * @brief Adds a graph signal for the GraphManager to wait on
              */
-            inline void addGraphSignal(std::condition_variable * signal) { _graphSignals.push_back(signal); }
+            inline void addOutputGraphSignal(std::condition_variable * signal) { _outputGraphSignals.push_back(signal); }
+            inline void addInputGraphSignal(std::condition_variable * signal) { _inputGraphSignals.push_back(signal); }
             /**
              * @brief Adds a graph mutex for the GraphManager to lock
              */
-            inline void addGraphMutex(std::mutex * mutex) { _graphMutexs.push_back(mutex); }
+            inline void addOutputGraphMutex(std::mutex * mutex) { _outputGraphMutexs.push_back(mutex); }
+            inline void addInputGraphMutex(std::mutex * mutex) { _inputGraphMutexs.push_back(mutex); }
             inline std::shared_ptr<std::recursive_mutex> getMutex() { return _mutex; }
-            inline void removeGraphSignal(std::condition_variable * signal) { 
-                _graphSignals.erase(std::remove_if(_graphSignals.begin(), _graphSignals.end(), [&](std::condition_variable * s) { return s == signal; }), _graphSignals.end());
+            inline void removeOutputGraphSignal(std::condition_variable * signal) { 
+                _outputGraphSignals.erase(std::remove_if(_outputGraphSignals.begin(), _outputGraphSignals.end(), [&](std::condition_variable * s) { return s == signal; }), _outputGraphSignals.end());
             }
-            inline void removeGraphMutex(std::mutex * mutex) { 
-                _graphMutexs.erase(std::remove_if(_graphMutexs.begin(), _graphMutexs.end(), [&](std::mutex * m) { return m == mutex; }), _graphMutexs.end());
+            inline void removeInputGraphSignal(std::condition_variable * signal) { 
+                _inputGraphSignals.erase(std::remove_if(_inputGraphSignals.begin(), _inputGraphSignals.end(), [&](std::condition_variable * s) { return s == signal; }), _inputGraphSignals.end());
+            }
+            inline void removeOutputGraphMutex(std::mutex * mutex) { 
+                _outputGraphMutexs.erase(std::remove_if(_outputGraphMutexs.begin(), _outputGraphMutexs.end(), [&](std::mutex * m) { return m == mutex; }), _outputGraphMutexs.end());
+            }
+            inline void removeInputGraphMutex(std::mutex * mutex) { 
+                _inputGraphMutexs.erase(std::remove_if(_inputGraphMutexs.begin(), _inputGraphMutexs.end(), [&](std::mutex * m) { return m == mutex; }), _inputGraphMutexs.end());
             }
         private:
             /// Override the mutex
@@ -82,11 +90,13 @@ namespace flap {
             /**
              * @brief A vector of condition variables for the GraphManager to wait on
              */
-            std::vector<std::condition_variable *> _graphSignals;
+            std::vector<std::condition_variable *> _outputGraphSignals;
+            std::vector<std::condition_variable *> _inputGraphSignals;
             /**
              * @brief A vector of mutexes for the GraphManager to lock
              */
-            std::vector<std::mutex *> _graphMutexs;
+            std::vector<std::mutex *> _outputGraphMutexs;
+            std::vector<std::mutex *> _inputGraphMutexs;
             /**
              * @brief The thread function for the GraphManager.
              */

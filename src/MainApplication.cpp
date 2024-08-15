@@ -14,6 +14,7 @@
 #include "objects/effects/Chorus.h"
 #include "objects/effects/Flanger.h"
 #include "objects/effects/Phaser.h"
+#include "objects/synths/FlapSynth.h"
 
 #include <iostream>
 #include <cstring>
@@ -100,8 +101,40 @@ void makeAudioOutObject(ma_device_info p) {
         /// TODO: Does this need to be protected by the mutex?
         auto a = audioOut.value()->getAudioObjects()[0];
         auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(a);
-        flap::GraphManager::getInstance().addGraphSignal(&sink->cv);
-        flap::GraphManager::getInstance().addGraphMutex(&sink->cv_mtx);
+        flap::GraphManager::getInstance().addOutputGraphSignal(&sink->cv);
+        flap::GraphManager::getInstance().addOutputGraphMutex(&sink->cv_mtx);
+    }
+}
+
+void makeAudioInObject(ma_device_info p) {
+    /// Convert the format to a ma_format
+    ma_format format;
+    if (flap::MainApplicationSettingsManager::getInstance().settings.format == "f32") {
+        format = ma_format_f32;
+    } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s16") {
+        format = ma_format_s16;
+    } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s24") {
+        format = ma_format_s24;
+    } else if (flap::MainApplicationSettingsManager::getInstance().settings.format == "s32") {
+        format = ma_format_s32;
+    } else {
+        format = ma_format_f32;
+    }
+    /// Pull out the device info and add it to the graph
+    auto audioIn = flap::AudioManager::getInstance().openCaptureDevice(p, format, 2);
+    /// If the device was opened successfully, add it to the graph
+    if (audioIn.has_value()) {
+        flap::ObjectManager::getInstance().objects.push_back(audioIn.value());
+        {
+            std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+            flap::GraphManager::getInstance().addObject(audioIn.value()->getAudioObjects());
+        }
+        /// Set the graph signal and mutex - this lets the two talk to each other
+        /// TODO: Does this need to be protected by the mutex?
+        auto a = audioIn.value()->getAudioObjects()[0];
+        auto source = std::dynamic_pointer_cast<dibiff::source::GraphSource>(a);
+        flap::GraphManager::getInstance().addOutputGraphSignal(&source->cv);
+        flap::GraphManager::getInstance().addOutputGraphMutex(&source->cv_mtx);
     }
 }
 
@@ -147,6 +180,16 @@ void makePhaserObject() {
     {
         std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
         flap::GraphManager::getInstance().addObject(phaser->getAudioObjects());
+    }
+}
+
+void makeFlapSynthObject() {
+    auto flapSynth = std::make_shared<flap::FlapSynth>("FlapSynth" + std::to_string(flap::ObjectManager::getInstance().flapSynthCounter++));
+    flapSynth->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(flapSynth);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(flapSynth->getAudioObjects());
     }
 }
 
@@ -379,6 +422,10 @@ void flap::MainApplication::_renderEditMenu() {
 void flap::MainApplication::_renderGraphMenu() {
     if (ImGui::BeginMenu("Graph")) {
         if (ImGui::BeginMenu("Add Object")) {
+            if (ImGui::BeginMenu("Synth")) {
+                buildMenuEntry("FLAP Synth", makeFlapSynthObject);
+                ImGui::EndMenu();
+            }
             if (ImGui::BeginMenu("Basic")) {
                 buildMenuEntry("Gain", makeGainObject);
                 ImGui::EndMenu();
@@ -403,8 +450,14 @@ void flap::MainApplication::_renderGraphMenu() {
             buildMenuEntry("Probe", makeProbeObject, "^ + P");
             if (ImGui::BeginMenu("Input")) {
                 for (auto& c : flap::AudioManager::getInstance().getCaptureDevices()) {
-                    if (ImGui::MenuItem(c.name)) {
+                    bool selected = false;
+                    for (auto& d : flap::AudioManager::getInstance().getOpenedCaptureDevices()) {
+                        if (std::strcmp(c.name, d.name) == 0) {
+                            selected = true;
+                            break;
+                        }
                     }
+                    buildMenuEntry(c.name, [=](){ makeAudioInObject(c); }, std::nullopt, &selected, !selected);
                 }
                 ImGui::EndMenu();
             }

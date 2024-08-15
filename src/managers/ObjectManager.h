@@ -30,6 +30,7 @@ namespace flap {
             int sineCounter = 0;
             int probeCounter = 0;
             int keyboardSimulatorCounter = 0;
+            int flapSynthCounter = 0;
         private:
             /// Singleton pattern
             inline ObjectManager() {}

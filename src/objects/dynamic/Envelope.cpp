@@ -33,13 +33,13 @@ void flap::Envelope::render() {
     ImGui::SameLine();
     _output.render("Out");
     ImGui::SeparatorText("Envelope Parameters");
-    ImGuiKnobs::Knob("Attack", &_attackTime, 0.0f, 2.0f, 0.005f, "%1.3fs", ImGuiKnobVariant_Wiper);
+    ImGuiKnobs::Knob("Attack", &_attackTime, 0.005f, 2.0f, 0.005f, "%1.3fs", ImGuiKnobVariant_Wiper);
     ImGui::SameLine();
-    ImGuiKnobs::Knob("Decay", &_decayTime, 0.0f, 2.0f, 0.005f, "%1.3fs", ImGuiKnobVariant_Wiper);
+    ImGuiKnobs::Knob("Decay", &_decayTime, 0.005f, 2.0f, 0.005f, "%1.3fs", ImGuiKnobVariant_Wiper);
     ImGui::SameLine();
-    ImGuiKnobs::Knob("Sustain", &_sustainLevel, 0.0f, 1.0f, 0.005f, "%1.3f", ImGuiKnobVariant_Wiper);
+    ImGuiKnobs::Knob("Sustain", &_sustainLevel, 0.005f, 1.0f, 0.005f, "%1.3f", ImGuiKnobVariant_Wiper);
     ImGui::SameLine();
-    ImGuiKnobs::Knob("Release", &_releaseTime, 0.0f, 5.0f, 0.01f, "%1.2fs", ImGuiKnobVariant_Wiper);
+    ImGuiKnobs::Knob("Release", &_releaseTime, 0.01f, 5.0f, 0.01f, "%1.2fs", ImGuiKnobVariant_Wiper);
     ImGui::End();
     _isOpen.check();
 }

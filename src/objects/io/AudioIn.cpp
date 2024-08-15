@@ -1,6 +1,6 @@
-/// AudioOut.cpp
+/// AudioIn.cpp
 
-#include "AudioOut.h"
+#include "AudioIn.h"
 
 #include "imgui.h"
 #include "imgui_internal.h"
@@ -12,29 +12,29 @@
 #include "../../managers/GraphManager.h"
 #include "../../MainApplicationSettings.h"
 
-void flap::AudioOut::initialize() {
-    auto graphSink = dibiff::sink::GraphSink::create(_channels, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate, flap::MainApplicationSettingsManager::getInstance().settings.blockSize);
-    _audioObjects.push_back(graphSink);
-    _input = Connector(graphSink->getInput(), graphSink);
-    _inputL = Connector(graphSink->getInput(0), graphSink);
-    _inputR = Connector(graphSink->getInput(1), graphSink);
+void flap::AudioIn::initialize() {
+    auto graphSource = dibiff::source::GraphSource::create(_channels, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate, flap::MainApplicationSettingsManager::getInstance().settings.blockSize);
+    _audioObjects.push_back(graphSource);
+    _output = Connector(graphSource->getOutput(), graphSource, true);
+    _outputL = Connector(graphSource->getOutput(0), graphSource, true);
+    _outputR = Connector(graphSource->getOutput(1), graphSource, true);
 }
 
-void flap::AudioOut::render() {
+void flap::AudioIn::render() {
     std::string title;
     if (_name.has_value()) {
         title = *_name;
     } else {
-        title = "AudioOut";
+        title = "AudioIn";
     }
     ImGui::Begin(title.c_str(), _isOpen);
     ImGui::SeparatorText("Connections");
     if (_channels == 1) {
-        _input.render("In");
+        _output.render("Out");
     } else {
-        _inputL.render("In-L");
+        _outputL.render("Out-L");
         ImGui::SameLine();
-        _inputR.render("In-R");
+        _outputR.render("Out-R");
     }
     ImGui::SeparatorText("Audio Settings");
     if (ImGui::RadioButton("Mono", _channels == 1)) {
@@ -54,14 +54,14 @@ void flap::AudioOut::render() {
     _isOpen.check();
 }
 
-void flap::AudioOut::preDisconnect() {
+void flap::AudioIn::preDisconnect() {
     /// Remove graph mutexs and condition variables
-    auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(_audioObjects[0]);
-    flap::GraphManager::getInstance().removeOutputGraphMutex(&sink->cv_mtx);
-    flap::GraphManager::getInstance().removeOutputGraphSignal(&sink->cv);
+    auto source = std::dynamic_pointer_cast<dibiff::source::GraphSource>(_audioObjects[0]);
+    flap::GraphManager::getInstance().removeInputGraphMutex(&source->cv_mtx);
+    flap::GraphManager::getInstance().removeInputGraphSignal(&source->cv);
 }
 
-void flap::AudioOut::postDisconnect() {
+void flap::AudioIn::postDisconnect() {
     /// Close the playback device
-    flap::AudioManager::getInstance().closePlaybackDevice(_device);
+    flap::AudioManager::getInstance().closeCaptureDevice(_device);
 }

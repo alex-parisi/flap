@@ -33,8 +33,14 @@ void flap::AudioManager::cleanup() {
             ma_device_uninit(pd.second.get());
         }
     }
+    for (auto & cd : _captureDevices) {
+        ma_device_state state = ma_device_get_state(cd.second.get());
+        if (state == ma_device_state_started) {
+            ma_device_stop(cd.second.get());
+            ma_device_uninit(cd.second.get());
+        }
+    }
     ma_context_uninit(&_playbackContext);
-    
     ma_context_uninit(&_captureContext);
 }
 
@@ -54,7 +60,7 @@ std::optional<std::shared_ptr<flap::AudioOut>> flap::AudioManager::openPlaybackD
     ma_result result;
     auto audioCallbackData = std::make_shared<AudioCallbackData>();
     audioCallbackData->device = device;
-    _audioCallbackDatas[device.name] = audioCallbackData;
+    _audioOutCallbackDatas[device.name] = audioCallbackData;
     /// TODO: Determine the supported formats and channels for the device
     /// TODO: Support stereo when selected 
     std::shared_ptr<ma_device> playbackDevice = std::make_shared<ma_device>();
@@ -89,6 +95,47 @@ std::optional<std::shared_ptr<flap::AudioOut>> flap::AudioManager::openPlaybackD
     return audioOut;
 }
 
+std::optional<std::shared_ptr<flap::AudioIn>> flap::AudioManager::openCaptureDevice(ma_device_info device, ma_format format, int channels) {
+    std::lock_guard<std::mutex> lock(*_mutex);
+
+    ma_result result;
+    auto audioCallbackData = std::make_shared<AudioCallbackData>();
+    audioCallbackData->device = device;
+    _audioInCallbackDatas[device.name] = audioCallbackData;
+    /// TODO: Determine the supported formats and channels for the device
+    /// TODO: Support stereo when selected 
+    std::shared_ptr<ma_device> captureDevice = std::make_shared<ma_device>();
+    std::shared_ptr<ma_device_config> captureConfig = std::make_shared<ma_device_config>();
+    *captureConfig = ma_device_config_init(ma_device_type_capture);
+    captureConfig->capture.format = ma_format_f32;
+    captureConfig->capture.channels = channels;
+    captureConfig->sampleRate = flap::MainApplicationSettingsManager::getInstance().settings.sampleRate;
+    captureConfig->dataCallback = _captureDataCallback;
+    captureConfig->pUserData = audioCallbackData.get();
+    captureConfig->capture.pDeviceID = &device.id;
+    captureConfig->periodSizeInFrames = flap::MainApplicationSettingsManager::getInstance().settings.blockSize;
+    _captureConfigs[device.name] = captureConfig;
+    result = ma_device_init(&_captureContext, captureConfig.get(), captureDevice.get());
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to initialize capture device." << std::endl;
+        return std::nullopt;
+    }
+    std::cout << "Opened capture device: " << device.name << std::endl;
+    std::shared_ptr<AudioIn> audioIn = std::make_shared<AudioIn>(device, channels, device.name);
+    audioIn->initialize();
+    _audioIns[device.name] = audioIn;
+    result = ma_device_start(captureDevice.get());
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to start capture device." << std::endl;
+        ma_device_uninit(captureDevice.get());
+        return std::nullopt;
+    }
+    std::cout << "Started capture device: " << device.name << std::endl;
+    _captureDevices[device.name] = captureDevice;
+    _openedCaptureDevices.push_back(device);
+    return audioIn;
+}
+
 void flap::AudioManager::closePlaybackDevice(ma_device_info device) {
     std::lock_guard<std::mutex> lock(*_mutex);
 
@@ -117,7 +164,7 @@ void flap::AudioManager::closePlaybackDevice(ma_device_info device) {
 
     // Clean up associated data
     _playbackConfigs.erase(device.name);
-    _audioCallbackDatas.erase(device.name);
+    _audioOutCallbackDatas.erase(device.name);
     _audioOuts.erase(device.name);
 
     // Remove the device from the list of opened playback devices
@@ -126,6 +173,45 @@ void flap::AudioManager::closePlaybackDevice(ma_device_info device) {
     }), _openedPlaybackDevices.end());
 
     std::cout << "Closed playback device: " << device.name << std::endl;
+}
+
+void flap::AudioManager::closeCaptureDevice(ma_device_info device) {
+    std::lock_guard<std::mutex> lock(*_mutex);
+
+    auto deviceIt = _captureDevices.find(device.name);
+    if (deviceIt == _captureDevices.end()) {
+        std::cerr << "Capture device not found: " << device.name << std::endl;
+        return;
+    }
+
+    std::shared_ptr<ma_device> captureDevice = deviceIt->second;
+
+    // Stop the playback device if it is running
+    ma_result result = ma_device_stop(captureDevice.get());
+    if (result != MA_SUCCESS) {
+        std::cerr << "Failed to stop capture device: " << device.name << std::endl;
+    } else {
+        std::cout << "Stopped capture device: " << device.name << std::endl;
+    }
+
+    // Uninitialize the device to free resources
+    ma_device_uninit(captureDevice.get());
+    std::cout << "Uninitialized capture device: " << device.name << std::endl;
+
+    // Remove the device from the map
+    _captureDevices.erase(deviceIt);
+
+    // Clean up associated data
+    _captureConfigs.erase(device.name);
+    _audioInCallbackDatas.erase(device.name);
+    _audioIns.erase(device.name);
+
+    // Remove the device from the list of opened playback devices
+    _openedCaptureDevices.erase(std::remove_if(_openedCaptureDevices.begin(), _openedCaptureDevices.end(), [device](ma_device_info d) {
+        return strcmp(d.name, device.name) == 0;
+    }), _openedCaptureDevices.end());
+
+    std::cout << "Closed capture device: " << device.name << std::endl;
 }
 
 void flap::AudioManager::_threadFunction() {
@@ -197,4 +283,33 @@ void flap::AudioManager::_playbackDataCallback(ma_device* pDevice, void* pOutput
     // Signal that the callback has finished processing
     std::lock_guard<std::mutex> lock(sink->cv_mtx);
     sink->cv.notify_one();
+}
+
+void flap::AudioManager::_captureDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount) {
+    AudioCallbackData* callbackData = static_cast<AudioCallbackData*>(pDevice->pUserData);
+    if (flap::AudioManager::getInstance()._audioIns.find(callbackData->device.name) == flap::AudioManager::getInstance()._audioIns.end()) {
+        return;
+    }
+    auto a = flap::AudioManager::getInstance()._audioIns[callbackData->device.name]->getAudioObjects()[0];
+    auto source = std::dynamic_pointer_cast<dibiff::source::GraphSource>(a);
+    if (source == nullptr) {
+        std::lock_guard<std::mutex> lock(source->cv_mtx);
+        source->cv.notify_one();
+        return;
+    };
+    int channels = pDevice->capture.channels; // Number of output channels
+    // Write interleaved samples for each channel, read from pInput
+    const float* inputBuffer = static_cast<const float*>(pInput);
+    for (ma_uint32 frame = 0; frame < frameCount; ++frame) {
+        for (int channel = 0; channel < channels; ++channel) {
+            if (channel < source->ringBuffers.size() && source->ringBuffers[channel] != nullptr) {
+                float sample = inputBuffer[frame * channels + channel];
+                source->ringBuffers[channel]->write(&sample, 1);
+            }
+        }
+    }
+    size_t samplesAvailable = source->ringBuffers[0]->available();
+    // Signal that the callback has finished processing
+    std::lock_guard<std::mutex> lock(source->cv_mtx);
+    source->cv.notify_one();
 }

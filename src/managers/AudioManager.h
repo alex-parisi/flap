@@ -14,6 +14,7 @@
 #include "miniaudio.h"
 #include "dibiff/dibiff"
 #include "../objects/io/AudioOut.h"
+#include "../objects/io/AudioIn.h"
 #include "../MainApplicationSettings.h"
 
 namespace flap {
@@ -62,8 +63,10 @@ namespace flap {
              * @return A shared pointer to an AudioOut object.
              */
             std::optional<std::shared_ptr<AudioOut>> openPlaybackDevice(ma_device_info device, ma_format format, int channels);
+            std::optional<std::shared_ptr<AudioIn>> openCaptureDevice(ma_device_info device, ma_format format, int channels);
 
             void closePlaybackDevice(ma_device_info device);
+            void closeCaptureDevice(ma_device_info device);
 
             inline std::vector<ma_device_info> getOpenedPlaybackDevices() { return _openedPlaybackDevices; }
             inline std::vector<ma_device_info> getOpenedCaptureDevices() { return _openedCaptureDevices; }
@@ -83,30 +86,31 @@ namespace flap {
              * @brief The playback device infos.
              */
             std::vector<ma_device_info> _playbackDeviceInfos = {};
-
-            std::vector<ma_device_info> _openedPlaybackDevices = {};
-
+            std::vector<ma_device_info> _captureDeviceInfos = {};
             /**
              * @brief The capture device infos.
              */
-            std::vector<ma_device_info> _captureDeviceInfos = {};
-
+            std::vector<ma_device_info> _openedPlaybackDevices = {};
             std::vector<ma_device_info> _openedCaptureDevices = {};
 
             /**
              * @brief The playback device configs.
              */
             std::unordered_map<std::string, std::shared_ptr<ma_device_config>> _playbackConfigs = {};
+            std::unordered_map<std::string, std::shared_ptr<ma_device_config>> _captureConfigs = {};
             /**
              * @brief The playback device.
              */
             std::unordered_map<std::string, std::shared_ptr<ma_device>> _playbackDevices = {};
+            std::unordered_map<std::string, std::shared_ptr<ma_device>> _captureDevices = {};
             /**
              * @brief The AudioOut object associated with the playback device.
              */
             std::unordered_map<std::string, std::shared_ptr<AudioOut>> _audioOuts = {};
+            std::unordered_map<std::string, std::shared_ptr<AudioIn>> _audioIns = {};
 
-            std::unordered_map<std::string, std::shared_ptr<AudioCallbackData>> _audioCallbackDatas = {};
+            std::unordered_map<std::string, std::shared_ptr<AudioCallbackData>> _audioOutCallbackDatas = {};
+            std::unordered_map<std::string, std::shared_ptr<AudioCallbackData>> _audioInCallbackDatas = {};
             /**
              * @brief The rate at which the AudioManager updates.
              */
@@ -119,6 +123,7 @@ namespace flap {
              * @brief The playback data callback.
              */
             static void _playbackDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
+            static void _captureDataCallback(ma_device* pDevice, void* pOutput, const void* pInput, ma_uint32 frameCount);
     };
     /**
      * @brief AudioCallbackData is a struct that holds a pointer to the AudioManager and an id.
