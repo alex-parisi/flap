@@ -15,6 +15,7 @@
 #include "objects/effects/Flanger.h"
 #include "objects/effects/Phaser.h"
 #include "objects/synths/FlapSynth.h"
+#include "objects/adaptive/EchoCanceller.h"
 
 #include <iostream>
 #include <cstring>
@@ -190,6 +191,16 @@ void makeFlapSynthObject() {
     {
         std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
         flap::GraphManager::getInstance().addObject(flapSynth->getAudioObjects());
+    }
+}
+
+void makeEchoCancellerObject() {
+    auto aec = std::make_shared<flap::EchoCanceller>("EchoCanceller" + std::to_string(flap::ObjectManager::getInstance().echoCancellerCounter++));
+    aec->initialize();
+    flap::ObjectManager::getInstance().objects.push_back(aec);
+    {
+        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        flap::GraphManager::getInstance().addObject(aec->getAudioObjects());
     }
 }
 
@@ -424,6 +435,10 @@ void flap::MainApplication::_renderGraphMenu() {
         if (ImGui::BeginMenu("Add Object")) {
             if (ImGui::BeginMenu("Synth")) {
                 buildMenuEntry("FLAP Synth", makeFlapSynthObject);
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Adaptive")) {
+                buildMenuEntry("Echo Canceller", makeEchoCancellerObject);
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Basic")) {
