@@ -3,6 +3,7 @@
 #pragma once
 
 #include <vector>
+#include <variant>
 #include "../objects/Object.h"
 
 namespace flap {
@@ -19,8 +20,9 @@ namespace flap {
             inline void cleanup() {
                 objects.clear();
             }
-            std::vector<std::shared_ptr<Object>> objects;
-            std::shared_ptr<std::recursive_mutex> mutex;
+            std::vector<std::unique_ptr<Object>> objects;
+            std::vector<std::shared_ptr<Object>> sharedObjects;
+            std::unique_ptr<std::recursive_mutex> mutex;
             /// TODO: Use a better way than counters to manage object IDs
             int gainCounter = 0;
             int envelopeCounter = 0;

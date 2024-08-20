@@ -13,10 +13,10 @@
 
 void flap::Envelope::initialize() {
     auto envelope = dibiff::dynamic::Envelope::create(_attackTime, _decayTime, _sustainLevel, _releaseTime, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate);
-    _audioObjects.push_back(envelope);
-    _input = Connector(envelope->input, envelope);
-    _midiInput = Connector(envelope->midiInput, envelope);
-    _output = Connector(envelope->output, envelope, true);
+    _audioObjects.push_back(std::move(envelope));
+    _input = Connector(_audioObjects[0].get()->getInput(0), _audioObjects[0].get());
+    _midiInput = Connector(_audioObjects[0].get()->getInput(1), _audioObjects[0].get());
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::Envelope::render() {

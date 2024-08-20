@@ -13,12 +13,13 @@
 
 void flap::KeyboardSimulator::initialize() {
     auto midiObject = dibiff::midi::MidiInput::create(flap::MainApplicationSettingsManager::getInstance().settings.blockSize);
-    _audioObjects.push_back(midiObject);
-    _output = Connector(midiObject->getOutput(), midiObject, true);
+    _audioObjects.push_back(std::move(midiObject));
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::KeyboardSimulator::render() {
-        std::string title;
+    update();
+    std::string title;
     if (_name.has_value()) {
         title = *_name;
     } else {
@@ -40,18 +41,18 @@ void flap::KeyboardSimulator::update() {
             message[1] = note.second; // Note number
             message[2] = 127; // Velocity
             std::vector<unsigned char> m = { message[0], message[1], message[2] };
-            auto a = _audioObjects[0];
-            auto b = std::dynamic_pointer_cast<dibiff::midi::MidiInput>(a);
-            b->addMidiMessage(m);
+            std::vector<std::vector<unsigned char>> messages = { m };
+            auto mi = static_cast<dibiff::midi::MidiInput*>(_audioObjects[0].get());
+            mi->addMidiMessage(messages);
         } else if (noteVal == -1) {
             unsigned char message[3];
             message[0] = 0x80; // Note off
             message[1] = note.second; // Note number
             message[2] = 0; // Velocity
             std::vector<unsigned char> m = { message[0], message[1], message[2] };
-            auto a = _audioObjects[0];
-            auto b = std::dynamic_pointer_cast<dibiff::midi::MidiInput>(a);
-            b->addMidiMessage(m);
+            std::vector<std::vector<unsigned char>> messages = { m };
+            auto mi = static_cast<dibiff::midi::MidiInput*>(_audioObjects[0].get());
+            mi->addMidiMessage(messages);
         }
     }
 }

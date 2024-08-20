@@ -12,17 +12,17 @@ flap::Object::Object() : _isOpen([&, this]() {
     /// For each object in _audioObjects, disconnect all connections then remove it from the graph
     preDisconnect();
     {
-        std::lock_guard<std::recursive_mutex> lock(*flap::GraphManager::getInstance().getMutex());
+        std::lock_guard<std::mutex> lock(flap::GraphManager::getInstance().getMutex());
         for (auto& audioObject : _audioObjects) {
             audioObject->disconnectAll();
-            flap::GraphManager::getInstance().removeObject(audioObject);
+            flap::GraphManager::getInstance().removeObject(audioObject.get());
         }
         for (auto& obj : _audioObjects) {
             for (auto& i : obj->_inputs) {
-                ConnectionService::getInstance().removeConnection(i);
+                ConnectionService::getInstance().removeConnection(i.get());
             }
             for (auto& o : obj->_outputs) {
-                ConnectionService::getInstance().removeConnection(o);
+                ConnectionService::getInstance().removeConnection(o.get());
             }
         }
         /// Clear the _audioObjects vector

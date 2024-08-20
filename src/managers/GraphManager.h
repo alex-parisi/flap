@@ -7,6 +7,7 @@
 
 #include <condition_variable>
 #include <mutex>
+#include <chrono>
 
 namespace flap {
     /**
@@ -34,29 +35,29 @@ namespace flap {
              * @brief Adds an object to the graph.
              * @param object The object to add.
              */
-            void addObject(std::shared_ptr<dibiff::graph::AudioObject> object);
+            void addObject(dibiff::graph::AudioObject* object);
             /**
              * @brief Adds a vector of objects to the graph.
              * @param objects The objects to add.
              */
-            void addObject(std::vector<std::shared_ptr<dibiff::graph::AudioObject>> objects);
+            void addObject(std::vector<dibiff::graph::AudioObject*> objects);
             /**
              * @brief Adds a composite object to the graph.
              * @param object The object to add.
              */
-            void addObject(std::shared_ptr<dibiff::graph::AudioCompositeObject> object);
+            void addObject(dibiff::graph::AudioCompositeObject* object);
             /**
              * @brief Removes an object from the graph.
              */
-            void removeObject(std::shared_ptr<dibiff::graph::AudioObject> object);
+            void removeObject(dibiff::graph::AudioObject* object);
             /**
              * @brief Removes a vector of objects from the graph.
              */
-            void removeObject(std::vector<std::shared_ptr<dibiff::graph::AudioObject>> objects);
+            void removeObject(std::vector<dibiff::graph::AudioObject*> objects);
             /**
              * @brief Removes a composite object from the graph.
              */
-            void removeObject(std::shared_ptr<dibiff::graph::AudioCompositeObject> object);
+            void removeObject(dibiff::graph::AudioCompositeObject* object);
             /**
              * @brief Adds a graph signal for the GraphManager to wait on
              */
@@ -67,7 +68,7 @@ namespace flap {
              */
             inline void addOutputGraphMutex(std::mutex * mutex) { _outputGraphMutexs.push_back(mutex); }
             inline void addInputGraphMutex(std::mutex * mutex) { _inputGraphMutexs.push_back(mutex); }
-            inline std::shared_ptr<std::recursive_mutex> getMutex() { return _mutex; }
+            inline std::mutex& getMutex() { return *_mutex; }
             inline void removeOutputGraphSignal(std::condition_variable * signal) { 
                 _outputGraphSignals.erase(std::remove_if(_outputGraphSignals.begin(), _outputGraphSignals.end(), [&](std::condition_variable * s) { return s == signal; }), _outputGraphSignals.end());
             }
@@ -82,7 +83,7 @@ namespace flap {
             }
         private:
             /// Override the mutex
-            std::shared_ptr<std::recursive_mutex> _mutex;
+            std::unique_ptr<std::mutex> _mutex;
             /// Singleton pattern
             inline GraphManager() {}
             inline ~GraphManager() {}
@@ -104,6 +105,6 @@ namespace flap {
             /**
              * @brief The audio graph.
              */
-            std::shared_ptr<dibiff::graph::AudioGraph> _graph;
+            std::unique_ptr<dibiff::graph::AudioGraph> _graph;
     };
 }

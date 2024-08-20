@@ -3,13 +3,14 @@
 #include "MidiManager.h"
 #include "../objects/io/MidiIn.h"
 #include "../managers/ObjectManager.h"
+#include "../managers/GraphManager.h"
 
 #include <iostream>
 
 bool flap::MidiManager::initialize() {
-    _mutex = std::make_shared<std::mutex>();
-    _mainMidiIn = std::make_shared<RtMidiIn>();
-    _mainMidiOut = std::make_shared<RtMidiOut>();
+    _mutex = std::make_unique<std::mutex>();
+    _mainMidiIn = std::make_unique<RtMidiIn>();
+    _mainMidiOut = std::make_unique<RtMidiOut>();
     return true;
 }
 
@@ -22,44 +23,44 @@ void flap::MidiManager::cleanup() {
     _midiInObjects.clear();
 }
 
-std::optional<std::shared_ptr<flap::MidiIn>> flap::MidiManager::openInputPort(int port) {
+std::unique_ptr<flap::MidiIn> flap::MidiManager::openInputPort(int port) {
     /// Mutex Locked
     {
         std::lock_guard<std::mutex> lock(*_mutex);
         /// Make a new RtMidiIn object
-        auto newMidiIn = std::make_shared<RtMidiIn>();
+        auto newMidiIn = std::make_unique<RtMidiIn>();
         if (port < newMidiIn->getPortCount()) {
             newMidiIn->closePort();
             try {
                 newMidiIn->openPort(port);
-                auto newMidiInObject = std::make_shared<flap::MidiIn>(port, newMidiIn->getPortName(port));
+                auto newMidiInObject = std::make_unique<flap::MidiIn>(port, newMidiIn->getPortName(port));
                 newMidiInObject->initialize();
                 /// Don't ignore sysex, timing, or active sensing messages.
                 newMidiIn->ignoreTypes(false, false, false);
                 /// Set the callback function for MIDI input.
-                auto callbackData = std::make_shared<MidiCallbackData>(MidiCallbackData{this, port});
+                auto callbackData = std::make_unique<MidiCallbackData>(MidiCallbackData{this, port});
                 newMidiIn->setCallback(&MidiManager::_midiCallback, callbackData.get());
-                _midiIns[port] = newMidiIn;
-                _midiInObjects[port] = newMidiInObject;
-                callbackDataMap[port] = callbackData;
-                return newMidiInObject;
+                _midiIns[port] = std::move(newMidiIn);
+                _midiInObjects[port] = newMidiInObject.get();
+                callbackDataMap[port] = std::move(callbackData);
+                return std::move(newMidiInObject);
             } catch (RtMidiError &error) {
                 std::cerr << error.getMessage() << "\n";
-                return std::nullopt;
+                return nullptr;
             }        
         }   
     }
-    return std::nullopt;
+    return nullptr;
 }
 
-std::shared_ptr<flap::KeyboardSimulator> flap::MidiManager::createSimulator() {
+std::unique_ptr<flap::KeyboardSimulator> flap::MidiManager::createSimulator() {
     /// Mutex Locked
     {
         std::lock_guard<std::mutex> lock(*_mutex);
-        auto keyboardSim = std::make_shared<flap::KeyboardSimulator>("KeyboardSimulator" + std::to_string(flap::ObjectManager::getInstance().keyboardSimulatorCounter++));
+        auto keyboardSim = std::make_unique<flap::KeyboardSimulator>("KeyboardSimulator" + std::to_string(flap::ObjectManager::getInstance().keyboardSimulatorCounter++));
         keyboardSim->initialize();
-        _simulators.push_back(keyboardSim);
-        return keyboardSim;
+        _simulators.push_back(keyboardSim.get());
+        return std::move(keyboardSim);
     }
 }
 
@@ -108,9 +109,10 @@ void flap::MidiManager::_midiCallback(double deltatime, std::vector<unsigned cha
         if (message->size() > 0) {
             /// Push MIDI message to the audio graph
             /// TODO: Search for the correct audio object, don't assume it's the first one
+            std::vector<std::vector<unsigned char>> messages = { *message };
             auto a = manager->_midiInObjects[port]->getAudioObjects()[0];
-            auto b = std::dynamic_pointer_cast<dibiff::midi::MidiInput>(a);
-            b->addMidiMessage(*message);
+            auto b = static_cast<dibiff::midi::MidiInput*>(a);
+            b->addMidiMessage(messages);
         }
     }
     /// Mutex Unlocked

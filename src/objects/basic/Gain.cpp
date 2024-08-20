@@ -12,9 +12,9 @@
 
 void flap::Gain::initialize() {
     auto gainObject = dibiff::level::Gain::create(_gain);
-    _audioObjects.push_back(gainObject);
-    _input = Connector(gainObject->getInput(), gainObject);
-    _output = Connector(gainObject->getOutput(), gainObject, true);
+    _audioObjects.push_back(std::move(gainObject));
+    _input = Connector(_audioObjects[0].get()->getInput(), _audioObjects[0].get());
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::Gain::render() {

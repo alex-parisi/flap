@@ -14,9 +14,9 @@
 void flap::Phaser::initialize() {
     int numStages = static_cast<int>(_numStages);
     auto phaserObject = dibiff::effect::Phaser::create(_modulationDepth, _modulationRate, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate, _baseCutoff, _wetMix, numStages);
-    _audioObjects.push_back(phaserObject);
-    _input = Connector(phaserObject->getInput(), phaserObject);
-    _output = Connector(phaserObject->getOutput(), phaserObject, true);
+    _audioObjects.push_back(std::move(phaserObject));
+    _input = Connector(_audioObjects[0].get()->getInput(), _audioObjects[0].get());
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::Phaser::render() {

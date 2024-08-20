@@ -5,15 +5,15 @@
 #include "dibiff/dibiff"
 
 void flap::Connector::render(std::optional<std::string> label) {
-    std::string title = (label.has_value()) ? label.value() : _point.lock()->getName();
+    std::string title = (label.has_value()) ? label.value() : _point->getName();
     
     // Render the radio button
-    bool _isSelected = _point.lock()->isConnected();
+    bool _isSelected = _point->isConnected();
     if (ImGui::RadioButton(title.c_str(), _isSelected)) {
         if (!_allowMultiple) {
             if (!_isSelected) {
                 if (!ConnectionService::getInstance().isDragging()) {
-                    ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), *this);
+                    ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), this);
                 } else {
                     ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), this);
                     _connectedTo.push_back(ConnectionService::getInstance().getCurrentConnector());
@@ -21,7 +21,7 @@ void flap::Connector::render(std::optional<std::string> label) {
             }
         } else {
             if (!ConnectionService::getInstance().isDragging()) {
-                ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), *this);
+                ConnectionService::getInstance().startDragging(_getRadioButtonCenter(), this);
             } else {
                 ConnectionService::getInstance().stopDragging(_getRadioButtonCenter(), this);
                 _connectedTo.push_back(ConnectionService::getInstance().getCurrentConnector());

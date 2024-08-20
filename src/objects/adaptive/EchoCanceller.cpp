@@ -12,10 +12,10 @@
 
 void flap::EchoCanceller::initialize() {
     auto aecObject = dibiff::adaptive::AcousticEchoCanceller::create(_filterLength, _stepSize);
-    _audioObjects.push_back(aecObject);
-    _input = Connector(aecObject->getInput(0), aecObject);
-    _reference = Connector(aecObject->getInput(1), aecObject);
-    _output = Connector(aecObject->getOutput(), aecObject, true);
+    _audioObjects.push_back(std::move(aecObject));
+    _input = Connector(_audioObjects[0].get()->getInput(0), _audioObjects[0].get());
+    _reference = Connector(_audioObjects[0].get()->getInput(1), _audioObjects[0].get());
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::EchoCanceller::render() {

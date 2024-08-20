@@ -14,20 +14,20 @@ namespace flap {
     class Connector : public std::enable_shared_from_this<Connector> {
         public:
             inline Connector() {};
-            inline Connector(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point, std::shared_ptr<dibiff::graph::AudioObject> object, bool allowMultiple = false) : _point(point), _object(object), _allowMultiple(allowMultiple) {};
+            inline Connector(dibiff::graph::AudioConnectionPoint* point, dibiff::graph::AudioObject* object, bool allowMultiple = false) : _point(point), _object(object), _allowMultiple(allowMultiple) {};
             void render(std::optional<std::string> label = std::nullopt);
-            inline std::weak_ptr<dibiff::graph::AudioConnectionPoint> getPoint() {
+            inline dibiff::graph::AudioConnectionPoint* getPoint() {
                 return _point;
             }
-            inline std::shared_ptr<dibiff::graph::AudioObject> getObject() {
+            inline dibiff::graph::AudioObject* getObject() {
                 return _object;
             }
             inline void addConnectedTo(Connector* connectedTo) {
                 _connectedTo.push_back(connectedTo);
             }
         private:
-            std::weak_ptr<dibiff::graph::AudioConnectionPoint> _point;
-            std::shared_ptr<dibiff::graph::AudioObject> _object;
+            dibiff::graph::AudioConnectionPoint* _point;
+            dibiff::graph::AudioObject* _object;
             bool _allowMultiple;
             /// @brief  Get the center position of a radio button. Note that this MUST
             ///         be called after the radio button has been rendered via:

@@ -13,9 +13,9 @@
 
 void flap::Flanger::initialize() {
     auto chorusObject = dibiff::effect::Flanger::create(_modulationDepth, _modulationRate, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate, _feedback, _wetMix);
-    _audioObjects.push_back(chorusObject);
-    _input = Connector(chorusObject->getInput(), chorusObject);
-    _output = Connector(chorusObject->getOutput(), chorusObject, true);
+    _audioObjects.push_back(std::move(chorusObject));
+    _input = Connector(_audioObjects[0].get()->getInput(), _audioObjects[0].get());
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::Flanger::render() {

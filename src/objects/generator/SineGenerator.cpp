@@ -12,9 +12,9 @@
 
 void flap::SineGenerator::initialize() {
     auto sineObject = dibiff::generator::SineGenerator::create(flap::MainApplicationSettingsManager::getInstance().settings.blockSize, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate);
-    _audioObjects.push_back(sineObject);
-    _input = Connector(sineObject->getInput(), sineObject);
-    _output = Connector(sineObject->getOutput(), sineObject, true);
+    _audioObjects.push_back(std::move(sineObject));
+    _input = Connector(_audioObjects[0].get()->getInput(), _audioObjects[0].get());
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::SineGenerator::render() {

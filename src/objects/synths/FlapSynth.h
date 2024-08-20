@@ -18,12 +18,12 @@ namespace flap {
             Connector _input;
             Connector _output;
             std::optional<std::string> _name;
-            std::shared_ptr<dibiff::midi::VoiceSelector> _voiceSelectorObj;
-            std::shared_ptr<dibiff::level::Mixer> _mixerObj;
-            std::shared_ptr<dibiff::level::Gain> _gainObj;
-            std::vector<std::shared_ptr<dibiff::generator::VariableGenerator>> _generatorObjs;
-            std::vector<std::shared_ptr<dibiff::dynamic::Envelope>> _envelopeObjs;
-            std::shared_ptr<dibiff::sink::GraphSink> _plotObj;
+            std::unique_ptr<dibiff::midi::VoiceSelector> _voiceSelectorObj;
+            std::unique_ptr<dibiff::level::Mixer> _mixerObj;
+            std::unique_ptr<dibiff::level::Gain> _gainObj;
+            std::vector<std::unique_ptr<dibiff::generator::VariableGenerator>> _generatorObjs;
+            std::vector<std::unique_ptr<dibiff::dynamic::Envelope>> _envelopeObjs;
+            std::unique_ptr<dibiff::sink::GraphSink> _plotObj;
             int _numVoices;
             float _gain;
             float _attack;

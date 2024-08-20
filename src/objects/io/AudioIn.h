@@ -11,7 +11,7 @@
 #include <string>
 
 namespace flap {
-    class AudioIn : public Object {
+    class AudioIn : public Object, public std::enable_shared_from_this<AudioIn> {
     public:
         inline AudioIn(ma_device_info device, int channels, std::optional<std::string> name = std::nullopt) : Object(), _device(device), _channels(channels), _name(name) {}
         void initialize() override;

@@ -14,10 +14,10 @@
 
 void flap::AudioOut::initialize() {
     auto graphSink = dibiff::sink::GraphSink::create(_channels, flap::MainApplicationSettingsManager::getInstance().settings.sampleRate, flap::MainApplicationSettingsManager::getInstance().settings.blockSize);
-    _audioObjects.push_back(graphSink);
-    _input = Connector(graphSink->getInput(), graphSink);
-    _inputL = Connector(graphSink->getInput(0), graphSink);
-    _inputR = Connector(graphSink->getInput(1), graphSink);
+    _audioObjects.push_back(std::move(graphSink));
+    _input = Connector(_audioObjects[0].get()->getInput(), _audioObjects[0].get());
+    _inputL = Connector(_audioObjects[0].get()->getInput(0), _audioObjects[0].get());
+    _inputR = Connector(_audioObjects[0].get()->getInput(1), _audioObjects[0].get());
 }
 
 void flap::AudioOut::render() {
@@ -56,7 +56,7 @@ void flap::AudioOut::render() {
 
 void flap::AudioOut::preDisconnect() {
     /// Remove graph mutexs and condition variables
-    auto sink = std::dynamic_pointer_cast<dibiff::sink::GraphSink>(_audioObjects[0]);
+    auto sink = static_cast<dibiff::sink::GraphSink*>(_audioObjects[0].get());
     flap::GraphManager::getInstance().removeOutputGraphMutex(&sink->cv_mtx);
     flap::GraphManager::getInstance().removeOutputGraphSignal(&sink->cv);
 }

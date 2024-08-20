@@ -10,23 +10,7 @@
 #include "imgui.h"
 #include "dibiff/dibiff"
 #include "widgets/Connector.h"
-
-// Custom hash function for std::weak_ptr
-struct WeakPtrHash {
-    template <typename T>
-    std::size_t operator()(const std::weak_ptr<T>& wp) const {
-        auto sp = wp.lock();
-        return std::hash<std::shared_ptr<T>>()(sp);
-    }
-};
-
-// Custom equality function for std::weak_ptr
-struct WeakPtrEqual {
-    template <typename T>
-    bool operator()(const std::weak_ptr<T>& lhs, const std::weak_ptr<T>& rhs) const {
-        return !lhs.owner_before(rhs) && !rhs.owner_before(lhs);
-    }
-};
+#include "managers/GraphManager.h"
 
 class ConnectionService {
     public:
@@ -69,16 +53,10 @@ class ConnectionService {
         inline bool isDragging() {
             return _dragging;
         }
-        inline void setMutex(std::shared_ptr<std::recursive_mutex> mutex) {
-            _mutex = mutex;
-        }
-        inline std::shared_ptr<std::recursive_mutex> getMutex() {
-            return _mutex;
-        }
-        inline void startDragging(ImVec2 centerPos, flap::Connector& firstConnector) {
+        inline void startDragging(ImVec2 centerPos, flap::Connector* firstConnector) {
             addPoint(centerPos);
             setDragging(true);
-            _currentConnector = &firstConnector;
+            _currentConnector = firstConnector;
         }
         inline void stopDragging(ImVec2 centerpos, flap::Connector* secondConnector) {
             setDragging(false);
@@ -86,9 +64,9 @@ class ConnectionService {
             if (_currentConnector->getObject() != secondConnector->getObject()) {
                 /// Try to connect the active point to the input of the gain object
                 try {
-                    std::lock_guard<std::recursive_mutex> lock(*getMutex());
+                    // std::lock_guard<std::mutex> lock(flap::GraphManager::getInstance().getMutex());
                     dibiff::graph::AudioGraph::connect(_currentConnector->getPoint(), secondConnector->getPoint());
-                    std::cout << "Connected\n";
+                    std::cout << "Connected " << _currentConnector->getPoint()->getName() << " to " << secondConnector->getPoint()->getName() << "\n";
                     _connectionLocations[secondConnector->getPoint()] = centerpos;
                     _connectionLocations[_currentConnector->getPoint()] = _points.back();
                     _connections.push_back(std::make_tuple(_currentConnector->getPoint(), secondConnector->getPoint()));
@@ -104,26 +82,26 @@ class ConnectionService {
                 removePoint();
             }
         }
-        inline std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual>& getConnectionLocations() {
+        inline std::unordered_map<dibiff::graph::AudioConnectionPoint*, ImVec2>& getConnectionLocations() {
             return _connectionLocations;
         }
         inline flap::Connector* getCurrentConnector() {
             return _currentConnector;
         }
-        inline void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point1, std::weak_ptr<dibiff::graph::AudioConnectionPoint> point2) {
+        inline void removeConnection(dibiff::graph::AudioConnectionPoint* point1, dibiff::graph::AudioConnectionPoint* point2) {
             _connections.erase(std::remove_if(_connections.begin(), _connections.end(), 
-                [&](const auto& pair) {
-                    auto p1 = std::get<0>(pair).lock();
-                    auto p2 = std::get<1>(pair).lock();
-                    return p1 == point1.lock() && p2 == point2.lock() || p1 == point2.lock() && p2 == point1.lock();
+                [&](const std::tuple<dibiff::graph::AudioConnectionPoint*, dibiff::graph::AudioConnectionPoint*>& pair) {
+                    auto p1 = std::get<0>(pair);
+                    auto p2 = std::get<1>(pair);
+                    return p1 == point1 && p2 == point2 || p1 == point2 && p2 == point1;
                 }), _connections.end());
         }
-        inline void removeConnection(std::weak_ptr<dibiff::graph::AudioConnectionPoint> point) {
+        inline void removeConnection(dibiff::graph::AudioConnectionPoint* point) {
             _connections.erase(std::remove_if(_connections.begin(), _connections.end(), 
-                [&](const auto& pair) {
-                    auto p1 = std::get<0>(pair).lock();
-                    auto p2 = std::get<1>(pair).lock();
-                    return p1 == point.lock() || p2 == point.lock();
+                [&](const std::tuple<dibiff::graph::AudioConnectionPoint*, dibiff::graph::AudioConnectionPoint*>& pair) {
+                    auto p1 = std::get<0>(pair);
+                    auto p2 = std::get<1>(pair);
+                    return p1 == point || p2 == point;
                 }), _connections.end());
         }
         inline void setShowConnections(bool showConnections) {
@@ -139,9 +117,8 @@ class ConnectionService {
         /// List of points to draw lines between
         std::vector<ImVec2> _points;
         bool _dragging = false;
-        std::shared_ptr<std::recursive_mutex> _mutex;
         flap::Connector* _currentConnector;
-        std::unordered_map<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, ImVec2, WeakPtrHash, WeakPtrEqual> _connectionLocations;
-        std::vector<std::tuple<std::weak_ptr<dibiff::graph::AudioConnectionPoint>, std::weak_ptr<dibiff::graph::AudioConnectionPoint>>> _connections;
+        std::unordered_map<dibiff::graph::AudioConnectionPoint*, ImVec2> _connectionLocations;
+        std::vector<std::tuple<dibiff::graph::AudioConnectionPoint*, dibiff::graph::AudioConnectionPoint*>> _connections;
         bool _showConnections = true;
 };

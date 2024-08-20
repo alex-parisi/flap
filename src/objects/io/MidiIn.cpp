@@ -12,8 +12,8 @@
 
 void flap::MidiIn::initialize() {
     auto midiObject = dibiff::midi::MidiInput::create(flap::MainApplicationSettingsManager::getInstance().settings.blockSize);
-    _audioObjects.push_back(midiObject);
-    _output = Connector(midiObject->getOutput(), midiObject, true);
+    _audioObjects.push_back(std::move(midiObject));
+    _output = Connector(_audioObjects[0].get()->getOutput(), _audioObjects[0].get(), true);
 }
 
 void flap::MidiIn::render() {

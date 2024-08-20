@@ -96,21 +96,21 @@ namespace flap {
             /**
              * @brief The playback device configs.
              */
-            std::unordered_map<std::string, std::shared_ptr<ma_device_config>> _playbackConfigs = {};
-            std::unordered_map<std::string, std::shared_ptr<ma_device_config>> _captureConfigs = {};
+            std::unordered_map<std::string, std::unique_ptr<ma_device_config>> _playbackConfigs = {};
+            std::unordered_map<std::string, std::unique_ptr<ma_device_config>> _captureConfigs = {};
             /**
              * @brief The playback device.
              */
-            std::unordered_map<std::string, std::shared_ptr<ma_device>> _playbackDevices = {};
-            std::unordered_map<std::string, std::shared_ptr<ma_device>> _captureDevices = {};
+            std::unordered_map<std::string, std::unique_ptr<ma_device>> _playbackDevices = {};
+            std::unordered_map<std::string, std::unique_ptr<ma_device>> _captureDevices = {};
             /**
              * @brief The AudioOut object associated with the playback device.
              */
-            std::unordered_map<std::string, std::shared_ptr<AudioOut>> _audioOuts = {};
-            std::unordered_map<std::string, std::shared_ptr<AudioIn>> _audioIns = {};
+            std::unordered_map<std::string, AudioOut*> _audioOuts = {};
+            std::unordered_map<std::string, AudioIn*> _audioIns = {};
 
-            std::unordered_map<std::string, std::shared_ptr<AudioCallbackData>> _audioOutCallbackDatas = {};
-            std::unordered_map<std::string, std::shared_ptr<AudioCallbackData>> _audioInCallbackDatas = {};
+            std::unordered_map<std::string, std::unique_ptr<AudioCallbackData>> _audioOutCallbackDatas = {};
+            std::unordered_map<std::string, std::unique_ptr<AudioCallbackData>> _audioInCallbackDatas = {};
             /**
              * @brief The rate at which the AudioManager updates.
              */

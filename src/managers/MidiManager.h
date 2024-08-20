@@ -63,19 +63,19 @@ namespace flap {
              * @param port The port to open.
              * @return A shared pointer to a MidiIn object.
              */
-            std::optional<std::shared_ptr<MidiIn>> openInputPort(int port);
+            std::unique_ptr<MidiIn> openInputPort(int port);
             /**
              * @brief Creates a simulator.
              * @param name The name of the simulator.
              */
-            std::shared_ptr<flap::KeyboardSimulator> createSimulator();
+            std::unique_ptr<flap::KeyboardSimulator> createSimulator();
             /**
              * @brief Removes a simulator.
              * @param simulator The simulator to remove.
              */
-            inline void removeSimulator(std::shared_ptr<flap::KeyboardSimulator> simulator) {
+            inline void removeSimulator(flap::KeyboardSimulator* simulator) {
                 std::lock_guard<std::mutex> lock(*_mutex);
-                _simulators.erase(std::remove_if(_simulators.begin(), _simulators.end(), [simulator](std::shared_ptr<flap::KeyboardSimulator> sim) {
+                _simulators.erase(std::remove_if(_simulators.begin(), _simulators.end(), [&](flap::KeyboardSimulator* sim) {
                     return sim == simulator;
                 }), _simulators.end());
             }
@@ -117,27 +117,27 @@ namespace flap {
             /**
              * @brief A map of RtMidiIn contexts
              */
-            std::map<int, std::shared_ptr<RtMidiIn>> _midiIns;
+            std::map<int, std::unique_ptr<RtMidiIn>> _midiIns;
             /**
              * @brief A map of MidiIn objects
              */
-            std::map<int, std::shared_ptr<MidiIn>> _midiInObjects;
+            std::map<int, MidiIn*> _midiInObjects;
             /**
              * @brief A map of RtMidiOut contexts
              */
-            std::map<int, std::shared_ptr<RtMidiOut>> _midiOuts;
+            std::map<int, std::unique_ptr<RtMidiOut>> _midiOuts;
             /**
              * @brief A map of MIDI callback data
              */
-            std::map<int, std::shared_ptr<MidiCallbackData>> callbackDataMap;
+            std::map<int, std::unique_ptr<MidiCallbackData>> callbackDataMap;
             /**
              * @brief The main RtMidiIn context
              */
-            std::shared_ptr<RtMidiIn> _mainMidiIn;
+            std::unique_ptr<RtMidiIn> _mainMidiIn;
             /**
              * @brief The main RtMidiOut context
              */
-            std::shared_ptr<RtMidiOut> _mainMidiOut;
+            std::unique_ptr<RtMidiOut> _mainMidiOut;
             /**
              * @brief The input port names.
              */
@@ -161,7 +161,7 @@ namespace flap {
             /**
              * @brief A vector of all open simulators
              */
-            std::vector<std::shared_ptr<flap::KeyboardSimulator>> _simulators = {};
+            std::vector<flap::KeyboardSimulator*> _simulators = {};
     };
     /**
      * @brief MidiCallbackData is a struct that holds a pointer to the MidiManager and an id.

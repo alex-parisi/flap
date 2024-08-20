@@ -48,7 +48,7 @@ namespace flap {
             /**
              * @brief Gets the mutex for the Manager.
              */
-            inline std::shared_ptr<std::mutex> getMutex() { return _mutex; }
+            inline std::mutex& getMutex() { return *_mutex; }
         protected:
             /**
              * @brief A flag to check if the Manager is running.
@@ -61,7 +61,7 @@ namespace flap {
             /**
              * @brief The mutex for the Manager.
              */
-            std::shared_ptr<std::mutex> _mutex;
+            std::unique_ptr<std::mutex> _mutex;
             /**
              * @brief The thread function for the Manager.
              */

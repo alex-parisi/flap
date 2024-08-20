@@ -88,3 +88,7 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     target_compile_options(shared_sources PRIVATE -msse2 -mavx2)
   endif()
 endif()
+
+# # Add AddressSanitizer flags
+# target_compile_options(shared_sources PRIVATE -fsanitize=address)
+# target_link_options(flapTest PRIVATE -fsanitize=address)
